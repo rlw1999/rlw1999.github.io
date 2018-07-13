@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Hello WorldThis is the first document of this Blog.">
+<meta name="description" content="所以是为了什么。。。 Abbott’s Revenge, UVa 816题目描述比较复杂，但基本做法还是DFS，这里涉及一个路径保存的问题，采用的方法是保存DFS树中叶子的父节点，给定一个迷宫，就对应++唯一一个++DFS的搜索树，包含所有可以到达的地图上的点，把树保存下来也就把路径保存了下来。剩下的就比较好说了，一次AC 枚举方法 生成下一个排列的简单代码,在已有序列A的末尾依次添加未出现过的数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/hello-world/index.html">
+<meta property="og:title" content="UVa 816, UVa 524, UVa 129">
+<meta property="og:url" content="http://yoursite.com/2018/07/13/Stupid/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="Hello WorldThis is the first document of this Blog.">
+<meta property="og:description" content="所以是为了什么。。。 Abbott’s Revenge, UVa 816题目描述比较复杂，但基本做法还是DFS，这里涉及一个路径保存的问题，采用的方法是保存DFS树中叶子的父节点，给定一个迷宫，就对应++唯一一个++DFS的搜索树，包含所有可以到达的地图上的点，把树保存下来也就把路径保存了下来。剩下的就比较好说了，一次AC 枚举方法 生成下一个排列的简单代码,在已有序列A的末尾依次添加未出现过的数">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-12T11:24:21.677Z">
+<meta property="og:updated_time" content="2018-07-13T02:30:38.618Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Hello WorldThis is the first document of this Blog.">
+<meta name="twitter:title" content="UVa 816, UVa 524, UVa 129">
+<meta name="twitter:description" content="所以是为了什么。。。 Abbott’s Revenge, UVa 816题目描述比较复杂，但基本做法还是DFS，这里涉及一个路径保存的问题，采用的方法是保存DFS树中叶子的父节点，给定一个迷宫，就对应++唯一一个++DFS的搜索树，包含所有可以到达的地图上的点，把树保存下来也就把路径保存了下来。剩下的就比较好说了，一次AC 枚举方法 生成下一个排列的简单代码,在已有序列A的末尾依次添加未出现过的数">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/11/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/13/Stupid/"/>
 
 
 
 
 
-  <title>Hello World | Rlion's Blog</title>
+  <title>UVa 816, UVa 524, UVa 129 | Rlion's Blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/Stupid/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">UVa 816, UVa 524, UVa 129</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T18:00:55+08:00">
-                2018-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:32:15+08:00">
+                2018-07-13
               </time>
             
 
@@ -299,7 +299,22 @@
       
 
       
-        <h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h4><p>This is the first document of this Blog.</p>
+        <h4 id="所以是为了什么。。。"><a href="#所以是为了什么。。。" class="headerlink" title="所以是为了什么。。。"></a>所以是为了什么。。。</h4><hr>
+<h5 id="Abbott’s-Revenge-UVa-816"><a href="#Abbott’s-Revenge-UVa-816" class="headerlink" title="Abbott’s Revenge, UVa 816"></a>Abbott’s Revenge, <a href="https://vjudge.net/problem/UVA-816" target="_blank" rel="noopener">UVa 816</a></h5><p>题目描述比较复杂，但基本做法还是<strong>DFS</strong>，这里涉及一个路径保存的问题，采用的方法是<strong>保存DFS树中叶子的父节点</strong>，给定一个迷宫，就对应++唯一一个++DFS的搜索树，包含所有可以到达的地图上的点，把树保存下来也就把路径保存了下来。<br>剩下的就比较好说了，一次AC</p>
+<h5 id="枚举方法"><a href="#枚举方法" class="headerlink" title="枚举方法"></a>枚举方法</h5><ul>
+<li><p>生成下一个排列的简单代码,在已有序列A的末尾依次添加未出现过的数字，然后递归</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void print_permutation(int n,int *A,int cur)</span><br><span class="line">&#123;</span><br><span class="line">    if(cur==n)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int i=0;i&lt;n;++i)</span><br><span class="line">            printf(&quot;%d&quot;,A[i]);</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else for(int i=1;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int ok=1;</span><br><span class="line">        for(int j=0;j&lt;cur;++j)</span><br><span class="line">            if(A[j]==i)</span><br><span class="line">                ok=0;</span><br><span class="line">        if(ok)</span><br><span class="line">        &#123;</span><br><span class="line">            A[cur]=i;</span><br><span class="line">            print_permutation(n,A,cur+1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子集生成,生成1~9的所有子集，这个递归思路不是太明显，<strong>每一次递归</strong>都对应一个子集，并且子集内的元素严格单调，递归终点也没有显式表现出来</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void print_subset(int n,int* A,int cur)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i=0;i&lt;cur;++i)printf(&quot;%d &quot;,A[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    int s=cur? A[cur-1]+1:0;</span><br><span class="line">    for(int i=s;i&lt;n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        A[cur]=i;</span><br><span class="line">        print_subset(n,A,cur+1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>话说这么简单的程序我干嘛要抄。。。不过也提醒在考虑递归程序时先想好解答树，这样历遍也有条理一些</p>
+</blockquote>
+<p>来道简答题</p>
+<h5 id="Prime-Ring-Problem-UVa-524"><a href="#Prime-Ring-Problem-UVa-524" class="headerlink" title="Prime Ring Problem,  UVa 524"></a>Prime Ring Problem,  <a href="https://vjudge.net/problem/UVA-524" target="_blank" rel="noopener">UVa 524</a></h5><p>要求构造环使得相邻节点之和是素数，使用回溯递归枚举，好像真没啥难度。。。一次过了。</p>
+<h5 id="Krypton-Factor-UVa-129"><a href="#Krypton-Factor-UVa-129" class="headerlink" title="Krypton Factor, UVa 129"></a>Krypton Factor, <a href="https://vjudge.net/problem/UVA-129" target="_blank" rel="noopener">UVa 129</a></h5><p>要求找出第n个Hard Sequence，Easy Sequence形如CABAB，里面有重复。依旧是枚举里面比较简单的题，还是递归实现，不断在末尾添加字符并计数，添加时判断是否与前面构成重复串。第一次遇到了RE。。。给的样例和uDebug上的输入都没有问题。。。原来是忘记在<strong>找到解后加入递归终点的条件</strong>。。。<br>话说代码量真是一直降不下来啊。。。边想边写的缺点</p>
 
       
     </div>
@@ -324,15 +339,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/13/UVa10603/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/12/UVa213/" rel="prev" title="UVa 213 Message Coding">
-                UVa 213 Message Coding <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -446,7 +461,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hello-World"><span class="nav-number">1.</span> <span class="nav-text">Hello World</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#所以是为了什么。。。"><span class="nav-number">1.</span> <span class="nav-text">所以是为了什么。。。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Abbott’s-Revenge-UVa-816"><span class="nav-number">1.1.</span> <span class="nav-text">Abbott’s Revenge, UVa 816</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#枚举方法"><span class="nav-number">1.2.</span> <span class="nav-text">枚举方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Prime-Ring-Problem-UVa-524"><span class="nav-number">1.3.</span> <span class="nav-text">Prime Ring Problem,  UVa 524</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Krypton-Factor-UVa-129"><span class="nav-number">1.4.</span> <span class="nav-text">Krypton Factor, UVa 129</span></a></li></ol></li></ol></div>
             
 
           </div>
