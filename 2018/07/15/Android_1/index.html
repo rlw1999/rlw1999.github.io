@@ -336,7 +336,7 @@
 </ol>
 <p>或者new一个OnClickListener对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> View.OnClickListener MyListener = <span class="keyword">new</span> View.OnClickListener()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>然后在setOnClickListener()中调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> MyListener());</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
+<ol>
 <li><p>实现匿名内部类<br>这种方法适用于Listener只使用一次的情况</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
@@ -730,6 +730,8 @@
   
 
   
+  
+
 
   
 
