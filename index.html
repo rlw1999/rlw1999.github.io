@@ -229,6 +229,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/2018_7_16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/16/2018_7_16/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T16:05:35+08:00">
+                2018-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/Android_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -351,7 +470,10 @@
 <h5 id="销毁一个活动"><a href="#销毁一个活动" class="headerlink" title="销毁一个活动"></a>销毁一个活动</h5><p>调用finish()即可，与返回键作用相同</p>
 <h4 id="About-Intent"><a href="#About-Intent" class="headerlink" title="About Intent"></a>About Intent</h4><h5 id="Intent简介"><a href="#Intent简介" class="headerlink" title="Intent简介"></a>Intent简介</h5><p>Android中提供了Intent机制来协助应用间的交互与通讯，或者采用更准确的说法是，<strong>Intent不仅可用于应用程序之间，也可用于应用程序内部的activity, service和broadcast receiver之间的交互。</strong>Intent这个英语单词的本意是“目的、意向、意图”。<br>Intent类型分为显式Intent（直接类型）、隐式Intent（间接类型）。官方建议使用隐式Intent。</p>
 <h5 id="显式Intent"><a href="#显式Intent" class="headerlink" title="显式Intent"></a>显式Intent</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Intent intent=<span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">        <span class="comment">//第一个参数为启动活动的上下文，第二个为目标活动</span></span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h5 id="隐式Intent"><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h5><p>并不明确指出我们想要启动哪一个活动，而是指定一系列更为抽象的<code>action</code>和<code>category</code>等信息，然后交由系统去分析这个Intent，并帮我们找出合适的活动去启动。</p>
+<h5 id="隐式Intent"><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h5><p>并不明确指出我们想要启动哪一个活动，而是指定一系列更为抽象的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">配置SecondActivity在Manifest.xml中的信息</span><br><span class="line">```XML</span><br><span class="line">&lt;activity android:name=&quot;.SecondActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=&quot;com.example.activitytest.ACTION_START&quot;/&gt;</span><br><span class="line">        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在button1中使用隐式Intent<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Intent intent=<span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">        intent.addCategory(<span class="string">"com.example.intent.default"</span>);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>也可以修改intent的其他属性以传递信息<br><strong>Intent.Data</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"https://rlw1999.github.io"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>可以通过配置Manifest的Data属性以区别Intent</p>
 
           
         
@@ -471,7 +593,12 @@
       
         
           
-            <h4 id="Eight-POJ1077"><a href="#Eight-POJ1077" class="headerlink" title="Eight POJ1077"></a>Eight <a href="http://poj.org/problem?id=1077" target="_blank" rel="noopener">POJ1077</a></h4><p>1 2 3<br>x 4 6<br>7 5 8<br>问题在于棋盘状态的记录。<br>每个棋盘对应一串序列<br>比如上面棋盘：123046758<br>一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。<br>将所用排列按字典序排列，有<br>10!-1=9x9!+…+2x2!+1x1!<br>即876543210对应的编码为10!-1，而01234578对应0</p>
+            <h4 id="Eight-POJ1077"><a href="#Eight-POJ1077" class="headerlink" title="Eight POJ1077"></a>Eight <a href="http://poj.org/problem?id=1077" target="_blank" rel="noopener">POJ1077</a></h4><p>1 2 3<br>x 4 6<br>7 5 8<br>问题在于棋盘状态的记录。<br>每个棋盘对应一串序列<br>比如上面棋盘：123046758<br>一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。<br>将所用排列按字典序排列，有<br>9!-1=8x8!+…+2x2!+1x1!<br>即876543210对应的编码为10!-1，而01234578对应0</p>
+<p>这道题写起来比较复杂<br>最核心的部分在于<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在BFS的搜索过程中，树没有被完全储存，而是以队列的形式存在。因此需要将当前节点的父节点以及对应移动操作用外部数组储存，从而Node可设计为</span><br><span class="line"></span><br><span class="line">```C++</span><br><span class="line">struct Node</span><br><span class="line">&#123;</span><br><span class="line">    short board[9];</span><br><span class="line">    int hash;</span><br><span class="line">    int pos;//标记x的位置，方便移动</span><br><span class="line">    Node(short* b,int h,int p):hash(h),pos(p)&#123;memcpy(board,b,9);&#125;</span><br><span class="line">    Node()&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>DBFS的模板如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DBFS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	DBFS_init();</span><br><span class="line">	<span class="keyword">while</span>(!q1.empty() || !q2.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = q1_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans1;</span><br><span class="line">		<span class="keyword">int</span> ans2 = q2_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans2 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure></p>
+<p>实现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">```C++</span><br><span class="line">int q1_expand() &#123;</span><br><span class="line">	if(q1.empty()) return -1;</span><br><span class="line">	State cur = q1.front();</span><br><span class="line">	q1.pop();</span><br><span class="line">	State tem;  </span><br><span class="line">	for(int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">		tem.pos = cal_pos(cur.pos, i);</span><br><span class="line">		if(tem.pos&lt;0) continue;</span><br><span class="line">		for(int j = 0; j &lt; 9; j++) &#123;</span><br><span class="line">			if(j==cur.pos) tem.s[j] = cur.board[tem.pos];</span><br><span class="line">			else if(j == tem.pos) tem.board[j] = 9;</span><br><span class="line">			else tem.board[j] = cur.board[j];</span><br><span class="line">		&#125;</span><br><span class="line">		tem.hash = Hash(tem.board);</span><br><span class="line">		if(vis[tem.hash] == 1) continue;//1表示在q1的expand中搜索过</span><br><span class="line">		q1.push(tem);</span><br><span class="line">		last1[tem.hash] = cur.hash;</span><br><span class="line">		move1[tem.hash] = i;</span><br><span class="line">		if(vis[tem.hash] == 2) return tem.hash;</span><br><span class="line">		vis[tem.hash] = 1;</span><br><span class="line">	&#125;</span><br><span class="line">	return -1;</span><br><span class="line">&#125;</span><br><span class="line">//q2类似,但是注意在存储move2时需要倒过来,表示从当前状态转移到父节点状态所做的操作</span><br></pre></td></tr></table></figure></p>
+<p>其中的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">```C++</span><br><span class="line">int Hash(short* s) &#123;</span><br><span class="line">	int res = 0;</span><br><span class="line">	for (int i = 0; i &lt; 8; i++) &#123;</span><br><span class="line">		int cnt = 0;</span><br><span class="line">		for (int j = i + 1; j &lt; 9; j++) &#123;</span><br><span class="line">			if (s[i] &gt; s[j]) cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		res += cnt * fac[8 - i];</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">```C++</span><br><span class="line">char movename[]=&quot;drul&quot;;</span><br><span class="line">void print_path1(int x) &#123;</span><br><span class="line">	if(x==ini.hash) return;</span><br><span class="line">	print_path1(last1[x]);</span><br><span class="line">	printf(&quot;%c&quot;,movename[move1[x]]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void print_path2(int x) &#123;</span><br><span class="line">	if(x==0) return;</span><br><span class="line">	printf(&quot;%c&quot;,movename[move1[x]]);</span><br><span class="line">	print_path2(last2[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1503,129 +1630,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/11/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T18:00:55+08:00">
-                2018-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h4><p>This is the first document of this Blog.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1669,7 +1680,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
