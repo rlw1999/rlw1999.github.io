@@ -229,6 +229,149 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/UVa213/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/UVa213/" itemprop="url">UVa 213 Message Coding</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T19:26:55+08:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="UVa-213-Message-Coding"><a href="#UVa-213-Message-Coding" class="headerlink" title="UVa 213 Message Coding"></a>UVa 213 Message Coding</h4><p>输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。</p>
+<p>源码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">const int maxn = 80;</span><br><span class="line">char code[8][1 &lt;&lt; 8];</span><br><span class="line">void readchar();</span><br><span class="line">int readint(int c);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	using namespace std;</span><br><span class="line">	//int r = readint(3);</span><br><span class="line">	//cout &lt;&lt; r;</span><br><span class="line">	readchar();</span><br><span class="line">	//for (int a = 0; a &lt; 1; a++)</span><br><span class="line">	//cout &lt;&lt; code[2][a];</span><br><span class="line">	int m;</span><br><span class="line">	while ((m=readint(3)) != 0)</span><br><span class="line">	&#123;</span><br><span class="line">		int j;//necessary?yes</span><br><span class="line">		while ((j = readint(m)) != ((1 &lt;&lt; m )- 1))</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; code[m-1][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">void readchar()</span><br><span class="line">&#123;</span><br><span class="line">	for (int i = 0; i &lt; 8; i++)</span><br><span class="line">		code[i][1 &lt;&lt; 8] = &#123;&#125;;</span><br><span class="line">	using namespace std;</span><br><span class="line">	char head[maxn];</span><br><span class="line">	cin.getline(head, maxn);</span><br><span class="line">	int len = strlen(head);</span><br><span class="line">	int j = 0, k = 0;</span><br><span class="line">	for (int i = 0; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		code[j][k] = head[i];</span><br><span class="line">		if ((k + 1) &gt;= (1 &lt;&lt; (j + 1)) - 1) &#123; j++; k = 0; &#125;</span><br><span class="line">		else k++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int readint(int c)</span><br><span class="line">&#123;</span><br><span class="line">	using namespace std;</span><br><span class="line">	char ch;</span><br><span class="line">	int ans=0;</span><br><span class="line">	for (int i = 0; i &lt; c; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		while ((ch = cin.get()) == &apos;\n&apos;)continue;</span><br><span class="line">		ans += (ch - &apos;0&apos;) &lt;&lt; (c - i - 1);</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -386,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
