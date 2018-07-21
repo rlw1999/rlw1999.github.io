@@ -229,6 +229,300 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/UVa1606/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/UVa1606/" itemprop="url">UVa 1606 Amphiphilic Carbon Molecules</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-21T08:30:19+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="UVa-1606-Amphiphilic-Carbon-Molecules"><a href="#UVa-1606-Amphiphilic-Carbon-Molecules" class="headerlink" title="UVa 1606 Amphiphilic Carbon Molecules"></a><a href="https://vjudge.net/problem/UVA-1606" target="_blank" rel="noopener">UVa 1606</a> Amphiphilic Carbon Molecules</h4><p>平面上有黑点和白点，要求找到一条直线，使得直线一侧的黑点加另一侧的白点个数最大，在直线上的点可以算在任意一边。复杂度应该限制在n^2logn。<br>这道题的解法相当精妙。首先考虑一般情况，可以发现直线一定可以经过至少两个点，于是可以通过枚举通过直线的两点，计算两边的点个数，但是直接枚举复杂度应该在n^3。<br>为了降低复杂度，可以固定一个点，然后将其他点按与该点形成的向量的辐角排序，直线依次扫过这些点，就可以动态地维护两侧点个数。<br>具体实现时，一些细节可以大大简化代码。</p>
+<ul>
+<li>使用atan2()函数可以稳定地计算辐角，返回值在$(\pi,\pi]$之间,注意的是参数顺序是(y,x);</li>
+<li>在统计白点黑点个数时，可以先将所有黑点按基点中心对称，这样只需要统计一侧的点个数</li>
+<li>将直线旋转360度，从点0到点N-2，即可历遍直线的两侧</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1003</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x, y, r;</span><br><span class="line">	<span class="keyword">double</span> rad;</span><br><span class="line">	Point()&#123;&#125;</span><br><span class="line">	Point(<span class="keyword">int</span> xx,<span class="keyword">int</span> yy,<span class="keyword">int</span> rr):x(xx),y(yy),r(rr)&#123;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">const</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Point&amp; b)<span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> rad &lt; b.rad;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line">Point OP[maxn], P[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">below180</span><span class="params">(<span class="keyword">const</span> Point&amp; a, <span class="keyword">const</span> Point&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.x*b.y - a.y*b.x &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (N &lt;= <span class="number">2</span>)<span class="keyword">return</span> N;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (i == j)<span class="keyword">continue</span>;</span><br><span class="line">			P[k].x = OP[j].x - OP[i].x;</span><br><span class="line">			P[k].y = OP[j].y - OP[i].y;</span><br><span class="line">			<span class="keyword">if</span> (OP[j].r)P[k].x = -P[k].x, P[k].y = -P[k].y;</span><br><span class="line">			P[k].rad = <span class="built_in">atan2</span>(P[k].y, P[k].x);</span><br><span class="line">			++k;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(P, P + k);</span><br><span class="line">		<span class="keyword">int</span> L = <span class="number">0</span>, R = <span class="number">0</span>, cnt = <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (L &lt; k)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (L == R)R = (R + <span class="number">1</span>) % k, ++cnt;</span><br><span class="line">			<span class="keyword">while</span> (L != R&amp;&amp;below180(P[L], P[R]))R = (R + <span class="number">1</span>) % k, ++cnt;</span><br><span class="line">			++L;</span><br><span class="line">			--cnt;</span><br><span class="line">			ans = max(ans, cnt);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;OP[i].x, &amp;OP[i].y, &amp;OP[i].r);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, solve());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://music.163.com/song?id=25861068&amp;userid=300146003" target="_blank" rel="noopener">Symphony No.2 in E minor Rachmaninov</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/UVa11054/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/20/UVa11054/" itemprop="url">UVa 11054 Wine trading in Gergovia</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T18:19:02+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>There is one problem, however: Transporting wine from one house to another results in work. Since<br>all wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing trade<br>with, they are only interested in selling or buying a specific amount of wine. They are clever enough<br>to figure out a way of trading so that the overall amount of work needed for transports is minimized.<br>In this problem you are asked to reconstruct the trading during one day in Gergovia. For simplicity<br>we will assume that the houses are built along a straight line with equal distance between adjacent<br>houses. Transporting one bottle of wine from one house to an adjacent house results in one unit of<br>work.</p>
+</blockquote>
+<p>说是找最少，好像分配方法就一种。对于每个节点，左、右数值和即可反映该点的分配情况，比如一个节点有酒-100，左边和为-50，右边和为150，则该点一定会向左边输送50的酒。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="comment">//LL a[maxn];</span></span><br><span class="line"><span class="comment">//LL Left[maxn];</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">		LL now, Left = <span class="number">0</span>, Right = <span class="number">0</span>;</span><br><span class="line">		LL ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;now);</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				Left = <span class="number">0</span>;</span><br><span class="line">				Right = -now;</span><br><span class="line">				<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					ans += now;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			Right = Right - now;</span><br><span class="line">			Left = -now - Right;</span><br><span class="line">			<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)ans += -Right;</span><br><span class="line">			<span class="keyword">if</span> (Left &lt; <span class="number">0</span>)ans += -Left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/UVa11134/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1392,270 +1686,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/2018_7_12/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/2018_7_12/" itemprop="url">算是近期总结吧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T19:51:53+08:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h4><p>VS code 比我想象中要强大，轻量级编译，文本编辑感觉都还可以，然而编辑markdown还是比较丑<br>用户配置可以再摸索，应该还能更好看点</p>
-<h4 id="LaTeX"><a href="#LaTeX" class="headerlink" title="LaTeX"></a>LaTeX</h4><p>漂亮！感觉可以写书了<br>Hexo好像也可以支持LaTeX，可以再研究下，挂个<a href="https://blog.csdn.net/emptyset110/article/details/50123231" target="_blank" rel="noopener">链接</a><br>说起Hexo，可以顺便学一下前端开发？</p>
-<h4 id="理想的冲突"><a href="#理想的冲突" class="headerlink" title="理想的冲突"></a>理想的冲突</h4><p>宾克莱的一本书，挺实用的</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/UVa220/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/UVa220/" itemprop="url">UVa 220 Othello</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T19:45:41+08:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="UVa-220-Othello"><a href="#UVa-220-Othello" class="headerlink" title="UVa 220 Othello"></a>UVa 220 Othello</h4><p>这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">//Othello</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char b[10][10];</span><br><span class="line">int check(char type,int x,int y);</span><br><span class="line">char* move(int dir, int num,int x,int y);</span><br><span class="line">void M(char type, int x, int y);</span><br><span class="line">int count(char type);</span><br><span class="line">char* move(int dir, int num,int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	if (dir == 1)return &amp;b[x + num][y];</span><br><span class="line">	else if (dir == 2)return &amp;b[x + num][y + num];</span><br><span class="line">	else if (dir == 3)return &amp;b[x][y + num];</span><br><span class="line">	else if (dir == 4)return &amp;b[x - num][y + num];</span><br><span class="line">	else if (dir == 5)return &amp;b[x - num][y];</span><br><span class="line">	else if (dir == 6)return &amp;b[x - num][y - num];</span><br><span class="line">	else if (dir == 7)return &amp;b[x][y - num];</span><br><span class="line">	else if (dir == 8)return &amp;b[x + num][y - num];</span><br><span class="line">&#125;</span><br><span class="line">int check(char type,int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	int c_b = 0;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (*move(i, 1, x, y) != type &amp;&amp; *move(i, 1, x, y) != &apos;-&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 2; x + j &lt; 9 &amp;&amp; x - j&gt;0 &amp;&amp; y + j &lt; 9 &amp;&amp; y - j&gt;0; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if (*move(i, j, x, y) == &apos;-&apos;)break;</span><br><span class="line">				if (*move(i, j, x, y) == type)c_b = 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return c_b;</span><br><span class="line">&#125;</span><br><span class="line">void M(char type, int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">	b[x][y] = type;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int che = 0;</span><br><span class="line">		if (*move(i, 1, x, y) != type &amp;&amp; *move(i, 1, x, y) != &apos;-&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 2; x + j &lt; 9 &amp;&amp; x - j&gt;0 &amp;&amp; y + j &lt; 9 &amp;&amp; y - j&gt;0; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if (*move(i, j, x, y) == &apos;-&apos;)break;</span><br><span class="line">				if (*move(i, j, x, y) == type)che = 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (che)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 1; *move(i, j, x, y) != type; j++)</span><br><span class="line">				*move(i, j, x, y) = type;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int count(char type)</span><br><span class="line">&#123;</span><br><span class="line">	int n = 0;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 1; j &lt; 9; j++)</span><br><span class="line">			if (b[i][j] == type)n++;</span><br><span class="line">	&#125;</span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int round;</span><br><span class="line">	cin &gt;&gt; round;</span><br><span class="line">	while (round--)</span><br><span class="line">	&#123;</span><br><span class="line">		memset(b, 0, sizeof(b));</span><br><span class="line">		for (int i = 1; i &lt; 9; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 1; j &lt; 9; j++)</span><br><span class="line">				cin &gt;&gt; b[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		char type;</span><br><span class="line">		cin &gt;&gt; type;</span><br><span class="line">		char cmd;</span><br><span class="line">		while (cin &gt;&gt; cmd&amp;&amp;cmd != &apos;Q&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			if (cmd == &apos;L&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				int l = 0;</span><br><span class="line">				for (int i = 1; i &lt; 9; i++)</span><br><span class="line">				&#123;</span><br><span class="line">					for (int j = 1; j &lt; 9; j++)</span><br><span class="line">					&#123;</span><br><span class="line">						l += check(type, i, j);</span><br><span class="line">						if (check(type, i, j))</span><br><span class="line">							cout &lt;&lt; &quot;(&quot; &lt;&lt; i &lt;&lt; &quot;,&quot; &lt;&lt; j &lt;&lt; &quot;) &quot;;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (!l)</span><br><span class="line">				&#123;</span><br><span class="line">					cout &lt;&lt; &quot;No legal move.&quot; &lt;&lt; endl;</span><br><span class="line">					type = type == &apos;B&apos; ? &apos;M&apos; : &apos;B&apos;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			else if (cmd == &apos;M&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				int x, y;</span><br><span class="line">				cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">				M(type, x, y);</span><br><span class="line">				cout &lt;&lt; &quot;Black - &quot; &lt;&lt; count(&apos;B&apos;) &lt;&lt; &quot; White - &quot; &lt;&lt; count(&apos;W&apos;) &lt;&lt; endl;</span><br><span class="line">				type = type == &apos;B&apos; ? &apos;M&apos; : &apos;B&apos;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (cmd == &apos;Q&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int i = 1; i &lt; 9; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				for (int j = 1; j &lt; 9; j++)</span><br><span class="line">					cout &lt;&lt; b[i][j];</span><br><span class="line">				cout &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1706,7 +1736,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
