@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记  在Activity中添加Button1. 在XML布局文件中添加Button元素123456&amp;lt;">
+<meta name="description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 学习笔记1">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/Android_1/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记  在Activity中添加Button1. 在XML布局文件中添加Button元素123456&amp;lt;">
+<meta property="og:description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T11:47:10.971Z">
+<meta property="og:updated_time" content="2018-08-08T09:57:00.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 学习笔记1">
-<meta name="twitter:description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记  在Activity中添加Button1. 在XML布局文件中添加Button元素123456&amp;lt;">
+<meta name="twitter:description" content="About Acitivity 一个Activity通常就是一个单独的屏幕或窗口 Activity之间通过Intent通信 每一个Activity都必须在AndroidManifest.xml配置文件中注册 有一个main Activity在应用启动时启动，在AndroidManifest中标记">
 
 
 
@@ -327,6 +327,7 @@
 <li>每一个Activity都必须在AndroidManifest.xml配置文件中注册</li>
 <li>有一个main Activity在应用启动时启动，在AndroidManifest中标记</li>
 </ul>
+<a id="more"></a>
 <h5 id="在Activity中添加Button"><a href="#在Activity中添加Button" class="headerlink" title="在Activity中添加Button"></a>在Activity中添加Button</h5><p><strong>1. 在XML布局文件中添加Button元素</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/button_1"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:text</span>=<span class="string">"Button 1"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>2. 在Activity的java源码中加入Button逻辑</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.first_layout);</span><br><span class="line">        <span class="comment">//这里这个savedInstanceState是一个Bundle类的对象，可以重写onSavedInstanceState()方法，该方法会在//activity结束时调用，存入数据，在下次启动活动时传入savedInstanceState</span></span><br><span class="line">        Button button1=(Button)findViewById(R.id.button_1);</span><br><span class="line">        button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">                </span>&#123;</span><br><span class="line">                    <span class="comment">//button1干了什么</span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//监听器时一个存在于View类下的接口，一般以On...Listener命名，实现该接口需要相应的on...(View v)方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>实现Listener有三种方法</strong></p>
@@ -456,6 +457,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -484,6 +489,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

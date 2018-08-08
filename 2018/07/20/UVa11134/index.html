@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="We would like to place n rooks, 1 ≤ n ≤ 5000, on a n × nboard subject to the following restrictions• The i-th rook can only be placed within the rectanglegiven by its left-upper corner (xli, yli) and">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-20T09:52:55.850Z">
+<meta property="og:updated_time" content="2018-08-08T09:59:05.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UVa 11134 Fabled Rooks">
 <meta name="twitter:description" content="We would like to place n rooks, 1 ≤ n ≤ 5000, on a n × nboard subject to the following restrictions• The i-th rook can only be placed within the rectanglegiven by its left-upper corner (xli, yli) and">
@@ -324,6 +324,7 @@
         <blockquote>
 <p>We would like to place n rooks, 1 ≤ n ≤ 5000, on a n × n<br>board subject to the following restrictions<br>• The i-th rook can only be placed within the rectangle<br>given by its left-upper corner (xli<br>, yli) and its rightlower<br>corner (xri<br>, yri), where 1 ≤ i ≤ n, 1 ≤ xli ≤<br>xri ≤ n, 1 ≤ yli ≤ yri ≤ n.<br>• No two rooks can attack each other, that is no two rooks<br>can occupy the same column or the same row.</p>
 </blockquote>
+<a id="more"></a>
 <p>首先注意到x,y方向是两个独立问题，每个独立问题都可用贪心法解，但是注意区间排序一定是按照<strong>区间末尾</strong>进行排序，然后填充每个区间第一个还没有被填充的方块。不能按照区间开端进行排序，反例如下</p>
 <blockquote>
 <p>3<br>1 1 3 3<br>1 1 3 3<br>2 2 2 2</p>
@@ -421,6 +422,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -449,6 +454,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

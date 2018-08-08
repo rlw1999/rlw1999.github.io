@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="UVa 1606 Amphiphilic Carbon Molecules平面上有黑点和白点，要求找到一条直线，使得直线一侧的黑点加另一侧的白点个数最大，在直线上的点可以算在任意一边。复杂度应该限制在n^2logn。这道题的解法相当精妙。首先考虑一般情况，可以发现直线一定可以经过至少两个点，于是可以通过枚举通过直线的两点，计算两边的点个数，但是直接枚举复杂度应该在n^3。为了降低复杂度，可以固定一">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-21T03:10:41.682Z">
+<meta property="og:updated_time" content="2018-08-08T09:58:15.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UVa 1606 Amphiphilic Carbon Molecules">
 <meta name="twitter:description" content="UVa 1606 Amphiphilic Carbon Molecules平面上有黑点和白点，要求找到一条直线，使得直线一侧的黑点加另一侧的白点个数最大，在直线上的点可以算在任意一边。复杂度应该限制在n^2logn。这道题的解法相当精妙。首先考虑一般情况，可以发现直线一定可以经过至少两个点，于是可以通过枚举通过直线的两点，计算两边的点个数，但是直接枚举复杂度应该在n^3。为了降低复杂度，可以固定一">
@@ -327,6 +327,7 @@
 <li>在统计白点黑点个数时，可以先将所有黑点按基点中心对称，这样只需要统计一侧的点个数</li>
 <li>将直线旋转360度，从点0到点N-2，即可历遍直线的两侧</li>
 </ul>
+<a id="more"></a>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1003</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x, y, r;</span><br><span class="line">	<span class="keyword">double</span> rad;</span><br><span class="line">	Point()&#123;&#125;</span><br><span class="line">	Point(<span class="keyword">int</span> xx,<span class="keyword">int</span> yy,<span class="keyword">int</span> rr):x(xx),y(yy),r(rr)&#123;&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">const</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Point&amp; b)<span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> rad &lt; b.rad;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line">Point OP[maxn], P[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">below180</span><span class="params">(<span class="keyword">const</span> Point&amp; a, <span class="keyword">const</span> Point&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.x*b.y - a.y*b.x &gt;= <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (N &lt;= <span class="number">2</span>)<span class="keyword">return</span> N;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (i == j)<span class="keyword">continue</span>;</span><br><span class="line">			P[k].x = OP[j].x - OP[i].x;</span><br><span class="line">			P[k].y = OP[j].y - OP[i].y;</span><br><span class="line">			<span class="keyword">if</span> (OP[j].r)P[k].x = -P[k].x, P[k].y = -P[k].y;</span><br><span class="line">			P[k].rad = <span class="built_in">atan2</span>(P[k].y, P[k].x);</span><br><span class="line">			++k;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(P, P + k);</span><br><span class="line">		<span class="keyword">int</span> L = <span class="number">0</span>, R = <span class="number">0</span>, cnt = <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">while</span> (L &lt; k)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (L == R)R = (R + <span class="number">1</span>) % k, ++cnt;</span><br><span class="line">			<span class="keyword">while</span> (L != R&amp;&amp;below180(P[L], P[R]))R = (R + <span class="number">1</span>) % k, ++cnt;</span><br><span class="line">			++L;</span><br><span class="line">			--cnt;</span><br><span class="line">			ans = max(ans, cnt);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;OP[i].x, &amp;OP[i].y, &amp;OP[i].r);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, solve());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="http://music.163.com/song?id=25861068&amp;userid=300146003" target="_blank" rel="noopener">Symphony No.2 in E minor Rachmaninov</a></p>
 
@@ -431,6 +432,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -459,6 +464,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

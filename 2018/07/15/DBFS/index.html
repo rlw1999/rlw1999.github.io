@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="Eight POJ10771 2 3x 4 67 5 8问题在于棋盘状态的记录。每个棋盘对应一串序列比如上面棋盘：123046758一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。将所用排列按字典序排列，有$ 9!-1=8 \times 8! + …+2 \times 2!+1 \times 1! $即987654321对应的编码为$9!-1$，而1">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-16T08:46:45.716Z">
+<meta property="og:updated_time" content="2018-08-08T09:57:24.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="双向广搜 八数码问题">
 <meta name="twitter:description" content="Eight POJ10771 2 3x 4 67 5 8问题在于棋盘状态的记录。每个棋盘对应一串序列比如上面棋盘：123046758一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。将所用排列按字典序排列，有$ 9!-1=8 \times 8! + …+2 \times 2!+1 \times 1! $即987654321对应的编码为$9!-1$，而1">
@@ -300,6 +300,7 @@
 
       
         <h4 id="Eight-POJ1077"><a href="#Eight-POJ1077" class="headerlink" title="Eight POJ1077"></a>Eight <a href="http://poj.org/problem?id=1077" target="_blank" rel="noopener">POJ1077</a></h4><p>1 2 3<br>x 4 6<br>7 5 8<br>问题在于棋盘状态的记录。<br>每个棋盘对应一串序列<br>比如上面棋盘：123046758<br>一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。<br>将所用排列按字典序排列，有<br>$ 9!-1=8 \times 8! + …+2 \times 2!+1 \times 1! $<br>即987654321对应的编码为$9!-1$，而123456789对应$0$</p>
+<a id="more"></a>
 <p>这道题写起来比较复杂<br>最核心的部分在于<code>Node</code>的设计，以及DBFS的写法<br>在BFS的搜索过程中，树没有被完全储存，而是以队列的形式存在。因此需要将当前节点的父节点以及对应移动操作用外部数组储存，从而Node可设计为</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">short</span> board[<span class="number">9</span>];</span><br><span class="line">    <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">int</span> pos;<span class="comment">//标记x的位置，方便移动</span></span><br><span class="line">    Node(<span class="keyword">short</span>* b,<span class="keyword">int</span> h,<span class="keyword">int</span> p):hash(h),pos(p)&#123;<span class="built_in">memcpy</span>(board,b,<span class="number">9</span>);&#125;</span><br><span class="line">    Node()&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>DBFS的模板如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DBFS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	DBFS_init();</span><br><span class="line">	<span class="keyword">while</span>(!q1.empty() || !q2.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = q1_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans1;</span><br><span class="line">		<span class="keyword">int</span> ans2 = q2_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans2 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure></p>
@@ -408,6 +409,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -436,6 +441,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879">
+<meta name="description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UVa 220 Othello">
 <meta property="og:url" content="http://yoursite.com/2018/07/12/UVa220/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879">
+<meta property="og:description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T07:25:28.314Z">
+<meta property="og:updated_time" content="2018-08-08T09:59:47.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UVa 220 Othello">
-<meta name="twitter:description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879">
+<meta name="twitter:description" content="UVa 220 Othello这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多">
 
 
 
@@ -322,6 +322,7 @@
 
       
         <h4 id="UVa-220-Othello"><a href="#UVa-220-Othello" class="headerlink" title="UVa 220 Othello"></a>UVa 220 Othello</h4><p>这个题的思路也比较清晰，依然花了1个小时才把代码写出来，好在bug不多</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">//Othello</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">char b[10][10];</span><br><span class="line">int check(char type,int x,int y);</span><br><span class="line">char* move(int dir, int num,int x,int y);</span><br><span class="line">void M(char type, int x, int y);</span><br><span class="line">int count(char type);</span><br><span class="line">char* move(int dir, int num,int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	if (dir == 1)return &amp;b[x + num][y];</span><br><span class="line">	else if (dir == 2)return &amp;b[x + num][y + num];</span><br><span class="line">	else if (dir == 3)return &amp;b[x][y + num];</span><br><span class="line">	else if (dir == 4)return &amp;b[x - num][y + num];</span><br><span class="line">	else if (dir == 5)return &amp;b[x - num][y];</span><br><span class="line">	else if (dir == 6)return &amp;b[x - num][y - num];</span><br><span class="line">	else if (dir == 7)return &amp;b[x][y - num];</span><br><span class="line">	else if (dir == 8)return &amp;b[x + num][y - num];</span><br><span class="line">&#125;</span><br><span class="line">int check(char type,int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">	int c_b = 0;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (*move(i, 1, x, y) != type &amp;&amp; *move(i, 1, x, y) != &apos;-&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 2; x + j &lt; 9 &amp;&amp; x - j&gt;0 &amp;&amp; y + j &lt; 9 &amp;&amp; y - j&gt;0; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if (*move(i, j, x, y) == &apos;-&apos;)break;</span><br><span class="line">				if (*move(i, j, x, y) == type)c_b = 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return c_b;</span><br><span class="line">&#125;</span><br><span class="line">void M(char type, int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">	b[x][y] = type;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int che = 0;</span><br><span class="line">		if (*move(i, 1, x, y) != type &amp;&amp; *move(i, 1, x, y) != &apos;-&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 2; x + j &lt; 9 &amp;&amp; x - j&gt;0 &amp;&amp; y + j &lt; 9 &amp;&amp; y - j&gt;0; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if (*move(i, j, x, y) == &apos;-&apos;)break;</span><br><span class="line">				if (*move(i, j, x, y) == type)che = 1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (che)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 1; *move(i, j, x, y) != type; j++)</span><br><span class="line">				*move(i, j, x, y) = type;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int count(char type)</span><br><span class="line">&#123;</span><br><span class="line">	int n = 0;</span><br><span class="line">	for (int i = 1; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j = 1; j &lt; 9; j++)</span><br><span class="line">			if (b[i][j] == type)n++;</span><br><span class="line">	&#125;</span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int round;</span><br><span class="line">	cin &gt;&gt; round;</span><br><span class="line">	while (round--)</span><br><span class="line">	&#123;</span><br><span class="line">		memset(b, 0, sizeof(b));</span><br><span class="line">		for (int i = 1; i &lt; 9; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int j = 1; j &lt; 9; j++)</span><br><span class="line">				cin &gt;&gt; b[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">		char type;</span><br><span class="line">		cin &gt;&gt; type;</span><br><span class="line">		char cmd;</span><br><span class="line">		while (cin &gt;&gt; cmd&amp;&amp;cmd != &apos;Q&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			if (cmd == &apos;L&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				int l = 0;</span><br><span class="line">				for (int i = 1; i &lt; 9; i++)</span><br><span class="line">				&#123;</span><br><span class="line">					for (int j = 1; j &lt; 9; j++)</span><br><span class="line">					&#123;</span><br><span class="line">						l += check(type, i, j);</span><br><span class="line">						if (check(type, i, j))</span><br><span class="line">							cout &lt;&lt; &quot;(&quot; &lt;&lt; i &lt;&lt; &quot;,&quot; &lt;&lt; j &lt;&lt; &quot;) &quot;;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if (!l)</span><br><span class="line">				&#123;</span><br><span class="line">					cout &lt;&lt; &quot;No legal move.&quot; &lt;&lt; endl;</span><br><span class="line">					type = type == &apos;B&apos; ? &apos;M&apos; : &apos;B&apos;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			else if (cmd == &apos;M&apos;)</span><br><span class="line">			&#123;</span><br><span class="line">				int x, y;</span><br><span class="line">				cin &gt;&gt; x &gt;&gt; y;</span><br><span class="line">				M(type, x, y);</span><br><span class="line">				cout &lt;&lt; &quot;Black - &quot; &lt;&lt; count(&apos;B&apos;) &lt;&lt; &quot; White - &quot; &lt;&lt; count(&apos;W&apos;) &lt;&lt; endl;</span><br><span class="line">				type = type == &apos;B&apos; ? &apos;M&apos; : &apos;B&apos;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (cmd == &apos;Q&apos;)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int i = 1; i &lt; 9; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				for (int j = 1; j &lt; 9; j++)</span><br><span class="line">					cout &lt;&lt; b[i][j];</span><br><span class="line">				cout &lt;&lt; endl;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -424,6 +425,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -452,6 +457,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

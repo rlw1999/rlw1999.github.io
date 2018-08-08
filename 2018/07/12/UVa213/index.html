@@ -53,13 +53,13 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。 源码如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta name="description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UVa 213 Message Coding">
 <meta property="og:url" content="http://yoursite.com/2018/07/12/UVa213/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。 源码如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta property="og:description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T07:25:28.314Z">
+<meta property="og:updated_time" content="2018-08-08T10:00:36.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UVa 213 Message Coding">
-<meta name="twitter:description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。 源码如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484">
+<meta name="twitter:description" content="UVa 213 Message Coding输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。">
 
 
 
@@ -322,6 +322,7 @@
 
       
         <h4 id="UVa-213-Message-Coding"><a href="#UVa-213-Message-Coding" class="headerlink" title="UVa 213 Message Coding"></a>UVa 213 Message Coding</h4><p>输入部分包含两部分，编码头和一串code，注意序列与编码头的对应关系中，序列有着很强的分段规律性，所以选择二维数组code储存，最后解码时直接输出对应code元素即可。</p>
+<a id="more"></a>
 <p>源码如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">const int maxn = 80;</span><br><span class="line">char code[8][1 &lt;&lt; 8];</span><br><span class="line">void readchar();</span><br><span class="line">int readint(int c);</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	using namespace std;</span><br><span class="line">	//int r = readint(3);</span><br><span class="line">	//cout &lt;&lt; r;</span><br><span class="line">	readchar();</span><br><span class="line">	//for (int a = 0; a &lt; 1; a++)</span><br><span class="line">	//cout &lt;&lt; code[2][a];</span><br><span class="line">	int m;</span><br><span class="line">	while ((m=readint(3)) != 0)</span><br><span class="line">	&#123;</span><br><span class="line">		int j;//necessary?yes</span><br><span class="line">		while ((j = readint(m)) != ((1 &lt;&lt; m )- 1))</span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; code[m-1][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">void readchar()</span><br><span class="line">&#123;</span><br><span class="line">	for (int i = 0; i &lt; 8; i++)</span><br><span class="line">		code[i][1 &lt;&lt; 8] = &#123;&#125;;</span><br><span class="line">	using namespace std;</span><br><span class="line">	char head[maxn];</span><br><span class="line">	cin.getline(head, maxn);</span><br><span class="line">	int len = strlen(head);</span><br><span class="line">	int j = 0, k = 0;</span><br><span class="line">	for (int i = 0; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		code[j][k] = head[i];</span><br><span class="line">		if ((k + 1) &gt;= (1 &lt;&lt; (j + 1)) - 1) &#123; j++; k = 0; &#125;</span><br><span class="line">		else k++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int readint(int c)</span><br><span class="line">&#123;</span><br><span class="line">	using namespace std;</span><br><span class="line">	char ch;</span><br><span class="line">	int ans=0;</span><br><span class="line">	for (int i = 0; i &lt; c; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		while ((ch = cin.get()) == &apos;\n&apos;)continue;</span><br><span class="line">		ans += (ch - &apos;0&apos;) &lt;&lt; (c - i - 1);</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -425,6 +426,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Ruan Liangwang" />
+            
               <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -453,6 +458,15 @@
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
