@@ -229,6 +229,293 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/UVa1609/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/UVa1609/" itemprop="url">UVa 1609 Foul Play</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T17:34:59+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>For each two teams, you know beforehand which one would win if they played against each other.<br>(Since this is a knock-out tournament, no ties will occur.) Furthermore, you know for sure that your<br>favourite team can beat at least half of the other teams, and for every team t that your favourite team<br>cannot beat, there is a team t<br>′<br>that beats t but is itself beaten by your favourite team.<br>Determine a tournament schedule such that your favourite team wins the tournament.</p>
+</blockquote>
+<p>递归的神奇应用，主要在于推理，找到一种方法使得问题规模递降就行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iterator&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> powers[<span class="number">1028</span>][<span class="number">1028</span>];</span><br><span class="line"><span class="keyword">int</span> remain, used[<span class="number">1028</span>];<span class="comment">//-1表示淘汰,1表示用过</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> round)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (remain == <span class="number">1</span>)<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i)<span class="comment">//unbeatable</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (powers[<span class="number">1</span>][i] || used[i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= N; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (i == j)<span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">if</span> (!used[j]&amp;&amp;powers[j][i]&amp;&amp;powers[<span class="number">1</span>][j])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, j, i);</span><br><span class="line">				used[j] = <span class="number">1</span>;</span><br><span class="line">				used[i] = <span class="number">-1</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!used[i] &amp;&amp; powers[<span class="number">1</span>][i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, <span class="number">1</span>, i);</span><br><span class="line">			used[i] = <span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (used[i] || powers[<span class="number">1</span>][i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (left == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			left = i; <span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, left, i);</span><br><span class="line">			<span class="keyword">if</span> (powers[i][left])</span><br><span class="line">			&#123;</span><br><span class="line">				used[i] = <span class="number">1</span>;</span><br><span class="line">				used[left] = <span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				used[i] = <span class="number">-1</span>;</span><br><span class="line">				used[left] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			left = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	left = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (used[i])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span> (left == <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			left = i; <span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, left, i);</span><br><span class="line">			<span class="keyword">if</span> (powers[i][left])</span><br><span class="line">			&#123;</span><br><span class="line">				used[i] = <span class="number">1</span>;</span><br><span class="line">				used[left] = <span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				used[i] = <span class="number">-1</span>;</span><br><span class="line">				used[left] = <span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			left = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i)</span><br><span class="line">		<span class="keyword">if</span> (used[i] == <span class="number">1</span>)</span><br><span class="line">			used[i] = <span class="number">0</span>;</span><br><span class="line">	remain /= <span class="number">2</span>;</span><br><span class="line">	solve(round + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d\n"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> temc;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;temc);</span><br><span class="line">				powers[i][j] = temc - <span class="string">'0'</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			getchar();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">memset</span>(used, <span class="number">0</span>, <span class="keyword">sizeof</span>(used));</span><br><span class="line">		remain = N;</span><br><span class="line">		solve(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/小偷家族/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/07/小偷家族/" itemprop="url">小偷家族</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T19:42:57+08:00">
+                2018-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/碎语/" itemprop="url" rel="index">
+                    <span itemprop="name">碎语</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>是枝裕和的作品，这是第三部。从《无人知晓》，到《海街日记》，再到这部《小偷家族》。是枝说不能想象人们走进电影院是为了振奋自己的精神，也不喜欢英雄克服弱点最后拯救别人的好莱坞式剧情，我倒是二者都不讨厌，但是我也挺喜欢这部《小偷家族》。虽说是枝眼里的家庭总给我一种过于美好的感觉，每个人都在尽力去维持着家族的生活，又能察觉到各个人细微的想法和情感。但是当小偷是不对的，不让孩子上学也是不对的，翔太从没叫过一声爸爸，互相之间的一句感谢也从未说出口。仔细想来，是枝描写的家庭在外人看来都是不幸的，但是真正深入其中的人，又能体味到其中超越血缘的美好。中国人应该比日本人更重视家的观念，但是中国人的家庭一定是基于血缘的，这大概是其中很大的不同，这可能也是《小偷家族》在中国票房并不高的原因。不知道如果给父母一辈看这种电影，会不会体味更深一些。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/UVa714/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1381,306 +1668,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/Android_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/15/Android_1/" itemprop="url">Android 学习笔记1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T15:28:52+08:00">
-                2018-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="About-Acitivity"><a href="#About-Acitivity" class="headerlink" title="About Acitivity"></a>About Acitivity</h4><ul>
-<li>一个Activity通常就是一个单独的屏幕或窗口</li>
-<li>Activity之间通过Intent通信</li>
-<li>每一个Activity都必须在AndroidManifest.xml配置文件中注册</li>
-<li>有一个main Activity在应用启动时启动，在AndroidManifest中标记</li>
-</ul>
-<h5 id="在Activity中添加Button"><a href="#在Activity中添加Button" class="headerlink" title="在Activity中添加Button"></a>在Activity中添加Button</h5><p><strong>1. 在XML布局文件中添加Button元素</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/button_1"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:text</span>=<span class="string">"Button 1"</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>2. 在Activity的java源码中加入Button逻辑</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.first_layout);</span><br><span class="line">        <span class="comment">//这里这个savedInstanceState是一个Bundle类的对象，可以重写onSavedInstanceState()方法，该方法会在//activity结束时调用，存入数据，在下次启动活动时传入savedInstanceState</span></span><br><span class="line">        Button button1=(Button)findViewById(R.id.button_1);</span><br><span class="line">        button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">                </span>&#123;</span><br><span class="line">                    <span class="comment">//button1干了什么</span></span><br><span class="line">                &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//监听器时一个存在于View类下的接口，一般以On...Listener命名，实现该接口需要相应的on...(View v)方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><strong>实现Listener有三种方法</strong></p>
-<ol>
-<li>在Activity中定义一个内部类继承监听器接口<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyListener</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">onClickListener</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"HaHa..."</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>或者new一个OnClickListener对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> View.OnClickListener MyListener = <span class="keyword">new</span> View.OnClickListener()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在setOnClickListener()中调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> MyListener());</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li><p>实现匿名内部类<br>这种方法适用于Listener只使用一次的情况</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用布局文件中的onClick属性，并在实现文件中实现该方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onButtonClick</span> <span class="params">(View view)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>然后在布局文件中的加上<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_below</span>=<span class="string">"@id/button2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/button3"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Button3"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:onClick</span>=<span class="string">"onButtonClick"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h5 id="在Activity中使用Menu"><a href="#在Activity中使用Menu" class="headerlink" title="在Activity中使用Menu"></a>在Activity中使用Menu</h5><p>在res目录下新建一个menu文件夹(与layout并列)，在其中新建main.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">menu</span> <span class="attr">xmlns:android</span>=<span class="string">"https://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/item_1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">"item 1"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/item_2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">"item 2"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">menu</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>重写onOptionsItemSelected()方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(item.getItemId())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> R.id.item_1:</span><br><span class="line">        <span class="comment">//do something </span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> R.id.item_2:</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="销毁一个活动"><a href="#销毁一个活动" class="headerlink" title="销毁一个活动"></a>销毁一个活动</h5><p>调用finish()即可，与返回键作用相同</p>
-<h4 id="About-Intent"><a href="#About-Intent" class="headerlink" title="About Intent"></a>About Intent</h4><h5 id="Intent简介"><a href="#Intent简介" class="headerlink" title="Intent简介"></a>Intent简介</h5><p>Android中提供了Intent机制来协助应用间的交互与通讯，或者采用更准确的说法是，<strong>Intent不仅可用于应用程序之间，也可用于应用程序内部的activity, service和broadcast receiver之间的交互。</strong>Intent这个英语单词的本意是“目的、意向、意图”。<br>Intent类型分为显式Intent（直接类型）、隐式Intent（间接类型）。官方建议使用隐式Intent。</p>
-<h5 id="显式Intent"><a href="#显式Intent" class="headerlink" title="显式Intent"></a>显式Intent</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Intent intent=<span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">        <span class="comment">//第一个参数为启动活动的上下文，第二个为目标活动</span></span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h5 id="隐式Intent"><a href="#隐式Intent" class="headerlink" title="隐式Intent"></a>隐式Intent</h5><p>并不明确指出我们想要启动哪一个活动，而是指定一系列更为抽象的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">配置SecondActivity在Manifest.xml中的信息</span><br><span class="line">```XML</span><br><span class="line">&lt;activity android:name=&quot;.SecondActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=&quot;com.example.activitytest.ACTION_START&quot;/&gt;</span><br><span class="line">        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure></p>
-<p>在button1中使用隐式Intent<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Intent intent=<span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">        intent.addCategory(<span class="string">"com.example.intent.default"</span>);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>也可以修改intent的其他属性以传递信息<br><strong>Intent.Data</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"https://rlw1999.github.io"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
-<p>可以通过配置Manifest的Data属性以区别Intent</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/DBFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/15/DBFS/" itemprop="url">双向广搜 八数码问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T11:02:14+08:00">
-                2018-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Eight-POJ1077"><a href="#Eight-POJ1077" class="headerlink" title="Eight POJ1077"></a>Eight <a href="http://poj.org/problem?id=1077" target="_blank" rel="noopener">POJ1077</a></h4><p>1 2 3<br>x 4 6<br>7 5 8<br>问题在于棋盘状态的记录。<br>每个棋盘对应一串序列<br>比如上面棋盘：123046758<br>一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。<br>将所用排列按字典序排列，有<br>$ 9!-1=8 \times 8! + …+2 \times 2!+1 \times 1! $<br>即987654321对应的编码为$9!-1$，而123456789对应$0$</p>
-<p>这道题写起来比较复杂<br>最核心的部分在于<code>Node</code>的设计，以及DBFS的写法<br>在BFS的搜索过程中，树没有被完全储存，而是以队列的形式存在。因此需要将当前节点的父节点以及对应移动操作用外部数组储存，从而Node可设计为</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">short</span> board[<span class="number">9</span>];</span><br><span class="line">    <span class="keyword">int</span> hash;</span><br><span class="line">    <span class="keyword">int</span> pos;<span class="comment">//标记x的位置，方便移动</span></span><br><span class="line">    Node(<span class="keyword">short</span>* b,<span class="keyword">int</span> h,<span class="keyword">int</span> p):hash(h),pos(p)&#123;<span class="built_in">memcpy</span>(board,b,<span class="number">9</span>);&#125;</span><br><span class="line">    Node()&#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>DBFS的模板如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DBFS</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	DBFS_init();</span><br><span class="line">	<span class="keyword">while</span>(!q1.empty() || !q2.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> ans1 = q1_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans1 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans1;</span><br><span class="line">		<span class="keyword">int</span> ans2 = q2_expand();</span><br><span class="line">		<span class="keyword">if</span>(ans2 &gt;= <span class="number">0</span>) <span class="keyword">return</span> ans2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure></p>
-<p>实现<code>q1_expand()</code>和<code>q2_expand()</code><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">q1_expand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(q1.empty()) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	State cur = q1.front();</span><br><span class="line">	q1.pop();</span><br><span class="line">	State tem;  </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">		tem.pos = cal_pos(cur.pos, i);</span><br><span class="line">		<span class="keyword">if</span>(tem.pos&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(j==cur.pos) tem.s[j] = cur.board[tem.pos];</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(j == tem.pos) tem.board[j] = <span class="number">9</span>;</span><br><span class="line">			<span class="keyword">else</span> tem.board[j] = cur.board[j];</span><br><span class="line">		&#125;</span><br><span class="line">		tem.hash = Hash(tem.board);</span><br><span class="line">		<span class="keyword">if</span>(vis[tem.hash] == <span class="number">1</span>) <span class="keyword">continue</span>;<span class="comment">//1表示在q1的expand中搜索过</span></span><br><span class="line">		q1.push(tem);</span><br><span class="line">		last1[tem.hash] = cur.hash;</span><br><span class="line">		move1[tem.hash] = i;</span><br><span class="line">		<span class="keyword">if</span>(vis[tem.hash] == <span class="number">2</span>) <span class="keyword">return</span> tem.hash;</span><br><span class="line">		vis[tem.hash] = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//q2类似,但是注意在存储move2时需要倒过来,表示从当前状态转移到父节点状态所做的操作</span></span><br></pre></td></tr></table></figure></p>
-<p>其中的<code>Hash()</code>即是编码函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Hash</span><span class="params">(<span class="keyword">short</span>* s)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; <span class="number">9</span>; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (s[i] &gt; s[j]) cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		res += cnt * fac[<span class="number">8</span> - i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>DBFS()</code>返回的即是中间相遇点的hash值，再利用<code>last1[],last2[],move1[],move2[]</code>即可输出路径<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> movename[]=<span class="string">"drul"</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_path1</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==ini.hash) <span class="keyword">return</span>;</span><br><span class="line">	print_path1(last1[x]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c"</span>,movename[move1[x]]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_path2</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%c"</span>,movename[move1[x]]);</span><br><span class="line">	print_path2(last2[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1731,7 +1718,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1742,7 +1729,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
