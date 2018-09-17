@@ -229,6 +229,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/PDS&A_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/17/PDS&A_1/" itemprop="url">数据结构与算法实习_1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T10:13:02+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Courses/" itemprop="url" rel="index">
+                    <span itemprop="name">Courses</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="成绩评定"><a href="#成绩评定" class="headerlink" title="成绩评定"></a>成绩评定</h4><ul>
+<li>期中上机 30%</li>
+<li>期末上机 30%</li>
+<li>平时 40%</li>
+</ul>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><h4 id="并查集的概念"><a href="#并查集的概念" class="headerlink" title="并查集的概念"></a>并查集的概念</h4><p><strong>Disjoint-Set</strong> </p>
+<ul>
+<li>合并两个集合<code>Merge(a,b)</code></li>
+<li>查询元素</li>
+<li>查询两个元素是否在同一集合<code>Query(a,b)</code></li>
+</ul>
+<h4 id="简单算法"><a href="#简单算法" class="headerlink" title="简单算法"></a>简单算法</h4><p>给集合编号，每个元素对应一个编号<br>Query-O(1)  Merge-O(N)</p>
+<h4 id="用树表示集合"><a href="#用树表示集合" class="headerlink" title="用树表示集合"></a>用树表示集合</h4><p><code>Merge(a,b)</code>即是把a所在树挂在b所在树的<code>Root</code>下面，或相反<br>用一个数组<code>parent[i]=j</code>表示i的父节点是j<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getroot</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(parent[i]!=i)</span><br><span class="line">    &#123;</span><br><span class="line">        i=parent[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getroot</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(parent[i]==i)</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> getroot(parent[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Query</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;&#125;<span class="comment">//比较根节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;&#125;<span class="comment">//修改根节点的parent</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>缺点</strong> 树的深度失控，最坏依然是O(N)</p>
+<h4 id="改进方法一"><a href="#改进方法一" class="headerlink" title="改进方法一"></a>改进方法一</h4><p>浅树挂深树</p>
+<h4 id="改进方法二"><a href="#改进方法二" class="headerlink" title="改进方法二"></a>改进方法二</h4><p>路径压缩<br>查询一个元素得到根之后可以直接将该元素挂到根节点上,并可以通过递归使得查找路径上的每个点都进行压缩<br>查询操作非常频繁<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getroot</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(parent[i]!=i)</span><br><span class="line">    &#123;</span><br><span class="line">        parent[i]=getroot(parent[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> parent[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    parent[getroot(b)]=getroot(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>getroot()</code>的平摊时间复杂度在N不是很大的时候是常数</p>
+<h4 id="例题1-The-Suspects-POJ1611"><a href="#例题1-The-Suspects-POJ1611" class="headerlink" title="例题1 The Suspects POJ1611"></a>例题1 The Suspects POJ1611</h4><p>不断合并疑似感染的集合，合并中维护集合元素个数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> total[maxn];<span class="comment">//total[getroot[a]]是a所在group的人数</span></span><br><span class="line"><span class="keyword">int</span> parent[maxn];</span><br><span class="line"><span class="comment">//在读入group X时，将X内每个元素所在的现有团体合并在一起</span></span><br><span class="line"><span class="comment">//在merge()的过程中维护total[]</span></span><br><span class="line"><span class="comment">//最终返回total[getroot(0)]</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>套路</strong><br>在<code>getroot()</code>和<code>merge()</code>中维护必要信息</p>
+<h4 id="例题2-Cube-stacking-POJ1988"><a href="#例题2-Cube-stacking-POJ1988" class="headerlink" title="例题2 Cube stacking POJ1988"></a>例题2 Cube stacking POJ1988</h4><p><code>int under[i];</code>i下面的方块个数,merge()及getroot()时更新,注意在merge()的时候更新一整棵树的under[]复杂度是O(N),不可取.应该在merge()的时候只更新根节点的under[],也即只有父节点是根节点的节点的under[]是准确值,然后再在getroot()的时候修改under[]并直接将节点挂在根节点下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum[i];<span class="comment">//i为root的堆的个数,merge()时更新</span></span><br><span class="line"><span class="keyword">int</span> under[i];</span><br><span class="line"><span class="keyword">int</span> parent[i];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getroot</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(parent[i]!=i)</span><br><span class="line">    &#123;</span><br><span class="line">        parent[i]=getroot(parent[i]);</span><br><span class="line">        under[i]+=under[parent[i]];<span class="comment">//Check</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> parent[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="例题3-食物链-POJ-1182"><a href="#例题3-食物链-POJ-1182" class="headerlink" title="例题3 食物链 POJ 1182"></a>例题3 食物链 POJ 1182</h4><p>关系两两已知的动物构成一个集合<br>关键在于关系可以传递</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/UVa1609/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -758,7 +920,7 @@
       
         
           <h4 id="UVa-1471-Defense-Lines"><a href="#UVa-1471-Defense-Lines" class="headerlink" title="UVa 1471 Defense Lines"></a><a href="https://vjudge.net/problem/UVA-1471" target="_blank" rel="noopener">UVa 1471</a> Defense Lines</h4><blockquote>
-<p>After some hard negotiations, it appeared that building new towers is out of question. Mages of<br>Ardenia have agreed to demolish some of their towers, though. You may demolish arbitrary number of<br>towers, but the mages enforced one condition: these towers have to be consecutive.<br>For example, if the heights of towers were, respectively, 5, 3, 4, 9, 2, 8, 6, 7, 1, then by demolishing<br>towers of heights 9, 2, and 8, the longest increasing sequence of consecutive towers is 3, 4, 6, 7.</p>
+<p>After some hard negotiations, it appeared that building new towers is out of question. Mages of Ardenia have agreed to demolish some of their towers, though. You may demolish arbitrary number of towers, but the mages enforced one condition: these towers have to be consecutive. For example, if the heights of towers were, respectively, 5, 3, 4, 9, 2, 8, 6, 7, 1, then by demolishing towers of heights 9, 2, and 8, the longest increasing sequence of consecutive towers is 3, 4, 6, 7.</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1545,157 +1707,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/2018_7_16/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/2018_7_16/" itemprop="url">IDA* 算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T16:05:35+08:00">
-                2018-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="埃及分数问题"><a href="#埃及分数问题" class="headerlink" title="埃及分数问题"></a>埃及分数问题</h4><p>迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/16/2018_7_16/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1745,7 +1761,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1756,7 +1772,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
