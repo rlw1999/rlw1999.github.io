@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta name="description" content="Binary Representations1 Byte= 8 bits(类型所占大小的表格)Boolean Operations (early termination) Integerssigned    原码 反码 补码Casting,Expanding,Truncating C语言默认整数为signed 比较时若涉及Unsigned, 统一转换为Unsigned    有符号相加-溢出无符号">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDA* 算法">
-<meta property="og:url" content="http://yoursite.com/2018/07/16/2018_7_16/index.html">
+<meta property="og:title" content="计算机系统导论讨论班_1">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/RICS_1/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta property="og:description" content="Binary Representations1 Byte= 8 bits(类型所占大小的表格)Boolean Operations (early termination) Integerssigned    原码 反码 补码Casting,Expanding,Truncating C语言默认整数为signed 比较时若涉及Unsigned, 统一转换为Unsigned    有符号相加-溢出无符号">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T09:57:08.404Z">
+<meta property="og:updated_time" content="2018-10-08T01:55:30.129Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IDA* 算法">
-<meta name="twitter:description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta name="twitter:title" content="计算机系统导论讨论班_1">
+<meta name="twitter:description" content="Binary Representations1 Byte= 8 bits(类型所占大小的表格)Boolean Operations (early termination) Integerssigned    原码 反码 补码Casting,Expanding,Truncating C语言默认整数为signed 比较时若涉及Unsigned, 统一转换为Unsigned    有符号相加-溢出无符号">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/16/2018_7_16/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/19/RICS_1/"/>
 
 
 
 
 
-  <title>IDA* 算法 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>计算机系统导论讨论班_1 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/2018_7_16/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/RICS_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IDA* 算法</h1>
+          <h1 class="post-title" itemprop="name headline">计算机系统导论讨论班_1</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T16:05:35+08:00">
-                2018-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
+                2018-09-19
               </time>
             
 
@@ -284,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -321,9 +321,33 @@
       
 
       
-        <h4 id="埃及分数问题"><a href="#埃及分数问题" class="headerlink" title="埃及分数问题"></a>埃及分数问题</h4><p>迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝</p>
-<a id="more"></a>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1000</span>;</span><br><span class="line">LL ans[maxn], v[maxn];</span><br><span class="line"><span class="keyword">int</span> maxd, kcase;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">	LL temp;</span><br><span class="line">	<span class="keyword">while</span> (b) &#123; temp = b; b = a % b; a = temp; &#125;</span><br><span class="line">	<span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LL <span class="title">get_first</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b / a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">better</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = d; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">		<span class="keyword">if</span> (v[i] != ans[i])</span><br><span class="line">			<span class="keyword">return</span> ans[i] == <span class="number">-1</span> || v[i] &lt; ans[i];</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> d, <span class="keyword">int</span> from, LL aa, LL bb)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (d == maxd) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bb % aa) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		v[d] = bb / aa;</span><br><span class="line">		<span class="keyword">if</span> (better(d)) <span class="built_in">memcpy</span>(ans, v, <span class="keyword">sizeof</span>(LL)*(d + <span class="number">1</span>));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">bool</span> ok = <span class="literal">false</span>;</span><br><span class="line">	from = max((LL)from, get_first(aa, bb));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = from; ; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bb * (maxd + <span class="number">1</span> - d) &lt;= i*aa) <span class="keyword">break</span>;<span class="comment">//剪枝：如果剩下的maxd+1-d个分数全部都是1/i，加起来仍然不超过aa/bb，则无解！ (maxd+1-d)/i &lt;= aa/bb</span></span><br><span class="line">		v[d] = i;</span><br><span class="line">		LL b2 = bb*i;</span><br><span class="line">		LL a2 = aa*i - bb;</span><br><span class="line">		LL g = gcd(a2, b2);</span><br><span class="line">		<span class="keyword">if</span> (dfs(d + <span class="number">1</span>, i + <span class="number">1</span>, a2 / g, b2 / g)) ok = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ok;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ok = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (maxd = <span class="number">1</span>; ; maxd++) &#123;</span><br><span class="line">		<span class="built_in">memset</span>(ans, <span class="number">-1</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">		<span class="keyword">if</span> (dfs(<span class="number">0</span>, get_first(a, b), a, b)) &#123;</span><br><span class="line">			ok = <span class="number">1</span>; <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Case %d: %d/%d="</span>, ++kcase, a, b);</span><br><span class="line">	<span class="keyword">if</span> (ok) &#123; <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;maxd; i++) <span class="built_in">printf</span>(<span class="string">"1/%lld+"</span>, ans[i]); <span class="built_in">printf</span>(<span class="string">"1/%lld\n"</span>, ans[maxd]); &#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d/%d\n"</span>, a, b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b) != EOF)</span><br><span class="line">		solve(a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>1 Byte= 8 bits<br>(类型所占大小的表格)<br>Boolean Operations (<strong>early termination</strong>)</p>
+<h4 id="Integers"><a href="#Integers" class="headerlink" title="Integers"></a>Integers</h4><p>signed  </p>
+<ul>
+<li>原码</li>
+<li>反码</li>
+<li>补码<h4 id="Casting-Expanding-Truncating"><a href="#Casting-Expanding-Truncating" class="headerlink" title="Casting,Expanding,Truncating"></a>Casting,Expanding,Truncating</h4></li>
+<li>C语言默认整数为signed</li>
+<li>比较时若涉及Unsigned, 统一转换为Unsigned  </li>
+</ul>
+<p>有符号相加-溢出<br>无符号相加-进位  </p>
+<h5 id="如何判断溢出和进位"><a href="#如何判断溢出和进位" class="headerlink" title="如何判断溢出和进位"></a>如何判断溢出和进位</h5><ul>
+<li>signed 正正得负或负负得正</li>
+<li>unsigned 加起来反而变小</li>
+</ul>
+<h5 id="加法性质"><a href="#加法性质" class="headerlink" title="加法性质"></a>加法性质</h5><ul>
+<li>封闭性</li>
+<li>可交换、结合</li>
+<li>存在相反数(-Tmin=Tmin)</li>
+<li>无单调性<br><code>x&gt;&gt;k==[x/2^k]?</code></li>
+</ul>
+<h4 id="Memory-Organization"><a href="#Memory-Organization" class="headerlink" title="Memory Organization"></a>Memory Organization</h4><ul>
+<li>小端法<br>x86 ARM</li>
+<li>大端法<br>  Internet</li>
+</ul>
+<p>(运算优先级)</p>
+<h4 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h4><h5 id="abs-x"><a href="#abs-x" class="headerlink" title="abs(x)"></a>abs(x)</h5><p>mask=x&gt;&gt;31;<br>(X+mask)^mask;</p>
+
       
     </div>
     
@@ -347,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/15/Android_1/" rel="next" title="Android 学习笔记1">
-                <i class="fa fa-chevron-left"></i> Android 学习笔记1
+              <a href="/2018/09/19/DS&A_1/" rel="next" title="数据结构与算法_1">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法_1
               </a>
             
           </div>
@@ -357,8 +381,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/UVa11212/" rel="prev" title="UVa 11212 Editing a Book">
-                UVa 11212 Editing a Book <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/19/ICS_2/" rel="prev" title="计算机系统导论_2">
+                计算机系统导论_2 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -486,7 +510,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#埃及分数问题"><span class="nav-number">1.</span> <span class="nav-text">埃及分数问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Representations"><span class="nav-number">1.</span> <span class="nav-text">Binary Representations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Integers"><span class="nav-number">2.</span> <span class="nav-text">Integers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Casting-Expanding-Truncating"><span class="nav-number">3.</span> <span class="nav-text">Casting,Expanding,Truncating</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何判断溢出和进位"><span class="nav-number">3.1.</span> <span class="nav-text">如何判断溢出和进位</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加法性质"><span class="nav-number">3.2.</span> <span class="nav-text">加法性质</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory-Organization"><span class="nav-number">4.</span> <span class="nav-text">Memory Organization</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LAB"><span class="nav-number">5.</span> <span class="nav-text">LAB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#abs-x"><span class="nav-number">5.1.</span> <span class="nav-text">abs(x)</span></a></li></ol></li></ol></div>
             
 
           </div>

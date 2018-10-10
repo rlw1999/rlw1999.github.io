@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta name="description" content="Bits, Bytes, and IntegersBinary RepresentationsDec 1.2 = Bin 1.00110011[0011]….">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDA* 算法">
-<meta property="og:url" content="http://yoursite.com/2018/07/16/2018_7_16/index.html">
+<meta property="og:title" content="计算机系统导论_2">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/ICS_2/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta property="og:description" content="Bits, Bytes, and IntegersBinary RepresentationsDec 1.2 = Bin 1.00110011[0011]….">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T09:57:08.404Z">
+<meta property="og:updated_time" content="2018-10-08T07:13:30.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IDA* 算法">
-<meta name="twitter:description" content="埃及分数问题迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝">
+<meta name="twitter:title" content="计算机系统导论_2">
+<meta name="twitter:description" content="Bits, Bytes, and IntegersBinary RepresentationsDec 1.2 = Bin 1.00110011[0011]….">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/16/2018_7_16/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/19/ICS_2/"/>
 
 
 
 
 
-  <title>IDA* 算法 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>计算机系统导论_2 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/2018_7_16/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IDA* 算法</h1>
+          <h1 class="post-title" itemprop="name headline">计算机系统导论_2</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T16:05:35+08:00">
-                2018-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
+                2018-09-19
               </time>
             
 
@@ -284,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -321,9 +321,33 @@
       
 
       
-        <h4 id="埃及分数问题"><a href="#埃及分数问题" class="headerlink" title="埃及分数问题"></a>埃及分数问题</h4><p>迭代加深的A*算法，是一种剪枝优化的DFS，当最小估计深度超过了目标搜索深度时，判断为不可达到解，剪枝</p>
-<a id="more"></a>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1000</span>;</span><br><span class="line">LL ans[maxn], v[maxn];</span><br><span class="line"><span class="keyword">int</span> maxd, kcase;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">	LL temp;</span><br><span class="line">	<span class="keyword">while</span> (b) &#123; temp = b; b = a % b; a = temp; &#125;</span><br><span class="line">	<span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">LL <span class="title">get_first</span><span class="params">(LL a, LL b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b / a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">better</span><span class="params">(<span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = d; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">		<span class="keyword">if</span> (v[i] != ans[i])</span><br><span class="line">			<span class="keyword">return</span> ans[i] == <span class="number">-1</span> || v[i] &lt; ans[i];</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> d, <span class="keyword">int</span> from, LL aa, LL bb)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (d == maxd) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bb % aa) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		v[d] = bb / aa;</span><br><span class="line">		<span class="keyword">if</span> (better(d)) <span class="built_in">memcpy</span>(ans, v, <span class="keyword">sizeof</span>(LL)*(d + <span class="number">1</span>));</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">bool</span> ok = <span class="literal">false</span>;</span><br><span class="line">	from = max((LL)from, get_first(aa, bb));</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = from; ; i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (bb * (maxd + <span class="number">1</span> - d) &lt;= i*aa) <span class="keyword">break</span>;<span class="comment">//剪枝：如果剩下的maxd+1-d个分数全部都是1/i，加起来仍然不超过aa/bb，则无解！ (maxd+1-d)/i &lt;= aa/bb</span></span><br><span class="line">		v[d] = i;</span><br><span class="line">		LL b2 = bb*i;</span><br><span class="line">		LL a2 = aa*i - bb;</span><br><span class="line">		LL g = gcd(a2, b2);</span><br><span class="line">		<span class="keyword">if</span> (dfs(d + <span class="number">1</span>, i + <span class="number">1</span>, a2 / g, b2 / g)) ok = <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ok;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ok = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (maxd = <span class="number">1</span>; ; maxd++) &#123;</span><br><span class="line">		<span class="built_in">memset</span>(ans, <span class="number">-1</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">		<span class="keyword">if</span> (dfs(<span class="number">0</span>, get_first(a, b), a, b)) &#123;</span><br><span class="line">			ok = <span class="number">1</span>; <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Case %d: %d/%d="</span>, ++kcase, a, b);</span><br><span class="line">	<span class="keyword">if</span> (ok) &#123; <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;maxd; i++) <span class="built_in">printf</span>(<span class="string">"1/%lld+"</span>, ans[i]); <span class="built_in">printf</span>(<span class="string">"1/%lld\n"</span>, ans[maxd]); &#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%d/%d\n"</span>, a, b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b) != EOF)</span><br><span class="line">		solve(a, b);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br><a id="more"></a><br>Why Binary? The Voltage of electronic circle is continuate.  </p>
+<h4 id="Encoding-Byte-Values"><a href="#Encoding-Byte-Values" class="headerlink" title="Encoding Byte Values"></a>Encoding Byte Values</h4><p>Byte = 8 bits<br>Decimal 0 to 255<br>Hexadecimal 00 to FF</p>
+<p>in X86-64 system, the data type <code>long</code> and a <code>pointer</code> contain 8 bytes, but in typical 32 system, contain 4 bytes.<br>the maximum main memory size of a 32 system is 2^32 bits, which is 4GB, but in a 64 system, the theoratical limit is 2^64 bits, which is 16EG.</p>
+<h4 id="Boolean-Algebra"><a href="#Boolean-Algebra" class="headerlink" title="Boolean Algebra"></a>Boolean Algebra</h4><ul>
+<li>And &amp;</li>
+<li>Or |</li>
+<li>Not ~</li>
+<li>Xor ^</li>
+</ul>
+<h5 id="Representing-amp-Manipulating-Sets"><a href="#Representing-amp-Manipulating-Sets" class="headerlink" title="Representing &amp; Manipulating Sets"></a>Representing &amp; Manipulating Sets</h5><p>100110={2,3,6} to show the noun-zero bits<br>then<br>&amp; = Intersection<br>| = Union<br>…  </p>
+<h5 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0x69 &amp; 0x55 = 0x41;  </span><br><span class="line">0x69 &amp;&amp; 0x55 = 0x01;  </span><br><span class="line">!!0x41=0x01;  </span><br><span class="line">p &amp;&amp; *p (avoid null pointer access)</span><br></pre></td></tr></table></figure>
+<h5 id="Shift-Operations"><a href="#Shift-Operations" class="headerlink" title="Shift Operations"></a>Shift Operations</h5><ul>
+<li><strong>left shift</strong> x &lt;&lt; y<br>full with 0 on the right</li>
+<li><strong>right shift</strong> x &gt;&gt; y<ul>
+<li>logical shift<br>fill with 0 on the right</li>
+<li>arithmetic shift<br>replicate most significant bit on the left</li>
+</ul>
+</li>
+<li><strong>undifined behavior</strong><br>shift out of size</li>
+</ul>
+<h4 id="Encoding-Integers"><a href="#Encoding-Integers" class="headerlink" title="Encoding Integers"></a>Encoding Integers</h4><p><strong>Unsigned</strong>  </p>
+<p><strong>Two’s Complement</strong><br>Tmin=100..0<br>Tmax=011..1<br>-1=11..1  </p>
+<h5 id="Casting-surprises"><a href="#Casting-surprises" class="headerlink" title="Casting surprises"></a>Casting surprises</h5><p>  Expression Evaluation</p>
+<h5 id="Sign-Extension"><a href="#Sign-Extension" class="headerlink" title="Sign Extension"></a>Sign Extension</h5><p>add the most significant left bit</p>
+<h5 id="Additon"><a href="#Additon" class="headerlink" title="Additon"></a>Additon</h5><p>Discard carry</p>
+<h5 id="Mutiplication"><a href="#Mutiplication" class="headerlink" title="Mutiplication"></a>Mutiplication</h5><p>我错了，我再也不用英语做笔记了。。。</p>
+
       
     </div>
     
@@ -347,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/15/Android_1/" rel="next" title="Android 学习笔记1">
-                <i class="fa fa-chevron-left"></i> Android 学习笔记1
+              <a href="/2018/09/19/RICS_1/" rel="next" title="计算机系统导论讨论班_1">
+                <i class="fa fa-chevron-left"></i> 计算机系统导论讨论班_1
               </a>
             
           </div>
@@ -357,8 +381,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/UVa11212/" rel="prev" title="UVa 11212 Editing a Book">
-                UVa 11212 Editing a Book <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/08/PDS&A_2/" rel="prev" title="数据结构与算法实习_2">
+                数据结构与算法实习_2 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -486,7 +510,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#埃及分数问题"><span class="nav-number">1.</span> <span class="nav-text">埃及分数问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bits-Bytes-and-Integers"><span class="nav-number">1.</span> <span class="nav-text">Bits, Bytes, and Integers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Representations"><span class="nav-number">1.1.</span> <span class="nav-text">Binary Representations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding-Byte-Values"><span class="nav-number">1.2.</span> <span class="nav-text">Encoding Byte Values</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boolean-Algebra"><span class="nav-number">1.3.</span> <span class="nav-text">Boolean Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Representing-amp-Manipulating-Sets"><span class="nav-number">1.3.1.</span> <span class="nav-text">Representing &amp; Manipulating Sets</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Attention"><span class="nav-number">1.3.2.</span> <span class="nav-text">Attention</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Shift-Operations"><span class="nav-number">1.3.3.</span> <span class="nav-text">Shift Operations</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding-Integers"><span class="nav-number">1.4.</span> <span class="nav-text">Encoding Integers</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Casting-surprises"><span class="nav-number">1.4.1.</span> <span class="nav-text">Casting surprises</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Sign-Extension"><span class="nav-number">1.4.2.</span> <span class="nav-text">Sign Extension</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Additon"><span class="nav-number">1.4.3.</span> <span class="nav-text">Additon</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mutiplication"><span class="nav-number">1.4.4.</span> <span class="nav-text">Mutiplication</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

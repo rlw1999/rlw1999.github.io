@@ -229,6 +229,684 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/Android_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/Android_1/" itemprop="url">Android 学习笔记1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T15:28:52+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="About-Acitivity"><a href="#About-Acitivity" class="headerlink" title="About Acitivity"></a>About Acitivity</h4><ul>
+<li>一个Activity通常就是一个单独的屏幕或窗口</li>
+<li>Activity之间通过Intent通信</li>
+<li>每一个Activity都必须在AndroidManifest.xml配置文件中注册</li>
+<li>有一个main Activity在应用启动时启动，在AndroidManifest中标记</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/15/Android_1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/DBFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/DBFS/" itemprop="url">双向广搜 八数码问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T11:02:14+08:00">
+                2018-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="Eight-POJ1077"><a href="#Eight-POJ1077" class="headerlink" title="Eight POJ1077"></a>Eight <a href="http://poj.org/problem?id=1077" target="_blank" rel="noopener">POJ1077</a></h4><p>1 2 3<br>x 4 6<br>7 5 8<br>问题在于棋盘状态的记录。<br>每个棋盘对应一串序列<br>比如上面棋盘：123046758<br>一共10 != 3628800 = 3e6种排列，用10位整数明显过大，需要给每个排列对应编码。<br>将所用排列按字典序排列，有<br>$ 9!-1=8 \times 8! + …+2 \times 2!+1 \times 1! $<br>即987654321对应的编码为$9!-1$，而123456789对应$0$</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/15/DBFS/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/Stupid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/Stupid/" itemprop="url">UVa 816, UVa 524, UVa 129</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:32:15+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="所以是为了什么。。。"><a href="#所以是为了什么。。。" class="headerlink" title="所以是为了什么。。。"></a>所以是为了什么。。。</h4><hr>
+<h5 id="Abbott’s-Revenge-UVa-816"><a href="#Abbott’s-Revenge-UVa-816" class="headerlink" title="Abbott’s Revenge, UVa 816"></a>Abbott’s Revenge, <a href="https://vjudge.net/problem/UVA-816" target="_blank" rel="noopener">UVa 816</a></h5><p>题目描述比较复杂，但基本做法还是<strong>DFS</strong>，这里涉及一个路径保存的问题，采用的方法是<strong>保存DFS树中叶子的父节点</strong>，给定一个迷宫，就对应++唯一一个++DFS的搜索树，包含所有可以到达的地图上的点，把树保存下来也就把路径保存了下来。<br>剩下的就比较好说了，一次AC</p>
+<h5 id="枚举方法"><a href="#枚举方法" class="headerlink" title="枚举方法"></a>枚举方法</h5><ul>
+<li><p>生成下一个排列的简单代码,在已有序列A的末尾依次添加未出现过的数字，然后递归</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void print_permutation(int n,int *A,int cur)</span><br><span class="line">&#123;</span><br><span class="line">    if(cur==n)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int i=0;i&lt;n;++i)</span><br><span class="line">            printf(&quot;%d&quot;,A[i]);</span><br><span class="line">        printf(&quot;\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    else for(int i=1;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int ok=1;</span><br><span class="line">        for(int j=0;j&lt;cur;++j)</span><br><span class="line">            if(A[j]==i)</span><br><span class="line">                ok=0;</span><br><span class="line">        if(ok)</span><br><span class="line">        &#123;</span><br><span class="line">            A[cur]=i;</span><br><span class="line">            print_permutation(n,A,cur+1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子集生成,生成1~9的所有子集，这个递归思路不是太明显，<strong>每一次递归</strong>都对应一个子集，并且子集内的元素严格单调，递归终点也没有显式表现出来</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void print_subset(int n,int* A,int cur)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i=0;i&lt;cur;++i)printf(&quot;%d &quot;,A[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    int s=cur? A[cur-1]+1:0;</span><br><span class="line">    for(int i=s;i&lt;n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        A[cur]=i;</span><br><span class="line">        print_subset(n,A,cur+1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>话说这么简单的程序我干嘛要抄。。。不过也提醒在考虑递归程序时先想好解答树，这样历遍也有条理一些</p>
+</blockquote>
+<p>来道简答题</p>
+<h5 id="Prime-Ring-Problem-UVa-524"><a href="#Prime-Ring-Problem-UVa-524" class="headerlink" title="Prime Ring Problem,  UVa 524"></a>Prime Ring Problem,  <a href="https://vjudge.net/problem/UVA-524" target="_blank" rel="noopener">UVa 524</a></h5><p>要求构造环使得相邻节点之和是素数，使用回溯递归枚举，好像真没啥难度。。。一次过了。</p>
+<h5 id="Krypton-Factor-UVa-129"><a href="#Krypton-Factor-UVa-129" class="headerlink" title="Krypton Factor, UVa 129"></a>Krypton Factor, <a href="https://vjudge.net/problem/UVA-129" target="_blank" rel="noopener">UVa 129</a></h5><p>要求找出第n个Hard Sequence，Easy Sequence形如CABAB，里面有重复。依旧是枚举里面比较简单的题，还是递归实现，不断在末尾添加字符并计数，添加时判断是否与前面构成重复串。第一次遇到了RE。。。给的样例和uDebug上的输入都没有问题。。。原来是忘记在<strong>找到解后加入递归终点的条件</strong>。。。<br>话说代码量真是一直降不下来啊。。。边想边写的缺点</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/UVa10603/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/UVa10603/" itemprop="url">UVa 10603 Fill</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T10:21:39+08:00">
+                2018-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="UVa-10603-Fill"><a href="#UVa-10603-Fill" class="headerlink" title="UVa 10603 Fill"></a>UVa 10603 Fill</h4><p>题目大概意思是三个杯子容量分别为a,b,c,(&lt;=200)第三个杯子是满的，能不能在杯子中相互倒水使得某个杯子中刚好有d升水。如果不能，找到最接近的d’(d’&lt; d),并输出倒水最少的方案。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/13/UVa10603/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/2018_7_12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/12/2018_7_12/" itemprop="url">算是近期总结吧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T19:51:53+08:00">
+                2018-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h4><p>VS code 比我想象中要强大，轻量级编译，文本编辑感觉都还可以，然而编辑markdown还是比较丑<br>用户配置可以再摸索，应该还能更好看点</p>
+<h4 id="LaTeX"><a href="#LaTeX" class="headerlink" title="LaTeX"></a>LaTeX</h4><p>漂亮！感觉可以写书了<br>Hexo好像也可以支持LaTeX，可以再研究下，挂个<a href="https://blog.csdn.net/emptyset110/article/details/50123231" target="_blank" rel="noopener">链接</a><br>说起Hexo，可以顺便学一下前端开发？</p>
+<h4 id="理想的冲突"><a href="#理想的冲突" class="headerlink" title="理想的冲突"></a>理想的冲突</h4><p>宾克莱的一本书，挺实用的</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/UVa220/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -974,7 +1652,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
