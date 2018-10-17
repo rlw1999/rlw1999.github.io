@@ -229,6 +229,448 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/ICS_4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/15/ICS_4/" itemprop="url">计算机系统导论_4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T15:21:17+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h1><h2 id="Mechanisms-in-Procedures"><a href="#Mechanisms-in-Procedures" class="headerlink" title="Mechanisms in Procedures"></a>Mechanisms in Procedures</h2><ul>
+<li>Passing control</li>
+<li>Passing data</li>
+<li>Memory management<ul>
+<li>Allocate during procedure excution</li>
+<li>Deallocate upon return</li>
+</ul>
+</li>
+</ul>
+<h2 id="x86-64-Stack"><a href="#x86-64-Stack" class="headerlink" title="x86-64 Stack"></a>x86-64 Stack</h2><p>%rsp contains lowest element (top) of the stack</p>
+<ul>
+<li><strong><code>pushq Src</code></strong><ul>
+<li>Fecth oprand at Src</li>
+<li>Decrement %rsp by 8</li>
+<li>Write operand ar address given by <strong>%rsp</strong></li>
+</ul>
+</li>
+<li><strong><code>popq Dest</code></strong><ul>
+<li>Read value at address given by <strong>%rsp</strong></li>
+<li>Increment <strong>%rsp</strong> by 8</li>
+<li>Store value at Dest</li>
+<li>the memory doesn’t change</li>
+</ul>
+</li>
+</ul>
+<h2 id="Passing-Control"><a href="#Passing-Control" class="headerlink" title="Passing Control"></a>Passing Control</h2><ul>
+<li><strong><code>call label</code></strong><ul>
+<li>Push return address on stack</li>
+<li>Jump to label</li>
+</ul>
+</li>
+<li><strong><code>ret</code></strong><ul>
+<li>Pop address from stack</li>
+<li>Jump to address</li>
+</ul>
+</li>
+</ul>
+<h2 id="Passing-data"><a href="#Passing-data" class="headerlink" title="Passing data"></a>Passing data</h2><ul>
+<li>First 6 arguments<blockquote>
+<p><strong>%rdi</strong> <strong>%rsi</strong> <strong>%rdx</strong> <strong>%rcx</strong> <strong>%r8</strong> <strong>%r9</strong>  </p>
+</blockquote>
+</li>
+<li>Return value<br><strong>%rax</strong></li>
+</ul>
+<h2 id="Managing-local-data"><a href="#Managing-local-data" class="headerlink" title="Managing local data"></a>Managing local data</h2><ul>
+<li>Languages that support recursion<ul>
+<li>Code must be Reentrant</li>
+<li>Need some place to store state of each instantiation<ul>
+<li>Arguments</li>
+<li>Local variables</li>
+<li>Return pointer</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stack allocated in <strong>Frames</strong></li>
+</ul>
+<h3 id="Stack-Frames"><a href="#Stack-Frames" class="headerlink" title="Stack Frames"></a>Stack Frames</h3><ul>
+<li>Contents<ul>
+<li>Return information</li>
+<li>Local storage</li>
+<li>Temporary space</li>
+</ul>
+</li>
+<li>Pointers<ul>
+<li><strong>%rsp</strong> Stack Pointer</li>
+<li><strong>%rbp</strong> Frame Pointer(Optional, from IA32)</li>
+</ul>
+</li>
+</ul>
+<h4 id="x86-64-Linux-Stack-Frame"><a href="#x86-64-Linux-Stack-Frame" class="headerlink" title="x86-64/Linux Stack Frame"></a>x86-64/Linux Stack Frame</h4><ul>
+<li>Caller Stack Frame<ul>
+<li>Return address(push by <code>call</code>)</li>
+<li>Arguments for this call</li>
+</ul>
+</li>
+<li>Current Stack Frame<ul>
+<li>“Argument build”(Parameters for function about to call)</li>
+<li>Local variables(if can’t keep in registers)</li>
+<li>Saved register context</li>
+<li>Old frame pointer(optional)<ul>
+<li><blockquote>
+<p>方便返回时找到<code>caller</code>的栈帧</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>callee</code>可以访问并修改<code>caller</code>栈帧里的内容，比如<code>caller</code>向<code>callee</code>传递的参数大于6个时，就存在<code>callee</code>的栈帧里</p>
+</blockquote>
+<h4 id="Register-Saving-Conventions"><a href="#Register-Saving-Conventions" class="headerlink" title="Register Saving Conventions"></a>Register Saving Conventions</h4><ul>
+<li>Caller Saved<ul>
+<li>caller saves temporary values in its frame before the call</li>
+</ul>
+</li>
+<li><p>Callee Saved</p>
+<ul>
+<li>Callee saves temporary values in its frame before using</li>
+<li>Callee restores them before returning to caller</li>
+</ul>
+</li>
+<li><p>Caller Save</p>
+<ul>
+<li>%rax</li>
+<li>%rdi,…,%r9</li>
+<li>%r10,%r11</li>
+</ul>
+</li>
+<li>Callee Save<ul>
+<li>%rbx, %r12, %13, %r14</li>
+<li>%rbp</li>
+<li>%rsp</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/PDS&A_3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/15/PDS&A_3/" itemprop="url">数据结构与算法实习_3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T09:57:00+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="线段树-Interval-Tree"><a href="#线段树-Interval-Tree" class="headerlink" title="线段树 Interval Tree"></a>线段树 Interval Tree</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
+<li>树上的每个节点对应一个区间$[a,b]$</li>
+<li>每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$</li>
+<li>同层节点对应区间不相交，并起来为总区间</li>
+</ul>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
+<li>使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次</li>
+<li>叶子节点数目为$N$，总结点个数$2N-1$</li>
+</ul>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="核心操作：区间分解"><a href="#核心操作：区间分解" class="headerlink" title="核心操作：区间分解"></a>核心操作：区间分解</h3><p>给定区间$[c,d]$，寻找其对应的线段树中的节点集合</p>
+<ul>
+<li>从节点开始</li>
+<li>走到$[L,R]$，如果要分解的区间就是$[L,R]$，找到一个终止节点</li>
+<li>考虑节点的两个子节点，若子节点与$[L,R]$有交集，就进入子节点递归分解</li>
+</ul>
+<p>每层最多<strong>2</strong>个终止节点，总的终止节点数是$log(N)$量级，总复杂度也是$O(logN)$</p>
+<blockquote>
+<p>两者在复杂度上同级, 但是<strong>树状数组的常数</strong>明显<strong>优于</strong>线段树, 其编程复杂度也远小于线段树.<br>树状数组的作用被线段树完全涵盖, 凡是可以使用树状数组解决的问题, <strong>使用线段树一定可以解决</strong>, 但是线段树能够解决的问题<strong>树状数组未必能够解决</strong>.<br><strong>树状数组</strong>的突出特点是其编程的极端<strong>简洁性</strong>, 使用lowbit技术可以在很短的几步操作中完成树状数组的核心操作，与之相关的便是其代码效率远高于线段树。<br>另外，当问题推广到<strong>高维情形</strong>时高维<strong>树状数组</strong>有高维线段树所无法企及的<strong>常数优势</strong>。</p>
+</blockquote>
+<p>对于两个子节点都与目标区间相交的情况，访问到<code>v-&gt;_L-&gt;_R</code>一定是终止节点，<code>v-&gt;_R-&gt;_L</code>也一定是终止节点，因此实际有效的“两个子区间都参与分解”的情况只会出现一次。因此总复杂度仍为$O(logN)$</p>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>从根节点开始，递归构建<br>复杂度为$O(N)$</p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><ul>
+<li>确认根节点对应区间，建树</li>
+<li>插入数据</li>
+<li>更新计算</li>
+</ul>
+<h2 id="储存"><a href="#储存" class="headerlink" title="储存"></a>储存</h2><ul>
+<li>动态储存</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> L,R;</span><br><span class="line">    <span class="comment">//与区间[L,R]有关的数据</span></span><br><span class="line">    node* pLeft,pRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>静态储存</li>
+</ul>
+<p>不要左右节点指针，使用完全二叉树的数组储存，最后一层的未满叶子占数组空间。数组开到$4N$可保证不越界</p>
+<h2 id="例题1-单点更新，区间求和"><a href="#例题1-单点更新，区间求和" class="headerlink" title="例题1 单点更新，区间求和"></a>例题1 单点更新，区间求和</h2><p>自顶向下递归查询和更新</p>
+<h2 id="例题2-Balanced-Lineup-POJ3264"><a href="#例题2-Balanced-Lineup-POJ3264" class="headerlink" title="例题2 Balanced Lineup POJ3264"></a>例题2 Balanced Lineup POJ3264</h2><p>多次求任一区间$[A_i,A_j]$中最大数与最小数的差</p>
+<h2 id="例题3-A-Simple-Problem-with-Integers"><a href="#例题3-A-Simple-Problem-with-Integers" class="headerlink" title="例题3 A Simple Problem with Integers"></a>例题3 A Simple Problem with Integers</h2><p>区间更新，区间求和</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CNOde</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> L,R;</span><br><span class="line">    CNode *pLeft,*pRight;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> sum;<span class="comment">//原来的和</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> inc;<span class="comment">//本区间里的所有数都加上inc，其子节点**不更新**</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在更新时，如果当前节点是修改区间的子集，就更新inc，不继续往下。如果不是，则更新当前节点的<code>sum</code>，inc带到下一层，inc=0;</p>
+<blockquote>
+<p>inc在查询或修改节点不是目标区间的子集时，都必须更新本层的inc并将inc带到下一层。因为虽然父节点记录了子节点每个数要增加的值，但是在自顶向下递归时并不知道子节点的元素个数。</p>
+</blockquote>
+<h2 id="例题4-Mayor’s-Poster"><a href="#例题4-Mayor’s-Poster" class="headerlink" title="例题4 Mayor’s Poster"></a>例题4 Mayor’s Poster</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/IFCS_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -641,8 +1083,9 @@
 <li>Targ1: Code Block1</li>
 <li>…</li>
 </ul>
-<h5 id="Jump-Table-1"><a href="#Jump-Table-1" class="headerlink" title="Jump Table"></a>Jump Table</h5><p>jTab:</p>
+<p>jTab:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp *.L4(,%rdi,8)</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -883,152 +1326,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/ICS_2/" itemprop="url">计算机系统导论_2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/19/ICS_2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/RICS_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1196,7 +1493,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/DS&A_1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -1215,7 +1512,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/19/DS&A_1/" itemprop="url">数据结构与算法_1</a></h1>
+                <a class="post-title-link" href="/2018/09/19/ICS_2/" itemprop="url">计算机系统导论_2</a></h1>
         
 
         <div class="post-meta">
@@ -1227,7 +1524,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T10:11:55+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
                 2018-09-19
               </time>
             
@@ -1250,8 +1547,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">DS&A</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -1288,22 +1585,10 @@
 
       
         
-          <h4 id="lt-数据结构与算法-gt"><a href="#lt-数据结构与算法-gt" class="headerlink" title="&lt;数据结构与算法&gt;"></a>&lt;数据结构与算法&gt;</h4><ul>
-<li>逻辑结构<br>图&gt; 树&gt; 线性</li>
-<li>储存结构<ul>
-<li>顺序方法、链接方法</li>
-<li>索引方法、散列方法</li>
-</ul>
-</li>
-<li>运算<ul>
-<li>增、删、改、查</li>
-<li>遍历、排序</li>
-</ul>
-</li>
-<li>时间复杂性&amp;空间复杂性
+          <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/09/19/DS&A_1/#more" rel="contents">
+            <a class="btn" href="/2018/09/19/ICS_2/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1510,6 +1795,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/DS&A_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/19/DS&A_1/" itemprop="url">数据结构与算法_1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T10:11:55+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">DS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="lt-数据结构与算法-gt"><a href="#lt-数据结构与算法-gt" class="headerlink" title="&lt;数据结构与算法&gt;"></a>&lt;数据结构与算法&gt;</h4><ul>
+<li>逻辑结构<br>图&gt; 树&gt; 线性</li>
+<li>储存结构<ul>
+<li>顺序方法、链接方法</li>
+<li>索引方法、散列方法</li>
+</ul>
+</li>
+<li>运算<ul>
+<li>增、删、改、查</li>
+<li>遍历、排序</li>
+</ul>
+</li>
+<li>时间复杂性&amp;空间复杂性
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/19/DS&A_1/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/IFCS_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1650,313 +2093,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/ICS_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/17/ICS_1/" itemprop="url">ICS 总论</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T15:12:01+08:00">
-                2018-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ul>
-<li>数据表示</li>
-<li>了解汇编</li>
-<li>内存管理</li>
-<li>程序性能</li>
-<li>网络问题
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/17/ICS_1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/PDS&A_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/17/PDS&A_1/" itemprop="url">数据结构与算法实习_1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T10:13:02+08:00">
-                2018-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="成绩评定"><a href="#成绩评定" class="headerlink" title="成绩评定"></a>成绩评定</h4><ul>
-<li>期中上机 30%</li>
-<li>期末上机 30%</li>
-<li>平时 40%</li>
-</ul>
-<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/17/PDS&A_1/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2006,7 +2147,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
