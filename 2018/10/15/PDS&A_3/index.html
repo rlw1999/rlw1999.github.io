@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-15T04:00:21.411Z">
+<meta property="og:updated_time" content="2018-10-20T14:15:42.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法实习_3">
 <meta name="twitter:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
@@ -673,7 +673,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -726,6 +726,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
