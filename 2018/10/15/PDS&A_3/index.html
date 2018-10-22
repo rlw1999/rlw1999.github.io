@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-20T14:15:42.767Z">
+<meta property="og:updated_time" content="2018-10-22T03:01:18.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法实习_3">
 <meta name="twitter:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
@@ -363,7 +363,16 @@
 <blockquote>
 <p>inc在查询或修改节点不是目标区间的子集时，都必须更新本层的inc并将inc带到下一层。因为虽然父节点记录了子节点每个数要增加的值，但是在自顶向下递归时并不知道子节点的元素个数。</p>
 </blockquote>
-<h2 id="例题4-Mayor’s-Poster"><a href="#例题4-Mayor’s-Poster" class="headerlink" title="例题4 Mayor’s Poster"></a>例题4 Mayor’s Poster</h2>
+<h2 id="例题4-Mayor’s-Poster"><a href="#例题4-Mayor’s-Poster" class="headerlink" title="例题4 Mayor’s Poster"></a>例题4 Mayor’s Poster</h2><p>离散化，树中元素记录对应区间是否被覆盖</p>
+<blockquote>
+<p>在更新时(初始为<code>false</code>，完全覆盖时更新)，更新到终止节点就返回。这样虽然终止节点的子节点没有更新，但是每次访问子节点都需要经过父节点，而父节点已经被标记为<code>true</code>，此时访问到父节点直接返回不会导致错误。同时还需要注意当父节点为<code>false</code>时，此时贴上海报可能导致父节点表示区间被覆盖，因此递归返回时，要用子节点的返回值更新父节点的值。</p>
+</blockquote>
+<h2 id="例题5-Atlantis"><a href="#例题5-Atlantis" class="headerlink" title="例题5 Atlantis"></a>例题5 <a href="http://poj.org/problem?id=1151" target="_blank" rel="noopener">Atlantis</a></h2><p>先进行横坐标的离散化，在求面积时，使用一条纵向扫描线从左扫到右，构建纵向区间的线段树，记录对应区间的<strong>被矩形覆盖的长度</strong><code>len</code>，以及<strong>覆盖当前区间的矩形的个数</strong><code>cover</code>。<br>在扫到矩形边时，计算扫面线走过的长度乘上整个纵向区间被矩形覆盖的长度，得到扫过的面积，再更新线段树，分两种情况：</p>
+<ul>
+<li>扫到矩形左边时，递归向下到终止节点增加<code>cover</code>值和<code>len</code>值，回调时更新父节点的<code>len</code>值，如果父节点的<code>cover</code>不为0则不更改</li>
+<li>扫到矩形右边时，递归向下到终止节点更新<code>cover</code>和<code>len</code>，注意到删除的矩形一定是之前存在的，因此即使父节点的<code>cover</code>值与子节点的<code>cover</code>没有同步更新，也不会出现删除出错的情况。同样，回调时更新父节点的<code>len</code>，同样注意<code>cover</code>不为0时不更改</li>
+</ul>
+
       
     </div>
     
@@ -397,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/15/ICS_4/" rel="prev" title="计算机系统导论_4">
-                计算机系统导论_4 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/15/PDS&A_4/" rel="prev" title="数据结构与算法实习_4">
+                数据结构与算法实习_4 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -480,7 +489,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -526,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树-Interval-Tree"><span class="nav-number">1.</span> <span class="nav-text">线段树 Interval Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">1.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心操作：区间分解"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心操作：区间分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">1.3.2.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.3.3.</span> <span class="nav-text">解题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储存"><span class="nav-number">1.4.</span> <span class="nav-text">储存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-单点更新，区间求和"><span class="nav-number">1.5.</span> <span class="nav-text">例题1 单点更新，区间求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题2-Balanced-Lineup-POJ3264"><span class="nav-number">1.6.</span> <span class="nav-text">例题2 Balanced Lineup POJ3264</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题3-A-Simple-Problem-with-Integers"><span class="nav-number">1.7.</span> <span class="nav-text">例题3 A Simple Problem with Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题4-Mayor’s-Poster"><span class="nav-number">1.8.</span> <span class="nav-text">例题4 Mayor’s Poster</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树-Interval-Tree"><span class="nav-number">1.</span> <span class="nav-text">线段树 Interval Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">1.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心操作：区间分解"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心操作：区间分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">1.3.2.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.3.3.</span> <span class="nav-text">解题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储存"><span class="nav-number">1.4.</span> <span class="nav-text">储存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-单点更新，区间求和"><span class="nav-number">1.5.</span> <span class="nav-text">例题1 单点更新，区间求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题2-Balanced-Lineup-POJ3264"><span class="nav-number">1.6.</span> <span class="nav-text">例题2 Balanced Lineup POJ3264</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题3-A-Simple-Problem-with-Integers"><span class="nav-number">1.7.</span> <span class="nav-text">例题3 A Simple Problem with Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题4-Mayor’s-Poster"><span class="nav-number">1.8.</span> <span class="nav-text">例题4 Mayor’s Poster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题5-Atlantis"><span class="nav-number">1.9.</span> <span class="nav-text">例题5 Atlantis</span></a></li></ol></li></ol></div>
             
 
           </div>
