@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-22T03:01:18.979Z">
+<meta property="og:updated_time" content="2018-10-22T03:53:36.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法实习_3">
 <meta name="twitter:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
@@ -372,6 +372,17 @@
 <li>扫到矩形左边时，递归向下到终止节点增加<code>cover</code>值和<code>len</code>值，回调时更新父节点的<code>len</code>值，如果父节点的<code>cover</code>不为0则不更改</li>
 <li>扫到矩形右边时，递归向下到终止节点更新<code>cover</code>和<code>len</code>，注意到删除的矩形一定是之前存在的，因此即使父节点的<code>cover</code>值与子节点的<code>cover</code>没有同步更新，也不会出现删除出错的情况。同样，回调时更新父节点的<code>len</code>，同样注意<code>cover</code>不为0时不更改</li>
 </ul>
+<h2 id="例题6-K-th-Number"><a href="#例题6-K-th-Number" class="headerlink" title="例题6 K-th Number"></a>例题6 <a href="http://poj.org/problem?id=2104" target="_blank" rel="noopener">K-th Number</a></h2><p>问题数据空间过大，但是解空间不大！</p>
+<ul>
+<li>枚举第K小的数X，枚举范围是$a_i$的取值范围，对假定的X，用线段树查询$a[L…R]$中小于等于X的数的个数num，看是否是K</li>
+<li>用二分加快枚举，若$num \geqslant k$，则减小X，否则加大X，最小的使得$num \geqslant k$的X，就是问题答案</li>
+<li>树状数组里储存区间内排序后的数组，空间复杂度$O(NlogN)$，访问到终止节点使用<code>upper_bound</code>，回调时将子节点的<code>num</code>值加起来即可。单次访问的时间复杂度为$O(logN)$<blockquote>
+<p>这里时间复杂度需要argue一下</p>
+</blockquote>
+</li>
+<li>总结一下，先将<code>a[1...n]</code>使用归并排序同时构建线段树，对于每次查询，在排序过的<code>a[1..n]</code>中使用二分查找，判断条件为$num \geqslant k$</li>
+</ul>
+<h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2><p>采用树套树的方法，相当于二维数组的每一行都是行的线段树，每一列都是列的线段树。</p>
 
       
     </div>
@@ -396,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/09/IFCS_2/" rel="next" title="前沿计算导论_2">
-                <i class="fa fa-chevron-left"></i> 前沿计算导论_2
+              <a href="/2018/10/15/PDS&A_4/" rel="next" title="数据结构与算法实习_4">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法实习_4
               </a>
             
           </div>
@@ -406,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/15/PDS&A_4/" rel="prev" title="数据结构与算法实习_4">
-                数据结构与算法实习_4 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/15/ICS_4/" rel="prev" title="计算机系统导论_4">
+                计算机系统导论_4 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树-Interval-Tree"><span class="nav-number">1.</span> <span class="nav-text">线段树 Interval Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">1.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心操作：区间分解"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心操作：区间分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">1.3.2.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.3.3.</span> <span class="nav-text">解题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储存"><span class="nav-number">1.4.</span> <span class="nav-text">储存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-单点更新，区间求和"><span class="nav-number">1.5.</span> <span class="nav-text">例题1 单点更新，区间求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题2-Balanced-Lineup-POJ3264"><span class="nav-number">1.6.</span> <span class="nav-text">例题2 Balanced Lineup POJ3264</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题3-A-Simple-Problem-with-Integers"><span class="nav-number">1.7.</span> <span class="nav-text">例题3 A Simple Problem with Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题4-Mayor’s-Poster"><span class="nav-number">1.8.</span> <span class="nav-text">例题4 Mayor’s Poster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题5-Atlantis"><span class="nav-number">1.9.</span> <span class="nav-text">例题5 Atlantis</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线段树-Interval-Tree"><span class="nav-number">1.</span> <span class="nav-text">线段树 Interval Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作"><span class="nav-number">1.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心操作：区间分解"><span class="nav-number">1.3.1.</span> <span class="nav-text">核心操作：区间分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建"><span class="nav-number">1.3.2.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">1.3.3.</span> <span class="nav-text">解题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#储存"><span class="nav-number">1.4.</span> <span class="nav-text">储存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-单点更新，区间求和"><span class="nav-number">1.5.</span> <span class="nav-text">例题1 单点更新，区间求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题2-Balanced-Lineup-POJ3264"><span class="nav-number">1.6.</span> <span class="nav-text">例题2 Balanced Lineup POJ3264</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题3-A-Simple-Problem-with-Integers"><span class="nav-number">1.7.</span> <span class="nav-text">例题3 A Simple Problem with Integers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题4-Mayor’s-Poster"><span class="nav-number">1.8.</span> <span class="nav-text">例题4 Mayor’s Poster</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题5-Atlantis"><span class="nav-number">1.9.</span> <span class="nav-text">例题5 Atlantis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题6-K-th-Number"><span class="nav-number">1.10.</span> <span class="nav-text">例题6 K-th Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维树状数组"><span class="nav-number">1.11.</span> <span class="nav-text">二维树状数组</span></a></li></ol></li></ol></div>
             
 
           </div>
