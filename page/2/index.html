@@ -229,6 +229,199 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/PDS&A_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/08/PDS&A_2/" itemprop="url">数据结构与算法实习_2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T09:57:00+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h1><p><strong>单点更新，区间求和</strong><br><code>C[i]=a[i-lowbit(i)+1]+a[i-lowbit(i)+2]+...+a[i]</code><br><code>i-lowbit(i)+1</code>为i抹去最后的1之后加1<br>C[0]和a[0]没用，下标从1开始<br><code>lowbit(x)=x&amp;(-x)</code></p>
+<ul>
+<li>更新元素a[i]用时<code>O(logN)</code></li>
+<li>求区间和用时<code>O(logN)</code></li>
+</ul>
+<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><p>设$sum(k)=a[1]+..+a[k]$<br>$a[i]+..+a[j]=sum(j)-sum(i-1)$<br>$sum(k)=C[n_1]+…+C[n_m]$<br><strong>$n_m=k,n_{i-1}=n_i-lowbit(n_i)$</strong><br>直到$n_1&gt;0,且n_1-lowbit(n_1)=0$<br>从右到左，每次抹掉最后的1<br>最多加<code>O(logN)</code>次  </p>
+<blockquote>
+<p>如果改为右移再加1？<br>更新成本在<code>O(N)</code></p>
+</blockquote>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>需要更新的项 $C[n_1],…,C[n_m]$</p>
+<ul>
+<li>$n_1=i,n_{p+1}=n_p+lowbit(n_p)$  </li>
+<li>$n_m+lowbit(n_m)&gt;N,n_m&lt;N$  </li>
+</ul>
+<p>从左到右最低位的1每次最少向左推1位，因此复杂度为<code>O(logN)</code>  </p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h4><ul>
+<li>a[i]更新，C[i]必须更新</li>
+<li><code>C[k+lowbit(k)]</code>的起始项不晚于<code>C[k]</code>的起始项(因为<code>lowbit(k+lowbit(k))&gt;=2*lowbit(k)</code>)，因此包含<code>a[i]</code>  </li>
+</ul>
+<h4 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h4><ul>
+<li><code>k&lt;i</code> 不需要更新</li>
+<li>命题：对任意的k($x&lt;k&lt;x+lowbit(x)$)，$C[k]$的起始项都在$a[x]$后面。<br>对于任何$n_p&lt;k&lt;n_{p+1}$，$C[k]$的起始项在$a[n_p]$的右边，不包含$a[i]$  </li>
+</ul>
+<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><p>$C[k]=sum[k]-sum[k-lowbit(k)]$<br><code>O(N)</code>可完成</p>
+<h2 id="Apple-Tree-POJ-3321"><a href="#Apple-Tree-POJ-3321" class="headerlink" title="Apple Tree  POJ 3321"></a>Apple Tree  POJ 3321</h2><p>多叉树节点的修改和查询 </p>
+<ul>
+<li>用邻接表存图</li>
+<li>使用dfs遍历整个树，记下每个节点的开始时间<code>Start[i]</code>和<code>End[i]</code>，其子节点的开始时间和结束时间在父节点的时间段内</li>
+<li>使用<code>T[n]</code>储存时间点对应访问的单个节点的苹果数，因此每个节点对应两个时间点。</li>
+<li>修改节点的苹果数就是修改<code>T[n]</code>中两个时间点的苹果数</li>
+<li>计算子树苹果树就是<code>T[n]</code>的连续区间和，注意要除以2 </li>
+</ul>
+<p>对于<code>T[n]</code>使用树状数组  </p>
+<h2 id="通用定义"><a href="#通用定义" class="headerlink" title="通用定义"></a>通用定义</h2><ul>
+<li><code>C[i]</code>不止可以存连续和，还可以表示最大值、最小值  </li>
+<li>只要是可以分组计算的值，都可以使用树状数组  </li>
+<li>但是只有<code>F([s,e])</code>可以由<code>F([1,e])</code>和<code>F([1,s-1])</code>推导出来，才可以求任意子区间的值</li>
+</ul>
+<h2 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h2><ul>
+<li>对<code>a[i]</code>排序得到<code>n[i]</code>，<code>n[i]</code>的原位置为<code>n[i].pos</code>(注意相等的元素，按照pos从大到小排，避免上升子序列中出现重复元素)  </li>
+<li>设定<code>C[i]</code>表示<code>a</code>中对应区间的LIS的长度，会不断更新</li>
+<li><code>LIS(i)</code>表示以<code>a[i]</code>结尾的最长上升子序列的长度，开始时的<code>LIS(i)</code>都是0</li>
+<li>从小到大扫描<code>n</code><ul>
+<li><code>LIS(n[i].pos)</code>的值设为<code>query(n[i].pos)+1</code>，<code>query(k)</code>表示从<code>a[1]</code>到<code>a[k]</code>的LIS的长度。(使用<code>C[i]</code>访问<code>LIS(i)</code>中的值)</li>
+<li>更新所有包含<code>a[n[i].pos]</code>的<code>C</code>元素</li>
+</ul>
+</li>
+<li>最大的<code>C</code>元素，就是答案</li>
+</ul>
+<blockquote>
+<p>基本思路从小到大访问<code>a</code>中的元素，记录每个<code>a[i]</code>对应的<code>LIS[i]</code>，每次访问更新之前的<code>LIS[i]</code>的值并求该点值(需要找<code>a[i]</code>之前的<code>LIS[i]</code>的最大值)，然后每次更新和求值使用树状数组完成。因此总复杂度为<code>O(NlogN)</code>  </p>
+</blockquote>
+<h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1588,152 +1781,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/UVa714/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/UVa714/" itemprop="url">UVa 714 Copying Books</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T10:38:31+08:00">
-                2018-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="UVa-714-Copying-Books"><a href="#UVa-714-Copying-Books" class="headerlink" title="UVa 714 Copying Books"></a><a href="https://vjudge.net/problem/UVA-714" target="_blank" rel="noopener">UVa 714</a> Copying Books</h4><p>将m个正整数的序列划分成k段，使得段内和的最大值最小，并将字典序最小的分割方法输出(即使前面的集合尽量小)<br>m,k&lt;=500<br>直接枚举肯定会超时(1E149了解一下。。。)此时发现，虽然枚举困难，但是检验一个解却很简单，从左到右历遍就能判断是否能找到一个分割方法使得最大和小于目标值。<br>于是就想从解空间搜索，找到上限之后再反推分割方法，解空间的搜索可使用二分查找<br>由于没有使用<code>long long</code>,WA了几次。。。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/25/UVa714/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1788,7 +1835,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
