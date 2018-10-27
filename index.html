@@ -229,6 +229,437 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/ICS_7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/24/ICS_7/" itemprop="url">计算机系统导论_7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-24T15:16:18+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Processor-Architecture-I-ISA-amp-Logic-Design"><a href="#Processor-Architecture-I-ISA-amp-Logic-Design" class="headerlink" title="Processor Architecture I: ISA &amp; Logic Design"></a>Processor Architecture I: ISA &amp; Logic Design</h1><h2 id="Instruction-Set-Architecture"><a href="#Instruction-Set-Architecture" class="headerlink" title="Instruction Set Architecture"></a>Instruction Set Architecture</h2><p>Compiler OS<br><strong>ISA</strong><br>CPU Design</p>
+<h2 id="Y86-Processor-State"><a href="#Y86-Processor-State" class="headerlink" title="Y86 Processor State"></a>Y86 Processor State</h2><blockquote>
+<p>教学所用x86的子集</p>
+</blockquote>
+<ul>
+<li>Program Registers<ul>
+<li>same 8 as with IA32</li>
+</ul>
+</li>
+<li>Condition Codes<ul>
+<li>ZF, SF, OF</li>
+</ul>
+</li>
+<li>Program Counter</li>
+<li>Program Status<blockquote>
+<p>标记有没有死机</p>
+</blockquote>
+</li>
+<li>Memory<ul>
+<li><strong>little endian</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Y86-Instruction-Set"><a href="#Y86-Instruction-Set" class="headerlink" title="Y86 Instruction Set"></a>Y86 Instruction Set</h3><blockquote>
+<p>与汇编器配套，可有多个版本</p>
+<ul>
+<li>halt <strong>00</strong><br>1 byte</li>
+<li>nop <strong>10</strong></li>
+<li>cmvXX rA, rB <strong>2 fn rA rB</strong><br><strong>fn</strong> 进一步确定XX的种类<ul>
+<li>rrmovl <strong>20</strong></li>
+<li>cmvle <strong>21</strong></li>
+<li>…</li>
+</ul>
+</li>
+<li>irmovl V, rB <strong>3 0 F rB V</strong></li>
+<li>…</li>
+</ul>
+</blockquote>
+<h3 id="Encoding-Registers"><a href="#Encoding-Registers" class="headerlink" title="Encoding Registers"></a>Encoding Registers</h3><ul>
+<li>%eax 0</li>
+<li>%ecx 1</li>
+<li>%edx 2</li>
+<li>…</li>
+<li>no register <strong>0xF</strong></li>
+</ul>
+<h3 id="Instruction-Example"><a href="#Instruction-Example" class="headerlink" title="Instruction Example"></a>Instruction Example</h3><p>addl rA, rB</p>
+<ul>
+<li>Add value in register rA to that in register rB</li>
+<li>Set condition codes</li>
+<li>…</li>
+</ul>
+<h3 id="Program-Stack"><a href="#Program-Stack" class="headerlink" title="Program Stack"></a>Program Stack</h3><ul>
+<li>indicated by %esp</li>
+<li>grows toward lower addresss</li>
+<li>…</li>
+</ul>
+<h3 id="Miscellaneous-Instructions"><a href="#Miscellaneous-Instructions" class="headerlink" title="Miscellaneous Instructions"></a>Miscellaneous Instructions</h3><ul>
+<li>nop</li>
+<li>halt<ul>
+<li>stop the simulator</li>
+<li>initialize memory to zero</li>
+</ul>
+</li>
+</ul>
+<h3 id="Status-Conditions"><a href="#Status-Conditions" class="headerlink" title="Status Conditions"></a>Status Conditions</h3><ul>
+<li>AOK 1 Normal operation</li>
+<li>HLT 2 Halt instruction encountered</li>
+<li>ADR 3 Bad address</li>
+<li>INS 4 Invalid instruction encountered</li>
+</ul>
+<h3 id="Writing-Y86-Code"><a href="#Writing-Y86-Code" class="headerlink" title="Writing Y86 Code"></a>Writing Y86 Code</h3><blockquote>
+<p>初始先init %esp, %ebp，然后<code>call main</code></p>
+</blockquote>
+<h2 id="Logic-Design"><a href="#Logic-Design" class="headerlink" title="Logic Design"></a>Logic Design</h2><p>Communication&amp;Computation&amp;Storage</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/ICS_6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/22/ICS_6/" itemprop="url">计算机系统导论_6</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-22T15:13:11+08:00">
+                2018-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a>Advanced Topics</h1><h2 id="Unions"><a href="#Unions" class="headerlink" title="Unions"></a>Unions</h2><h3 id="Byte-Ordering-Revisited"><a href="#Byte-Ordering-Revisited" class="headerlink" title="Byte Ordering Revisited"></a>Byte Ordering Revisited</h3><ul>
+<li>Big Endian<ul>
+<li>Most significant byte has lowest address</li>
+<li>Sparc</li>
+</ul>
+</li>
+<li>Little Endian<ul>
+<li>Least signficant byte has lowest address</li>
+<li>Intel x86, ARM Android and IOS</li>
+</ul>
+</li>
+<li>Bi Endian<ul>
+<li>Can be configured either way</li>
+<li>ARM</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意以不同的类型输出<code>Union</code>内的数据时要考虑大端小端</p>
+</blockquote>
+<h2 id="Memory-Layout"><a href="#Memory-Layout" class="headerlink" title="Memory Layout"></a>Memory Layout</h2><ul>
+<li>Stack<ul>
+<li>8MB limit</li>
+</ul>
+</li>
+<li>Heap<ul>
+<li>malloc()<blockquote>
+<p>堆在管理动态内存时会倾向于将大数据和小数据分开，当然这与编译器有关，总的来说堆向上增长。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Statically alloated as needed</li>
+</ul>
+</li>
+<li>Text/Shared Libraries<ul>
+<li>Read-only<blockquote>
+<p>公用库的位置可变</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Buffer-Overflow"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</h2><h3 id="Avoid-Overflow"><a href="#Avoid-Overflow" class="headerlink" title="Avoid Overflow"></a>Avoid Overflow</h3><ul>
+<li>avoid overflow vulnerabilities in Code<ul>
+<li>fgets instead of gets</li>
+<li>strncpy instead of strpy</li>
+<li>use %ns(like %4s)instead of integer</li>
+</ul>
+</li>
+<li>System-Level Protections<ul>
+<li>Randomized stack offsets<ul>
+<li>allocate random amount of space on stack</li>
+<li>Shifts stack addresses for entire program</li>
+<li>…</li>
+</ul>
+</li>
+<li>Nonexecutable code segments<ul>
+<li>add “executable” premission besides “read-only” and “writeable”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stack Canaries can help<ul>
+<li>Check for corruption before exiting function<ul>
+<li><code>mov %fs:28, %rax</code><blockquote>
+<p><code>%fs</code>是段寄存器，后面的数字每次编译不同，放在缓冲区后面，用作哨兵，输入后检查哨兵是否被更改</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/Config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -761,6 +1192,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/PDS&A_4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/15/PDS&A_4/" itemprop="url">数据结构与算法实习_4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T09:57:00+08:00">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/PDS&A_3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -917,147 +1489,6 @@
 </ul>
 <h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2><p>采用树套树的方法，相当于二维数组的每一行都是行的线段树，每一列都是列的线段树。</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/PDS&A_4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/15/PDS&A_4/" itemprop="url">数据结构与算法实习_4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T09:57:00+08:00">
-                2018-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
@@ -1747,319 +2178,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/RICS_1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/RICS_1/" itemprop="url">计算机系统导论讨论班_1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>1 Byte= 8 bits<br>(类型所占大小的表格)<br>Boolean Operations (<strong>early termination</strong>)</p>
-<h4 id="Integers"><a href="#Integers" class="headerlink" title="Integers"></a>Integers</h4><p>signed  </p>
-<ul>
-<li>原码</li>
-<li>反码</li>
-<li>补码<h4 id="Casting-Expanding-Truncating"><a href="#Casting-Expanding-Truncating" class="headerlink" title="Casting,Expanding,Truncating"></a>Casting,Expanding,Truncating</h4></li>
-<li>C语言默认整数为signed</li>
-<li>比较时若涉及Unsigned, 统一转换为Unsigned  </li>
-</ul>
-<p>有符号相加-溢出<br>无符号相加-进位  </p>
-<h5 id="如何判断溢出和进位"><a href="#如何判断溢出和进位" class="headerlink" title="如何判断溢出和进位"></a>如何判断溢出和进位</h5><ul>
-<li>signed 正正得负或负负得正</li>
-<li>unsigned 加起来反而变小</li>
-</ul>
-<h5 id="加法性质"><a href="#加法性质" class="headerlink" title="加法性质"></a>加法性质</h5><ul>
-<li>封闭性</li>
-<li>可交换、结合</li>
-<li>存在相反数(-Tmin=Tmin)</li>
-<li>无单调性<br><code>x&gt;&gt;k==[x/2^k]?</code></li>
-</ul>
-<h4 id="Memory-Organization"><a href="#Memory-Organization" class="headerlink" title="Memory Organization"></a>Memory Organization</h4><ul>
-<li>小端法<br>x86 ARM</li>
-<li>大端法<br>  Internet</li>
-</ul>
-<p>(运算优先级)</p>
-<h4 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h4><h5 id="abs-x"><a href="#abs-x" class="headerlink" title="abs(x)"></a>abs(x)</h5><p>mask=x&gt;&gt;31;<br>(X+mask)^mask;</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/ICS_2/" itemprop="url">计算机系统导论_2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/19/ICS_2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2114,7 +2232,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

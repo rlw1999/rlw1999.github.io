@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta name="description" content="Processor Architecture I: ISA &amp;amp; Logic DesignInstruction Set ArchitectureCompiler OSISACPU Design Y86 Processor State 教学所用x86的子集   Program Registers same 8 as with IA32   Condition Codes ZF, SF, OF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UVa 11054 Wine trading in Gergovia">
-<meta property="og:url" content="http://yoursite.com/2018/07/20/UVa11054/index.html">
+<meta property="og:title" content="计算机系统导论_7">
+<meta property="og:url" content="http://yoursite.com/2018/10/24/ICS_7/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta property="og:description" content="Processor Architecture I: ISA &amp;amp; Logic DesignInstruction Set ArchitectureCompiler OSISACPU Design Y86 Processor State 教学所用x86的子集   Program Registers same 8 as with IA32   Condition Codes ZF, SF, OF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T09:59:05.498Z">
+<meta property="og:updated_time" content="2018-10-24T08:38:45.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UVa 11054 Wine trading in Gergovia">
-<meta name="twitter:description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta name="twitter:title" content="计算机系统导论_7">
+<meta name="twitter:description" content="Processor Architecture I: ISA &amp;amp; Logic DesignInstruction Set ArchitectureCompiler OSISACPU Design Y86 Processor State 教学所用x86的子集   Program Registers same 8 as with IA32   Condition Codes ZF, SF, OF">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/20/UVa11054/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/24/ICS_7/"/>
 
 
 
 
 
-  <title>UVa 11054 Wine trading in Gergovia | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>计算机系统导论_7 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/UVa11054/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/ICS_7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">UVa 11054 Wine trading in Gergovia</h1>
+          <h1 class="post-title" itemprop="name headline">计算机系统导论_7</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T18:19:02+08:00">
-                2018-07-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-24T15:16:18+08:00">
+                2018-10-24
               </time>
             
 
@@ -284,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -321,12 +321,81 @@
       
 
       
-        <blockquote>
-<p>There is one problem, however: Transporting wine from one house to another results in work. Since<br>all wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing trade<br>with, they are only interested in selling or buying a specific amount of wine. They are clever enough<br>to figure out a way of trading so that the overall amount of work needed for transports is minimized.<br>In this problem you are asked to reconstruct the trading during one day in Gergovia. For simplicity<br>we will assume that the houses are built along a straight line with equal distance between adjacent<br>houses. Transporting one bottle of wine from one house to an adjacent house results in one unit of<br>work.</p>
+        <h1 id="Processor-Architecture-I-ISA-amp-Logic-Design"><a href="#Processor-Architecture-I-ISA-amp-Logic-Design" class="headerlink" title="Processor Architecture I: ISA &amp; Logic Design"></a>Processor Architecture I: ISA &amp; Logic Design</h1><h2 id="Instruction-Set-Architecture"><a href="#Instruction-Set-Architecture" class="headerlink" title="Instruction Set Architecture"></a>Instruction Set Architecture</h2><p>Compiler OS<br><strong>ISA</strong><br>CPU Design</p>
+<h2 id="Y86-Processor-State"><a href="#Y86-Processor-State" class="headerlink" title="Y86 Processor State"></a>Y86 Processor State</h2><blockquote>
+<p>教学所用x86的子集</p>
 </blockquote>
-<a id="more"></a>
-<p>说是找最少，好像分配方法就一种。对于每个节点，左、右数值和即可反映该点的分配情况，比如一个节点有酒-100，左边和为-50，右边和为150，则该点一定会向左边输送50的酒。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="comment">//LL a[maxn];</span></span><br><span class="line"><span class="comment">//LL Left[maxn];</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">		LL now, Left = <span class="number">0</span>, Right = <span class="number">0</span>;</span><br><span class="line">		LL ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;now);</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				Left = <span class="number">0</span>;</span><br><span class="line">				Right = -now;</span><br><span class="line">				<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					ans += now;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			Right = Right - now;</span><br><span class="line">			Left = -now - Right;</span><br><span class="line">			<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)ans += -Right;</span><br><span class="line">			<span class="keyword">if</span> (Left &lt; <span class="number">0</span>)ans += -Left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Program Registers<ul>
+<li>same 8 as with IA32</li>
+</ul>
+</li>
+<li>Condition Codes<ul>
+<li>ZF, SF, OF</li>
+</ul>
+</li>
+<li>Program Counter</li>
+<li>Program Status<blockquote>
+<p>标记有没有死机</p>
+</blockquote>
+</li>
+<li>Memory<ul>
+<li><strong>little endian</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Y86-Instruction-Set"><a href="#Y86-Instruction-Set" class="headerlink" title="Y86 Instruction Set"></a>Y86 Instruction Set</h3><blockquote>
+<p>与汇编器配套，可有多个版本</p>
+<ul>
+<li>halt <strong>00</strong><br>1 byte</li>
+<li>nop <strong>10</strong></li>
+<li>cmvXX rA, rB <strong>2 fn rA rB</strong><br><strong>fn</strong> 进一步确定XX的种类<ul>
+<li>rrmovl <strong>20</strong></li>
+<li>cmvle <strong>21</strong></li>
+<li>…</li>
+</ul>
+</li>
+<li>irmovl V, rB <strong>3 0 F rB V</strong></li>
+<li>…</li>
+</ul>
+</blockquote>
+<h3 id="Encoding-Registers"><a href="#Encoding-Registers" class="headerlink" title="Encoding Registers"></a>Encoding Registers</h3><ul>
+<li>%eax 0</li>
+<li>%ecx 1</li>
+<li>%edx 2</li>
+<li>…</li>
+<li>no register <strong>0xF</strong></li>
+</ul>
+<h3 id="Instruction-Example"><a href="#Instruction-Example" class="headerlink" title="Instruction Example"></a>Instruction Example</h3><p>addl rA, rB</p>
+<ul>
+<li>Add value in register rA to that in register rB</li>
+<li>Set condition codes</li>
+<li>…</li>
+</ul>
+<h3 id="Program-Stack"><a href="#Program-Stack" class="headerlink" title="Program Stack"></a>Program Stack</h3><ul>
+<li>indicated by %esp</li>
+<li>grows toward lower addresss</li>
+<li>…</li>
+</ul>
+<h3 id="Miscellaneous-Instructions"><a href="#Miscellaneous-Instructions" class="headerlink" title="Miscellaneous Instructions"></a>Miscellaneous Instructions</h3><ul>
+<li>nop</li>
+<li>halt<ul>
+<li>stop the simulator</li>
+<li>initialize memory to zero</li>
+</ul>
+</li>
+</ul>
+<h3 id="Status-Conditions"><a href="#Status-Conditions" class="headerlink" title="Status Conditions"></a>Status Conditions</h3><ul>
+<li>AOK 1 Normal operation</li>
+<li>HLT 2 Halt instruction encountered</li>
+<li>ADR 3 Bad address</li>
+<li>INS 4 Invalid instruction encountered</li>
+</ul>
+<h3 id="Writing-Y86-Code"><a href="#Writing-Y86-Code" class="headerlink" title="Writing Y86 Code"></a>Writing Y86 Code</h3><blockquote>
+<p>初始先init %esp, %ebp，然后<code>call main</code></p>
+</blockquote>
+<h2 id="Logic-Design"><a href="#Logic-Design" class="headerlink" title="Logic Design"></a>Logic Design</h2><p>Communication&amp;Computation&amp;Storage</p>
+
       
     </div>
     
@@ -350,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/20/UVa11134/" rel="next" title="UVa 11134 Fabled Rooks">
-                <i class="fa fa-chevron-left"></i> UVa 11134 Fabled Rooks
+              <a href="/2018/10/22/ICS_6/" rel="next" title="计算机系统导论_6">
+                <i class="fa fa-chevron-left"></i> 计算机系统导论_6
               </a>
             
           </div>
@@ -359,10 +428,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/21/UVa1606/" rel="prev" title="UVa 1606 Amphiphilic Carbon Molecules">
-                UVa 1606 Amphiphilic Carbon Molecules <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -414,8 +479,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -470,6 +544,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Processor-Architecture-I-ISA-amp-Logic-Design"><span class="nav-number">1.</span> <span class="nav-text">Processor Architecture I: ISA &amp; Logic Design</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Instruction-Set-Architecture"><span class="nav-number">1.1.</span> <span class="nav-text">Instruction Set Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Y86-Processor-State"><span class="nav-number">1.2.</span> <span class="nav-text">Y86 Processor State</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Y86-Instruction-Set"><span class="nav-number">1.2.1.</span> <span class="nav-text">Y86 Instruction Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding-Registers"><span class="nav-number">1.2.2.</span> <span class="nav-text">Encoding Registers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instruction-Example"><span class="nav-number">1.2.3.</span> <span class="nav-text">Instruction Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Program-Stack"><span class="nav-number">1.2.4.</span> <span class="nav-text">Program Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Miscellaneous-Instructions"><span class="nav-number">1.2.5.</span> <span class="nav-text">Miscellaneous Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Status-Conditions"><span class="nav-number">1.2.6.</span> <span class="nav-text">Status Conditions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Writing-Y86-Code"><span class="nav-number">1.2.7.</span> <span class="nav-text">Writing Y86 Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logic-Design"><span class="nav-number">1.3.</span> <span class="nav-text">Logic Design</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -611,7 +701,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -664,6 +754,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

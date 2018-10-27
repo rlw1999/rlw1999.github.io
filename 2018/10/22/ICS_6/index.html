@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta name="description" content="Advanced TopicsUnionsByte Ordering Revisited Big Endian Most significant byte has lowest address Sparc   Little Endian Least signficant byte has lowest address Intel x86, ARM Android and IOS   Bi Endi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UVa 11054 Wine trading in Gergovia">
-<meta property="og:url" content="http://yoursite.com/2018/07/20/UVa11054/index.html">
+<meta property="og:title" content="计算机系统导论_6">
+<meta property="og:url" content="http://yoursite.com/2018/10/22/ICS_6/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta property="og:description" content="Advanced TopicsUnionsByte Ordering Revisited Big Endian Most significant byte has lowest address Sparc   Little Endian Least signficant byte has lowest address Intel x86, ARM Android and IOS   Bi Endi">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-08T09:59:05.498Z">
+<meta property="og:updated_time" content="2018-10-22T08:55:09.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UVa 11054 Wine trading in Gergovia">
-<meta name="twitter:description" content="There is one problem, however: Transporting wine from one house to another results in work. Sinceall wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing tradew">
+<meta name="twitter:title" content="计算机系统导论_6">
+<meta name="twitter:description" content="Advanced TopicsUnionsByte Ordering Revisited Big Endian Most significant byte has lowest address Sparc   Little Endian Least signficant byte has lowest address Intel x86, ARM Android and IOS   Bi Endi">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/20/UVa11054/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/22/ICS_6/"/>
 
 
 
 
 
-  <title>UVa 11054 Wine trading in Gergovia | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>计算机系统导论_6 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/UVa11054/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/ICS_6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">UVa 11054 Wine trading in Gergovia</h1>
+          <h1 class="post-title" itemprop="name headline">计算机系统导论_6</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T18:19:02+08:00">
-                2018-07-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-22T15:13:11+08:00">
+                2018-10-22
               </time>
             
 
@@ -284,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -321,12 +321,82 @@
       
 
       
-        <blockquote>
-<p>There is one problem, however: Transporting wine from one house to another results in work. Since<br>all wines are equally good, the inhabitants of Gergovia don’t care which persons they are doing trade<br>with, they are only interested in selling or buying a specific amount of wine. They are clever enough<br>to figure out a way of trading so that the overall amount of work needed for transports is minimized.<br>In this problem you are asked to reconstruct the trading during one day in Gergovia. For simplicity<br>we will assume that the houses are built along a straight line with equal distance between adjacent<br>houses. Transporting one bottle of wine from one house to an adjacent house results in one unit of<br>work.</p>
+        <h1 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a>Advanced Topics</h1><h2 id="Unions"><a href="#Unions" class="headerlink" title="Unions"></a>Unions</h2><h3 id="Byte-Ordering-Revisited"><a href="#Byte-Ordering-Revisited" class="headerlink" title="Byte Ordering Revisited"></a>Byte Ordering Revisited</h3><ul>
+<li>Big Endian<ul>
+<li>Most significant byte has lowest address</li>
+<li>Sparc</li>
+</ul>
+</li>
+<li>Little Endian<ul>
+<li>Least signficant byte has lowest address</li>
+<li>Intel x86, ARM Android and IOS</li>
+</ul>
+</li>
+<li>Bi Endian<ul>
+<li>Can be configured either way</li>
+<li>ARM</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意以不同的类型输出<code>Union</code>内的数据时要考虑大端小端</p>
 </blockquote>
-<a id="more"></a>
-<p>说是找最少，好像分配方法就一种。对于每个节点，左、右数值和即可反映该点的分配情况，比如一个节点有酒-100，左边和为-50，右边和为150，则该点一定会向左边输送50的酒。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> LL;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="comment">//LL a[maxn];</span></span><br><span class="line"><span class="comment">//LL Left[maxn];</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (N == <span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">		LL now, Left = <span class="number">0</span>, Right = <span class="number">0</span>;</span><br><span class="line">		LL ans = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;now);</span><br><span class="line">			<span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				Left = <span class="number">0</span>;</span><br><span class="line">				Right = -now;</span><br><span class="line">				<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					ans += now;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			Right = Right - now;</span><br><span class="line">			Left = -now - Right;</span><br><span class="line">			<span class="keyword">if</span> (Right &lt; <span class="number">0</span>)ans += -Right;</span><br><span class="line">			<span class="keyword">if</span> (Left &lt; <span class="number">0</span>)ans += -Left;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Memory-Layout"><a href="#Memory-Layout" class="headerlink" title="Memory Layout"></a>Memory Layout</h2><ul>
+<li>Stack<ul>
+<li>8MB limit</li>
+</ul>
+</li>
+<li>Heap<ul>
+<li>malloc()<blockquote>
+<p>堆在管理动态内存时会倾向于将大数据和小数据分开，当然这与编译器有关，总的来说堆向上增长。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>Data<ul>
+<li>Statically alloated as needed</li>
+</ul>
+</li>
+<li>Text/Shared Libraries<ul>
+<li>Read-only<blockquote>
+<p>公用库的位置可变</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Buffer-Overflow"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</h2><h3 id="Avoid-Overflow"><a href="#Avoid-Overflow" class="headerlink" title="Avoid Overflow"></a>Avoid Overflow</h3><ul>
+<li>avoid overflow vulnerabilities in Code<ul>
+<li>fgets instead of gets</li>
+<li>strncpy instead of strpy</li>
+<li>use %ns(like %4s)instead of integer</li>
+</ul>
+</li>
+<li>System-Level Protections<ul>
+<li>Randomized stack offsets<ul>
+<li>allocate random amount of space on stack</li>
+<li>Shifts stack addresses for entire program</li>
+<li>…</li>
+</ul>
+</li>
+<li>Nonexecutable code segments<ul>
+<li>add “executable” premission besides “read-only” and “writeable”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stack Canaries can help<ul>
+<li>Check for corruption before exiting function<ul>
+<li><code>mov %fs:28, %rax</code><blockquote>
+<p><code>%fs</code>是段寄存器，后面的数字每次编译不同，放在缓冲区后面，用作哨兵，输入后检查哨兵是否被更改</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     
@@ -350,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/20/UVa11134/" rel="next" title="UVa 11134 Fabled Rooks">
-                <i class="fa fa-chevron-left"></i> UVa 11134 Fabled Rooks
+              <a href="/2018/10/19/Config/" rel="next" title="公式渲染的问题">
+                <i class="fa fa-chevron-left"></i> 公式渲染的问题
               </a>
             
           </div>
@@ -360,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/21/UVa1606/" rel="prev" title="UVa 1606 Amphiphilic Carbon Molecules">
-                UVa 1606 Amphiphilic Carbon Molecules <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/24/ICS_7/" rel="prev" title="计算机系统导论_7">
+                计算机系统导论_7 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -414,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -470,6 +549,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Advanced-Topics"><span class="nav-number">1.</span> <span class="nav-text">Advanced Topics</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unions"><span class="nav-number">1.1.</span> <span class="nav-text">Unions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Byte-Ordering-Revisited"><span class="nav-number">1.1.1.</span> <span class="nav-text">Byte Ordering Revisited</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Layout"><span class="nav-number">1.2.</span> <span class="nav-text">Memory Layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer-Overflow"><span class="nav-number">1.3.</span> <span class="nav-text">Buffer Overflow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Avoid-Overflow"><span class="nav-number">1.3.1.</span> <span class="nav-text">Avoid Overflow</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -611,7 +706,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -664,6 +759,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
