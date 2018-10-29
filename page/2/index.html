@@ -229,6 +229,317 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/ICS_3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/08/ICS_3/" itemprop="url">计算机系统导论_3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T15:13:12+08:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="程序的机器级表示"><a href="#程序的机器级表示" class="headerlink" title="程序的机器级表示"></a>程序的机器级表示</h1><ul>
+<li>Complex instruction set computer (CISC)<br>储存占用低，CPU复杂</li>
+<li>Reduced instruction set computer (RICS)<br>内存冗余，关注时间效率，CPU设计简单</li>
+</ul>
+<p>Intel 8086-&gt;386(32位)-&gt;Pentium-&gt;Pentium Pro(CICS,硬件转换为RICS)-&gt;Pentium 4E(64位)-&gt;Core 2(multi core)-&gt; i7<br>移动平台 ARM(RICS)</p>
+<h2 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h2><ul>
+<li>Architecture(also ISA,instruction set architechure)<ul>
+<li>Machine Code</li>
+<li>Assembly Code</li>
+</ul>
+</li>
+<li>Microarchitechture Implementation of ISA</li>
+</ul>
+<p>Example ISAs:</p>
+<ul>
+<li>Intel x86, IA32, Itanium, x86-64</li>
+<li>ARM</li>
+<li>RISC V:open-sourse</li>
+</ul>
+<h2 id="Assembly-Machine-Code-View"><a href="#Assembly-Machine-Code-View" class="headerlink" title="Assembly/Machine Code View"></a>Assembly/Machine Code View</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ul>
+<li>PC:Program counter<ul>
+<li>Address of next instruction</li>
+<li>Called <code>RIP</code>(x86-64)</li>
+</ul>
+</li>
+<li>Register file<ul>
+<li>heavily used data</li>
+</ul>
+</li>
+<li>Condition codes<ul>
+<li>store status information about most recent arithmatic or logic operation used for conditional branching</li>
+</ul>
+</li>
+</ul>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><h2 id="Turning-C-into-Object-Code"><a href="#Turning-C-into-Object-Code" class="headerlink" title="Turning C into Object Code"></a>Turning C into Object Code</h2><ul>
+<li>C program p.c -Compiler-&gt;<ul>
+<li><code>*dest = t</code>;</li>
+</ul>
+</li>
+<li>Asm program p.s(<code>gcc -Og -S p.c</code>) -Assembler-&gt;<ul>
+<li><code>movq %rax (%rbx)</code></li>
+</ul>
+</li>
+<li>Object program p.o -Linker-&gt;<ul>
+<li><code>0x40059e: 48 89 03</code></li>
+</ul>
+</li>
+<li>program</li>
+</ul>
+<p><code>objdump</code></p>
+<h2 id="Assembly-Characteristics"><a href="#Assembly-Characteristics" class="headerlink" title="Assembly Characteristics"></a>Assembly Characteristics</h2><h3 id="Data-Type"><a href="#Data-Type" class="headerlink" title="Data Type"></a>Data Type</h3><ul>
+<li>Integer of 1,2,4,8 bytes</li>
+<li>Floating point of 4,8,10 bytes</li>
+<li>Code</li>
+<li><strong>No</strong> aggregte type</li>
+</ul>
+<h3 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h3><ul>
+<li>arithmetic function</li>
+<li>transfer data</li>
+<li>transfer control<ul>
+<li>jump</li>
+<li>conditional branches</li>
+</ul>
+</li>
+</ul>
+<h2 id="Moving-Data"><a href="#Moving-Data" class="headerlink" title="Moving Data"></a>Moving Data</h2><p>movq Sourse, Dest</p>
+<h3 id="Memory-Addressing-Modes"><a href="#Memory-Addressing-Modes" class="headerlink" title="Memory Addressing Modes"></a>Memory Addressing Modes</h3><ul>
+<li><code>(R)</code> Mem[Reg[R]]</li>
+<li><code>D(R</code>) Mem[Reg[R]+D]</li>
+<li><code>D(Rb,Ri,S)</code> Mem[Reg[Rb]+S*Reg[Ri]+D]<ul>
+<li>S=1,2,4,8</li>
+<li><code>Ri</code> can’t be <code>%rsp</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Processor-State"><a href="#Processor-State" class="headerlink" title="Processor State"></a>Processor State</h2><ul>
+<li>Temporary data(%rax…)</li>
+<li>Location of runtime stack(%rsp…)</li>
+<li>current code control point(%rip…)</li>
+<li>CF ZF SF OF…</li>
+</ul>
+<h2 id="Condition-Codes"><a href="#Condition-Codes" class="headerlink" title="Condition Codes"></a>Condition Codes</h2><h3 id="Single-bit-registers"><a href="#Single-bit-registers" class="headerlink" title="Single bit registers"></a>Single bit registers</h3><ul>
+<li><code>CF</code> carry flag(unsigned)</li>
+<li><code>ZF</code> zero flag<ul>
+<li>set 1 when the result is 0</li>
+</ul>
+</li>
+<li><code>SF</code> sign flag<ul>
+<li>set 1 when &lt;0</li>
+</ul>
+</li>
+<li><code>OF</code> overflow flag(signed)<ul>
+<li><code>(a&gt;0&amp;&amp;b&gt;0&amp;&amp;t&lt;0)||(a&lt;0&amp;&amp;b&lt;0&amp;&amp;t&gt;=0)</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Not set by <code>leaq</code> instruction  </p>
+</blockquote>
+<h3 id="Explicit-Setting"><a href="#Explicit-Setting" class="headerlink" title="Explicit Setting"></a>Explicit Setting</h3><ul>
+<li><code>cmpq Src1, Src2</code><ul>
+<li>Src2-Src1</li>
+</ul>
+</li>
+<li><code>testq Src1, Src2</code><ul>
+<li>Src2&amp;Src1</li>
+<li><code>testq %rax, %rax</code> 判断是否为0</li>
+</ul>
+</li>
+</ul>
+<h3 id="SetX-Instructions"><a href="#SetX-Instructions" class="headerlink" title="SetX Instructions"></a>SetX Instructions</h3><p>set low-order byte of destination to 0 or 1 based on conditional code, <strong>does not</strong> alter the remain 7 bytes</p>
+<ul>
+<li>equal<ul>
+<li><code>sete</code> ZF 相等</li>
+<li><code>setne</code> ~ZF 不等</li>
+</ul>
+</li>
+<li>sign<ul>
+<li><code>sets</code> SF 负数</li>
+<li><code>setns</code> ~SF 非负数</li>
+</ul>
+</li>
+<li>signed compare<ul>
+<li><code>setl</code> SF^OF 小于(<strong>less</strong>)</li>
+<li><code>setle</code> (SF^OF)|ZF 小于或等于</li>
+<li><code>setg</code> 大于(<strong>grater</strong>)</li>
+<li><code>setge</code></li>
+</ul>
+</li>
+<li>unsigned compare<ul>
+<li><code>setb</code> CF 小于(<strong>below</strong>)</li>
+<li><code>setbe</code> CF|ZF 小于或等于</li>
+<li><code>seta</code> 大于(<strong>above</strong>)</li>
+<li><code>setae</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>movzbl %al, %eax</code>会把高4字节设为0</p>
+</blockquote>
+<h2 id="Jumping"><a href="#Jumping" class="headerlink" title="Jumping"></a>Jumping</h2><h3 id="JX-Instruction"><a href="#JX-Instruction" class="headerlink" title="JX Instruction"></a>JX Instruction</h3><ul>
+<li>Unconditional<ul>
+<li><code>jmp</code></li>
+</ul>
+</li>
+<li>equal<ul>
+<li><code>je</code></li>
+<li><code>jne</code></li>
+</ul>
+</li>
+<li>…</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  cmpq %rsi, %rdi</span><br><span class="line">  jle  .L4</span><br><span class="line">  movq %rdi, %rax</span><br><span class="line">.L4</span><br><span class="line">  subq %rdi, %rsi</span><br><span class="line">  #...</span><br></pre></td></tr></table></figure>
+<h3 id="Conditional-Expression-Translation"><a href="#Conditional-Expression-Translation" class="headerlink" title="Conditional Expression Translation"></a>Conditional Expression Translation</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ntest=!test;</span><br><span class="line"><span class="keyword">if</span>(ntest)<span class="keyword">goto</span> Else;</span><br><span class="line">val = Then_expr;</span><br><span class="line"><span class="keyword">goto</span> Done;</span><br><span class="line">Else:</span><br><span class="line">val=Else_expr;</span><br><span class="line">Done:</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>条件转移</strong>不能准确判断分支去向</p>
+</blockquote>
+<h3 id="Conditional-Moves"><a href="#Conditional-Moves" class="headerlink" title="Conditional Moves"></a>Conditional Moves</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">result=Then_expr;</span><br><span class="line">eval=Else_expr;</span><br><span class="line">nt=!Test;</span><br><span class="line"><span class="keyword">if</span>(nt)result=eval;</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>条件传送</strong>不破坏流水线，每条语句都执行，但是当分支过于复杂，或者部分分支不安全(野指针)，或者分支有连带效应(<code>x*=7</code>)时会出现问题</p>
+</blockquote>
+<h2 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h2><h3 id="do-while"><a href="#do-while" class="headerlink" title="do while"></a>do while</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.L2:</span><br><span class="line">  #...</span><br><span class="line">  shrq %rdi</span><br><span class="line">  jue .L2 #</span><br><span class="line">  rep; ret</span><br></pre></td></tr></table></figure>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!Test)</span><br><span class="line">  goto <span class="keyword">done</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  Body</span><br><span class="line"><span class="keyword">while</span>(Test)</span><br><span class="line"><span class="keyword">done</span>:</span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><h4 id="Jump-Table"><a href="#Jump-Table" class="headerlink" title="Jump Table"></a>Jump Table</h4><h5 id="Jump-Target"><a href="#Jump-Target" class="headerlink" title="Jump Target"></a>Jump Target</h5><ul>
+<li>Targ0: Code Block0</li>
+<li>Targ1: Code Block1</li>
+<li>…</li>
+</ul>
+<p>jTab:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp *.L4(,%rdi,8)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/PDS&A_2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -422,6 +733,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/19/ICS_2/" itemprop="url">计算机系统导论_2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/19/ICS_2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/RICS_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -543,152 +1000,6 @@
 <h4 id="LAB"><a href="#LAB" class="headerlink" title="LAB"></a>LAB</h4><h5 id="abs-x"><a href="#abs-x" class="headerlink" title="abs(x)"></a>abs(x)</h5><p>mask=x&gt;&gt;31;<br>(X+mask)^mask;</p>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/ICS_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/19/ICS_2/" itemprop="url">计算机系统导论_2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T15:09:38+08:00">
-                2018-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Bits-Bytes-and-Integers"><a href="#Bits-Bytes-and-Integers" class="headerlink" title="Bits, Bytes, and Integers"></a>Bits, Bytes, and Integers</h3><h4 id="Binary-Representations"><a href="#Binary-Representations" class="headerlink" title="Binary Representations"></a>Binary Representations</h4><p>Dec 1.2 = Bin 1.00110011[0011]….<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/19/ICS_2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1639,148 +1950,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/小偷家族/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/07/小偷家族/" itemprop="url">小偷家族</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-07T19:42:57+08:00">
-                2018-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/碎语/" itemprop="url" rel="index">
-                    <span itemprop="name">碎语</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/img/小偷家族.jpg" alt="小偷家族"><br>是枝裕和的作品，这是第三部。从《无人知晓》，到《海街日记》，再到这部《小偷家族》。是枝说不能想象人们走进电影院是为了振奋自己的精神，也不喜欢英雄克服弱点最后拯救别人的好莱坞式剧情，我倒是二者都不讨厌，但是我也挺喜欢这部《小偷家族》。虽说是枝眼里的家庭总给我一种过于美好的感觉，每个人都在尽力去维持着家族的生活，又能察觉到各个人细微的想法和情感。但是当小偷是不对的，不让孩子上学也是不对的，翔太从没叫过一声爸爸，互相之间的一句感谢也从未说出口。仔细想来，是枝描写的家庭在外人看来都是不幸的，但是真正深入其中的人，又能体味到其中超越血缘的美好。中国人应该比日本人更重视家的观念，但是中国人的家庭一定是基于血缘的，这大概是其中很大的不同，这可能也是《小偷家族》在中国票房并不高的原因。不知道如果给父母一辈看这种电影，会不会体味更深一些。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1835,7 +2004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

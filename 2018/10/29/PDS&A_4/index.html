@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="树状数组单点更新，区间求和C[i]=a[i-lowbit(i)+1]+a[i-lowbit(i)+2]+...+a[i]i-lowbit(i)+1为i抹去最后的1之后加1C[0]和a[0]没用，下标从1开始lowbit(x)=x&amp;amp;(-x)  更新元素a[i]用时O(logN) 求区间和用时O(logN)  求和设$sum(k)=a[1]+..+a[k]$$a[i]+..+a[j]=sum(">
+<meta name="description" content="Trie图多模式串的字符串匹配问题  母串的当前字符，同时匹配多个模式串的当前字符 失配时，母串指针不回溯，调整若干个模式串的指针到合适位置  Trie树(字典树，单词前缀树)树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。 12345struct trienode&amp;#123;    trienode* child[26];    //字符串由a~z组成&amp;#125;; T">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法实习_2">
-<meta property="og:url" content="http://yoursite.com/2018/10/08/PDS&A_2/index.html">
+<meta property="og:title" content="数据结构与算法实习_4">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/PDS&A_4/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="树状数组单点更新，区间求和C[i]=a[i-lowbit(i)+1]+a[i-lowbit(i)+2]+...+a[i]i-lowbit(i)+1为i抹去最后的1之后加1C[0]和a[0]没用，下标从1开始lowbit(x)=x&amp;amp;(-x)  更新元素a[i]用时O(logN) 求区间和用时O(logN)  求和设$sum(k)=a[1]+..+a[k]$$a[i]+..+a[j]=sum(">
+<meta property="og:description" content="Trie图多模式串的字符串匹配问题  母串的当前字符，同时匹配多个模式串的当前字符 失配时，母串指针不回溯，调整若干个模式串的指针到合适位置  Trie树(字典树，单词前缀树)树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。 12345struct trienode&amp;#123;    trienode* child[26];    //字符串由a~z组成&amp;#125;; T">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-19T01:36:18.789Z">
+<meta property="og:updated_time" content="2018-10-29T03:59:50.173Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法实习_2">
-<meta name="twitter:description" content="树状数组单点更新，区间求和C[i]=a[i-lowbit(i)+1]+a[i-lowbit(i)+2]+...+a[i]i-lowbit(i)+1为i抹去最后的1之后加1C[0]和a[0]没用，下标从1开始lowbit(x)=x&amp;amp;(-x)  更新元素a[i]用时O(logN) 求区间和用时O(logN)  求和设$sum(k)=a[1]+..+a[k]$$a[i]+..+a[j]=sum(">
+<meta name="twitter:title" content="数据结构与算法实习_4">
+<meta name="twitter:description" content="Trie图多模式串的字符串匹配问题  母串的当前字符，同时匹配多个模式串的当前字符 失配时，母串指针不回溯，调整若干个模式串的指针到合适位置  Trie树(字典树，单词前缀树)树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。 12345struct trienode&amp;#123;    trienode* child[26];    //字符串由a~z组成&amp;#125;; T">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/08/PDS&A_2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/29/PDS&A_4/"/>
 
 
 
 
 
-  <title>数据结构与算法实习_2 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>数据结构与算法实习_4 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/PDS&A_2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与算法实习_2</h1>
+          <h1 class="post-title" itemprop="name headline">数据结构与算法实习_4</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T09:57:00+08:00">
-                2018-10-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
+                2018-10-29
               </time>
             
 
@@ -321,59 +321,39 @@
       
 
       
-        <h1 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h1><p><strong>单点更新，区间求和</strong><br><code>C[i]=a[i-lowbit(i)+1]+a[i-lowbit(i)+2]+...+a[i]</code><br><code>i-lowbit(i)+1</code>为i抹去最后的1之后加1<br>C[0]和a[0]没用，下标从1开始<br><code>lowbit(x)=x&amp;(-x)</code></p>
+        <h1 id="Trie图"><a href="#Trie图" class="headerlink" title="Trie图"></a>Trie图</h1><p>多模式串的字符串匹配问题</p>
 <ul>
-<li>更新元素a[i]用时<code>O(logN)</code></li>
-<li>求区间和用时<code>O(logN)</code></li>
+<li>母串的当前字符，同时匹配多个模式串的当前字符</li>
+<li>失配时，母串指针不回溯，调整若干个模式串的指针到合适位置</li>
 </ul>
-<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><p>设$sum(k)=a[1]+..+a[k]$<br>$a[i]+..+a[j]=sum(j)-sum(i-1)$<br>$sum(k)=C[n_1]+…+C[n_m]$<br><strong>$n_m=k,n_{i-1}=n_i-lowbit(n_i)$</strong><br>直到$n_1&gt;0,且n_1-lowbit(n_1)=0$<br>从右到左，每次抹掉最后的1<br>最多加<code>O(logN)</code>次  </p>
-<blockquote>
-<p>如果改为右移再加1？<br>更新成本在<code>O(N)</code></p>
-</blockquote>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>需要更新的项 $C[n_1],…,C[n_m]$</p>
-<ul>
-<li>$n_1=i,n_{p+1}=n_p+lowbit(n_p)$  </li>
-<li>$n_m+lowbit(n_m)&gt;N,n_m&lt;N$  </li>
-</ul>
-<p>从左到右最低位的1每次最少向左推1位，因此复杂度为<code>O(logN)</code>  </p>
-<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><h4 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h4><ul>
-<li>a[i]更新，C[i]必须更新</li>
-<li><code>C[k+lowbit(k)]</code>的起始项不晚于<code>C[k]</code>的起始项(因为<code>lowbit(k+lowbit(k))&gt;=2*lowbit(k)</code>)，因此包含<code>a[i]</code>  </li>
-</ul>
-<h4 id="充分性"><a href="#充分性" class="headerlink" title="充分性"></a>充分性</h4><ul>
-<li><code>k&lt;i</code> 不需要更新</li>
-<li>命题：对任意的k($x&lt;k&lt;x+lowbit(x)$)，$C[k]$的起始项都在$a[x]$后面。<br>对于任何$n_p&lt;k&lt;n_{p+1}$，$C[k]$的起始项在$a[n_p]$的右边，不包含$a[i]$  </li>
-</ul>
-<h2 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h2><p>$C[k]=sum[k]-sum[k-lowbit(k)]$<br><code>O(N)</code>可完成</p>
-<h2 id="Apple-Tree-POJ-3321"><a href="#Apple-Tree-POJ-3321" class="headerlink" title="Apple Tree  POJ 3321"></a>Apple Tree  POJ 3321</h2><p>多叉树节点的修改和查询 </p>
-<ul>
-<li>用邻接表存图</li>
-<li>使用dfs遍历整个树，记下每个节点的开始时间<code>Start[i]</code>和<code>End[i]</code>，其子节点的开始时间和结束时间在父节点的时间段内</li>
-<li>使用<code>T[n]</code>储存时间点对应访问的单个节点的苹果数，因此每个节点对应两个时间点。</li>
-<li>修改节点的苹果数就是修改<code>T[n]</code>中两个时间点的苹果数</li>
-<li>计算子树苹果树就是<code>T[n]</code>的连续区间和，注意要除以2 </li>
-</ul>
-<p>对于<code>T[n]</code>使用树状数组  </p>
-<h2 id="通用定义"><a href="#通用定义" class="headerlink" title="通用定义"></a>通用定义</h2><ul>
-<li><code>C[i]</code>不止可以存连续和，还可以表示最大值、最小值  </li>
-<li>只要是可以分组计算的值，都可以使用树状数组  </li>
-<li>但是只有<code>F([s,e])</code>可以由<code>F([1,e])</code>和<code>F([1,s-1])</code>推导出来，才可以求任意子区间的值</li>
-</ul>
-<h2 id="最长上升子序列"><a href="#最长上升子序列" class="headerlink" title="最长上升子序列"></a>最长上升子序列</h2><ul>
-<li>对<code>a[i]</code>排序得到<code>n[i]</code>，<code>n[i]</code>的原位置为<code>n[i].pos</code>(注意相等的元素，按照pos从大到小排，避免上升子序列中出现重复元素)  </li>
-<li>设定<code>C[i]</code>表示<code>a</code>中对应区间的LIS的长度，会不断更新</li>
-<li><code>LIS(i)</code>表示以<code>a[i]</code>结尾的最长上升子序列的长度，开始时的<code>LIS(i)</code>都是0</li>
-<li>从小到大扫描<code>n</code><ul>
-<li><code>LIS(n[i].pos)</code>的值设为<code>query(n[i].pos)+1</code>，<code>query(k)</code>表示从<code>a[1]</code>到<code>a[k]</code>的LIS的长度。(使用<code>C[i]</code>访问<code>LIS(i)</code>中的值)</li>
-<li>更新所有包含<code>a[n[i].pos]</code>的<code>C</code>元素</li>
+<h2 id="Trie树-字典树，单词前缀树"><a href="#Trie树-字典树，单词前缀树" class="headerlink" title="Trie树(字典树，单词前缀树)"></a>Trie树(字典树，单词前缀树)</h2><p>树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">trienode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    trienode* child[<span class="number">26</span>];</span><br><span class="line">    <span class="comment">//字符串由a~z组成</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Trie图-AC自动机，DFA"><a href="#Trie图-AC自动机，DFA" class="headerlink" title="Trie图(AC自动机，DFA)"></a>Trie图(AC自动机，DFA)</h2><ul>
+<li>对于插入的每个字符串，插入过程中使用的最后一个节点标记为<code>终止节点</code></li>
+<li>如果只使用Trie树，在失配时只能回溯到根节点，并且母串指针回溯</li>
+<li>解决方法与KMP类似，对于每个节点，当在该节点失配时，应访问与其之前路径(已经与母串匹配)的后缀相同的最大前缀对应的节点，与母串当前字符比较。也就是树上的<code>next[i]</code>数组</li>
+<li>当按照上面描述的路径走到头时，应返回<code>root</code>，表明该次匹配不能匹配到任意模式串</li>
+<li>使用<code>BFS</code>构建前缀指针<ul>
+<li>添加0号节点，所有子节点指向root</li>
+<li>访问到一个节点，其父节点与其连边对应字符<code>ch</code>，顺着其父节点的前缀指针一直往上走，直到访问到一个节点有对应<code>ch</code>的边，对应的子节点即为所求的前缀指针。</li>
 </ul>
 </li>
-<li>最大的<code>C</code>元素，就是答案</li>
 </ul>
-<blockquote>
-<p>基本思路从小到大访问<code>a</code>中的元素，记录每个<code>a[i]</code>对应的<code>LIS[i]</code>，每次访问更新之前的<code>LIS[i]</code>的值并求该点值(需要找<code>a[i]</code>之前的<code>LIS[i]</code>的最大值)，然后每次更新和求值使用树状数组完成。因此总复杂度为<code>O(NlogN)</code>  </p>
-</blockquote>
-<h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2>
+<h3 id="危险节点"><a href="#危险节点" class="headerlink" title="危险节点"></a>危险节点</h3><ul>
+<li>终止节点是危险节点</li>
+<li>如果一个节点的前缀指针指向危险节点，那么它也是危险节点。(对应一个模式串是一个另一个模式串的子串)</li>
+<li>在匹配过程中经过了危险节点，就表明匹配到一个模式串</li>
+</ul>
+<h2 id="多模式串匹配模板题"><a href="#多模式串匹配模板题" class="headerlink" title="多模式串匹配模板题"></a>多模式串匹配模板题</h2><h2 id="躲不开的病毒"><a href="#躲不开的病毒" class="headerlink" title="躲不开的病毒"></a>躲不开的病毒</h2><ul>
+<li>有环</li>
+<li>当存在所有ch指针时，不走前缀指针</li>
+<li>不能经过危险节点</li>
+<li>使用dfs能访问到栈中节点时，有环</li>
+</ul>
+<h2 id="DNA-repair-POJ-3691"><a href="#DNA-repair-POJ-3691" class="headerlink" title="DNA repair POJ 3691"></a>DNA repair POJ 3691</h2><p>$dp[i][j]$表示用长度为i的母串前缀遍历Trie图，使之到达节点j，至少需要修改多少字符，j是安全节点。</p>
+<script type="math/tex; mode=display">dp[i+1][son(j)]=min\{dp[i+1][son(j)],dp[i][j]+(Char(j,son(j))!=str[i])\}</script><p>$Char(j,son(j))$表示从j到son(j)经过的字母，son(j)也包括通过前缀指针走到的节点。结果为</p>
+<script type="math/tex; mode=display">min\{dp[len][j]|j\in \{safe\ node\}\}</script><h2 id="Censored-POJ-1625"><a href="#Censored-POJ-1625" class="headerlink" title="Censored POJ 1625"></a>Censored POJ 1625</h2><p>动归+Trie图+高精度</p>
+
       
     </div>
     
@@ -397,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/19/ICS_2/" rel="next" title="计算机系统导论_2">
-                <i class="fa fa-chevron-left"></i> 计算机系统导论_2
+              <a href="/2018/10/27/POJ2104/" rel="next" title="K-th Number POJ2104">
+                <i class="fa fa-chevron-left"></i> K-th Number POJ2104
               </a>
             
           </div>
@@ -407,8 +387,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/08/ICS_3/" rel="prev" title="计算机系统导论_3">
-                计算机系统导论_3 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/29/ICS_8/" rel="prev" title="计算机系统导论_8">
+                计算机系统导论_8 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -536,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#树状数组"><span class="nav-number">1.</span> <span class="nav-text">树状数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求和"><span class="nav-number">1.1.</span> <span class="nav-text">求和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新"><span class="nav-number">1.2.</span> <span class="nav-text">更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">1.2.1.</span> <span class="nav-text">证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#必要性"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">必要性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#充分性"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">充分性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造"><span class="nav-number">1.3.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apple-Tree-POJ-3321"><span class="nav-number">1.4.</span> <span class="nav-text">Apple Tree  POJ 3321</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用定义"><span class="nav-number">1.5.</span> <span class="nav-text">通用定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长上升子序列"><span class="nav-number">1.6.</span> <span class="nav-text">最长上升子序列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维树状数组"><span class="nav-number">1.7.</span> <span class="nav-text">二维树状数组</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Trie图"><span class="nav-number">1.</span> <span class="nav-text">Trie图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Trie树-字典树，单词前缀树"><span class="nav-number">1.1.</span> <span class="nav-text">Trie树(字典树，单词前缀树)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trie图-AC自动机，DFA"><span class="nav-number">1.2.</span> <span class="nav-text">Trie图(AC自动机，DFA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#危险节点"><span class="nav-number">1.2.1.</span> <span class="nav-text">危险节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多模式串匹配模板题"><span class="nav-number">1.3.</span> <span class="nav-text">多模式串匹配模板题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#躲不开的病毒"><span class="nav-number">1.4.</span> <span class="nav-text">躲不开的病毒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNA-repair-POJ-3691"><span class="nav-number">1.5.</span> <span class="nav-text">DNA repair POJ 3691</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Censored-POJ-1625"><span class="nav-number">1.6.</span> <span class="nav-text">Censored POJ 1625</span></a></li></ol></li></ol></div>
             
 
           </div>

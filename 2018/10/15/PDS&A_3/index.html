@@ -86,13 +86,10 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/rlw1999/rlw1999.github.io/tree/master/img20181027_160029.png">
-<meta property="og:image" content="https://github.com/rlw1999/rlw1999.github.io/tree/master/img20181027_160230.png">
-<meta property="og:updated_time" content="2018-10-27T08:02:37.931Z">
+<meta property="og:updated_time" content="2018-10-27T08:09:09.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法实习_3">
 <meta name="twitter:description" content="线段树 Interval Tree定义 树上的每个节点对应一个区间$[a,b]$ 每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$ 同层节点对应区间不相交，并起来为总区间  性质 使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次 叶子节点数目为$N$，总结点个数$2N-1$  操作核心操作：区间分解给定区间$[c,d]">
-<meta name="twitter:image" content="https://github.com/rlw1999/rlw1999.github.io/tree/master/img20181027_160029.png">
 
 
 
@@ -386,7 +383,6 @@
 <li>总结一下，先将<code>a[1...n]</code>使用归并排序同时构建线段树，对于每次查询，在排序过的<code>a[1..n]</code>中使用二分查找，判断条件为$num \geqslant k$</li>
 </ul>
 <h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2><p>采用树套树的方法，相当于二维数组的每一行都是行的线段树，每一列都是列的线段树。</p>
-<p><img src="https://github.com/rlw1999/rlw1999.github.io/tree/master/img20181027_160029.png" alt="image"><br><img src="https://github.com/rlw1999/rlw1999.github.io/tree/master/img20181027_160230.png" alt="image"></p>
 
       
     </div>
@@ -421,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/15/PDS&A_4/" rel="prev" title="数据结构与算法实习_4">
-                数据结构与算法实习_4 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/15/ICS_4/" rel="prev" title="计算机系统导论_4">
+                计算机系统导论_4 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,7 +500,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
