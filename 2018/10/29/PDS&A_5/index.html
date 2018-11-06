@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="&amp;lt;数据结构与算法&amp;gt; 逻辑结构图&amp;gt; 树&amp;gt; 线性 储存结构 顺序方法、链接方法 索引方法、散列方法   运算 增、删、改、查 遍历、排序   时间复杂性&amp;amp;空间复杂性">
+<meta name="description" content="图的联通性相关问题拓扑排序对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前 .L1找出入度为0的点，将其从图中删去并加入队列当图非空时，goto .L1 有向图的强连通分支任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支 Tarjan算法(有向图)任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法_1">
-<meta property="og:url" content="http://yoursite.com/2018/09/19/DS&A_1/index.html">
+<meta property="og:title" content="图的联通性相关问题">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/PDS&A_5/index.html">
 <meta property="og:site_name" content="Rlion&#39;s Blog">
-<meta property="og:description" content="&amp;lt;数据结构与算法&amp;gt; 逻辑结构图&amp;gt; 树&amp;gt; 线性 储存结构 顺序方法、链接方法 索引方法、散列方法   运算 增、删、改、查 遍历、排序   时间复杂性&amp;amp;空间复杂性">
+<meta property="og:description" content="图的联通性相关问题拓扑排序对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前 .L1找出入度为0的点，将其从图中删去并加入队列当图非空时，goto .L1 有向图的强连通分支任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支 Tarjan算法(有向图)任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-21T00:07:06.295Z">
+<meta property="og:updated_time" content="2018-11-05T03:56:39.275Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法_1">
-<meta name="twitter:description" content="&amp;lt;数据结构与算法&amp;gt; 逻辑结构图&amp;gt; 树&amp;gt; 线性 储存结构 顺序方法、链接方法 索引方法、散列方法   运算 增、删、改、查 遍历、排序   时间复杂性&amp;amp;空间复杂性">
+<meta name="twitter:title" content="图的联通性相关问题">
+<meta name="twitter:description" content="图的联通性相关问题拓扑排序对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前 .L1找出入度为0的点，将其从图中删去并加入队列当图非空时，goto .L1 有向图的强连通分支任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支 Tarjan算法(有向图)任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/19/DS&A_1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/29/PDS&A_5/"/>
 
 
 
 
 
-  <title>数据结构与算法_1 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>图的联通性相关问题 | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/DS&A_1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与算法_1</h1>
+          <h1 class="post-title" itemprop="name headline">图的联通性相关问题</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-19T10:11:55+08:00">
-                2018-09-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
+                2018-10-29
               </time>
             
 
@@ -284,8 +284,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">DS&A</span>
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
                   </a>
                 </span>
 
@@ -321,69 +321,38 @@
       
 
       
-        <h4 id="lt-数据结构与算法-gt"><a href="#lt-数据结构与算法-gt" class="headerlink" title="&lt;数据结构与算法&gt;"></a>&lt;数据结构与算法&gt;</h4><ul>
-<li>逻辑结构<br>图&gt; 树&gt; 线性</li>
-<li>储存结构<ul>
-<li>顺序方法、链接方法</li>
-<li>索引方法、散列方法</li>
-</ul>
-</li>
-<li>运算<ul>
-<li>增、删、改、查</li>
-<li>遍历、排序</li>
-</ul>
-</li>
-<li>时间复杂性&amp;空间复杂性<a id="more"></a>
-<h4 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h4><strong>线性结构</strong></li>
-<li>线性表 Cpt 2</li>
-<li>栈和队列 Cpt 3</li>
-<li>字符串  Cpt 4</li>
-</ul>
-<p><strong>树</strong></p>
+        <h1 id="图的联通性相关问题"><a href="#图的联通性相关问题" class="headerlink" title="图的联通性相关问题"></a>图的联通性相关问题</h1><h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><p>对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前</p>
+<p>.L1<br>找出入度为0的点，将其从图中删去并加入队列<br>当图非空时，goto .L1</p>
+<h2 id="有向图的强连通分支"><a href="#有向图的强连通分支" class="headerlink" title="有向图的强连通分支"></a>有向图的强连通分支</h2><p>任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支</p>
+<h3 id="Tarjan算法-有向图"><a href="#Tarjan算法-有向图" class="headerlink" title="Tarjan算法(有向图)"></a>Tarjan算法(有向图)</h3><p>任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间，$dfs[i]$越小表示节点越早。用$low[i]$表示从i出发DFS过程中能访问到最早的节点。初始时$low[i]=i$，但是如果在i出发的DFS中能够到达更早的节点j，则这个更早的节点j与i强连通，更新</p>
+<script type="math/tex; mode=display">low[i]=min\{low[i],j\}</script><p>维护DFS过程中的栈，当发现当前节点的子节点在栈中，则表明可以从该点出发走到更早的节点，更新$low[i]$。在遍历完所有子节点之后，用子节点的最小的$low[j]$更新父节点，即</p>
+<script type="math/tex; mode=display">low[i]=min\{low[i],low[son(i)]\}</script><p>当发现更新之后节点的$dfs[i]==low[i]$，则说明这个节点是当前强连通子图中最小的节点，于是<strong>将栈中所有i和i以上的节点出栈，构成一个强连通分量</strong>。</p>
+<blockquote>
+<p>复杂度与深搜相同，为O(V)<br>算法正确性的证明需要把图中的节点按与u在栈中的关系分类，分别讨论与u在图中的关系。<br>感觉这个算法的关键是找到了栈与节点单调性之间的关系</p>
+</blockquote>
+<h2 id="例题1-Popular-Cows-POJ2186"><a href="#例题1-Popular-Cows-POJ2186" class="headerlink" title="例题1 Popular Cows POJ2186"></a>例题1 Popular Cows POJ2186</h2><p>将强连通分量合并，得到的有向图无环<br>有向无环图唯一一个出度为0的点，一定可以由任意点出发到达<br>用Tarjan算法给原图染色，扫一遍老图所有的边，跨两种颜色的边加到新图。</p>
+<h2 id="Network-of-schools-POJ1236"><a href="#Network-of-schools-POJ1236" class="headerlink" title="Network of schools POJ1236"></a>Network of schools POJ1236</h2><p>问题1) 给入度为0的强连通分量发软件<br>问题2) 为入度为0的点加边，给每个出度为0的点加出边，如果分别有m、n个，则$max(m,n)$为答案</p>
+<h2 id="无向连通图求割点和桥"><a href="#无向连通图求割点和桥" class="headerlink" title="无向连通图求割点和桥"></a>无向连通图求割点和桥</h2><p>删去割点后图不连通，去掉桥边后不连通</p>
+<p>基本与<strong>Tarjan算法</strong>类似，注意在考虑节点i的子节点j是否在栈中时，$(i,j)$不能是之前深搜走过的边，也即<strong>j不能是i在深搜时的父节点</strong></p>
+<p>一个点$u$是割点，当且仅当满足下面两条</p>
 <ul>
-<li>二叉树 Cpt 5</li>
-<li>树 Cpt 6</li>
-</ul>
-<p><strong>图</strong> Cpt 7</p>
-<p><strong>排序</strong></p>
-<ul>
-<li>内排序 Cpt 8</li>
-<li>外排序 Cpt 9</li>
-</ul>
-<p><strong>检索</strong> Cpt 10</p>
-<p><strong>索引</strong> Cpt 11</p>
-<h4 id="解决问题过程"><a href="#解决问题过程" class="headerlink" title="解决问题过程"></a>解决问题过程</h4><ul>
-<li>问题</li>
-<li>数据结构</li>
-<li>算法</li>
-<li>程序</li>
-</ul>
-<h4 id="1-数据结构"><a href="#1-数据结构" class="headerlink" title="1.数据结构"></a>1.数据结构</h4><ul>
-<li>逻辑结构</li>
-<li>储存结构</li>
-<li>运算</li>
-</ul>
-<h5 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h5><p>数学抽象，反映逻辑关系  节点K+关系R </p>
-<h6 id="节点K"><a href="#节点K" class="headerlink" title="节点K"></a>节点K</h6><ul>
-<li>基本数据类型</li>
-<li>复合数据类型</li>
-</ul>
-<h6 id="关系R"><a href="#关系R" class="headerlink" title="关系R"></a>关系R</h6><ul>
-<li>线性结构<br>关系r有向，全序性，单索性</li>
-<li>树型结构<br>有唯一的前驱</li>
-<li>图形结构<br>对关系r没有限制<h5 id="逻辑结构设计方法"><a href="#逻辑结构设计方法" class="headerlink" title="逻辑结构设计方法"></a>逻辑结构设计方法</h5><h6 id="自顶向下"><a href="#自顶向下" class="headerlink" title="自顶向下"></a>自顶向下</h6></li>
-<li>先明确数据节点及其主要关系</li>
-<li>分析关系同时分析关系</li>
-<li>分层设计<h5 id="储存结构"><a href="#储存结构" class="headerlink" title="储存结构"></a>储存结构</h5>从逻辑结构到物理结构的映射</li>
-<li>逻辑节点映射(连续映射)</li>
-<li>逻辑关系映射<br>映射为<strong>储存地址顺序关系</strong>或<strong>指针地址指向关系</strong><br><strong>四种基本方法</strong><ul>
-<li>顺序<br>存储密度最高，不保存附加信息</li>
-<li>链接<br>增删容易，定位困难</li>
-<li>索引<br>构建整数Z到地址D的映射</li>
-<li>散列<br>用函数将识别码S与地址对应<h5 id="抽象数据类型-ADT"><a href="#抽象数据类型-ADT" class="headerlink" title="抽象数据类型(ADT)"></a>抽象数据类型(ADT)</h5>定义数据集和运算集<h4 id="2-算法"><a href="#2-算法" class="headerlink" title="2.算法"></a>2.算法</h4>穷尽、搜索、分治、动态规划。。。  <h5 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h5></li>
-</ul>
+<li>$u$是树根，$u$有多于一个子树</li>
+<li>$u$不是树根，且存在$(u,v)$为树枝边(出现在DFS中的边,u为v的父节点)，且$dfs[u] \leqslant low[v]$<blockquote>
+<p>因为此时v必须通过u与上面的节点连通，故去掉u图不连通</p>
+</blockquote>
 </li>
 </ul>
+<p>一条边$(u,v)$是桥，当且仅当</p>
+<ul>
+<li>$(u,v)$为树枝边，且$dfs[u] &lt; low[v]$<blockquote>
+<p>注意这里是小于</p>
+</blockquote>
+</li>
+<li>注意不能有重边</li>
+</ul>
+<blockquote>
+<p>实际操作时，可以先做一遍DFS，再判断有无割点和桥</p>
+</blockquote>
 
       
     </div>
@@ -408,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/19/DS&A_2/" rel="next" title="数据结构与算法_2">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法_2
+              <a href="/2018/10/29/PDS&A_4/" rel="next" title="数据结构与算法实习_4">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法实习_4
               </a>
             
           </div>
@@ -418,8 +387,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/19/ICS_2/" rel="prev" title="计算机系统导论_2">
-                计算机系统导论_2 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/29/ICS_8/" rel="prev" title="计算机系统导论_8">
+                计算机系统导论_8 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-数据结构与算法-gt"><span class="nav-number">1.</span> <span class="nav-text">&lt;数据结构与算法&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#课程内容"><span class="nav-number">2.</span> <span class="nav-text">课程内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题过程"><span class="nav-number">3.</span> <span class="nav-text">解决问题过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-数据结构"><span class="nav-number">4.</span> <span class="nav-text">1.数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑结构"><span class="nav-number">4.1.</span> <span class="nav-text">逻辑结构</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#节点K"><span class="nav-number">4.1.1.</span> <span class="nav-text">节点K</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#关系R"><span class="nav-number">4.1.2.</span> <span class="nav-text">关系R</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#逻辑结构设计方法"><span class="nav-number">4.2.</span> <span class="nav-text">逻辑结构设计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#自顶向下"><span class="nav-number">4.2.1.</span> <span class="nav-text">自顶向下</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#储存结构"><span class="nav-number">4.3.</span> <span class="nav-text">储存结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#抽象数据类型-ADT"><span class="nav-number">4.4.</span> <span class="nav-text">抽象数据类型(ADT)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-算法"><span class="nav-number">5.</span> <span class="nav-text">2.算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算法分析"><span class="nav-number">5.1.</span> <span class="nav-text">算法分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图的联通性相关问题"><span class="nav-number">1.</span> <span class="nav-text">图的联通性相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有向图的强连通分支"><span class="nav-number">1.2.</span> <span class="nav-text">有向图的强连通分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tarjan算法-有向图"><span class="nav-number">1.2.1.</span> <span class="nav-text">Tarjan算法(有向图)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-Popular-Cows-POJ2186"><span class="nav-number">1.3.</span> <span class="nav-text">例题1 Popular Cows POJ2186</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-of-schools-POJ1236"><span class="nav-number">1.4.</span> <span class="nav-text">Network of schools POJ1236</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向连通图求割点和桥"><span class="nav-number">1.5.</span> <span class="nav-text">无向连通图求割点和桥</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -694,7 +663,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -747,6 +716,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
