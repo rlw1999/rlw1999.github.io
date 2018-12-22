@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_R.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon_R.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon_R.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Cache MemoriesCache memory organization and operation1234567graph TBA[Regs]--&amp;gt;B[L1 cache SRAM]B--&amp;gt; C[L2 cache SRAM]C--&amp;gt; D[L3 cache SRAM]D--&amp;gt; E[Main memory DRAM]E--&amp;gt; F[Local secondary st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cache Memories">
+<meta property="og:url" content="http://yoursite.com/2018/11/12/ICS_11/index.html">
+<meta property="og:site_name" content="Rlion&#39;s Blog">
+<meta property="og:description" content="Cache MemoriesCache memory organization and operation1234567graph TBA[Regs]--&amp;gt;B[L1 cache SRAM]B--&amp;gt; C[L2 cache SRAM]C--&amp;gt; D[L3 cache SRAM]D--&amp;gt; E[Main memory DRAM]E--&amp;gt; F[Local secondary st">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-12T08:49:25.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cache Memories">
+<meta name="twitter:description" content="Cache MemoriesCache memory organization and operation1234567graph TBA[Regs]--&amp;gt;B[L1 cache SRAM]B--&amp;gt; C[L2 cache SRAM]C--&amp;gt; D[L3 cache SRAM]D--&amp;gt; E[Main memory DRAM]E--&amp;gt; F[Local secondary st">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/12/ICS_11/"/>
+
+
+
+
+
+  <title>Cache Memories | Rlion's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Rlion's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/ICS_11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cache Memories</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T15:11:37+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Cache-Memories"><a href="#Cache-Memories" class="headerlink" title="Cache Memories"></a>Cache Memories</h1><h2 id="Cache-memory-organization-and-operation"><a href="#Cache-memory-organization-and-operation" class="headerlink" title="Cache memory organization and operation"></a>Cache memory organization and operation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A[Regs]--&gt;B[L1 cache SRAM]</span><br><span class="line">B--&gt; C[L2 cache SRAM]</span><br><span class="line">C--&gt; D[L3 cache SRAM]</span><br><span class="line">D--&gt; E[Main memory DRAM]</span><br><span class="line">E--&gt; F[Local secondary storage local disks]</span><br><span class="line">F--&gt; G[Remote secondary storage e.g. Web servers]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>垃圾mermaid，[()]都不能识别。。。</p>
+</blockquote>
+<h3 id="Direct-Mapped-Cache-E-1"><a href="#Direct-Mapped-Cache-E-1" class="headerlink" title="Direct Mapped Cache(E=1)"></a>Direct Mapped Cache(E=1)</h3><ul>
+<li>Cache<ul>
+<li>v(1 bit)+tag(t bits)+data block(2^b bytes)</li>
+</ul>
+</li>
+<li>Address<ul>
+<li>tag(t bits)+arr number(s bits)+b bits</li>
+</ul>
+</li>
+</ul>
+<p>每个数据块$2^b$bits，需要b个二进制位索引，实际内存有$2^{t+s}$个块，在cache中保留$2^s$个块，也即内存中$2^t$个块对应cache中的E个块<br>只有tag相同并且v=1时才命中<br>E=1时容易发生数据抖动</p>
+<h3 id="E-way-Set-Associative-Cache"><a href="#E-way-Set-Associative-Cache" class="headerlink" title="E-way Set Associative Cache"></a>E-way Set Associative Cache</h3><p>E路组相联Cache<br>当发生不命中时，将从内存中取出的block放在E个cache block中空的block内；当全满时，则根据不同的替换规则覆盖cache中的block。</p>
+<h2 id="General-Cache-Organization-S-E-B"><a href="#General-Cache-Organization-S-E-B" class="headerlink" title="General Cache Organization(S,E,B)"></a>General Cache Organization(S,E,B)</h2><p>cache容量为$S\times E \times B$ bytes，$S=2^s$，$B=2^b$。</p>
+<h3 id="Writes"><a href="#Writes" class="headerlink" title="Writes"></a>Writes</h3><ul>
+<li>Write-through<br>直接写进内存</li>
+<li>Write-back<br>写进cache，当被替换时写入内存，需要新增一位标记有没有被改过</li>
+</ul>
+<p>What if Write-miss?</p>
+<ul>
+<li>Write-allocate<br>在cache中更新，被替换时写入内存</li>
+<li>No-write-allocate<br>直接写入内存</li>
+</ul>
+<p>Typical</p>
+<ul>
+<li>Write-through + No-write-allocate</li>
+<li><strong>Write-back + Write-allocate</strong></li>
+</ul>
+<h2 id="Performance-impact-of-caches"><a href="#Performance-impact-of-caches" class="headerlink" title="Performance impact of caches"></a>Performance impact of caches</h2><h3 id="The-Memory-Mountain"><a href="#The-Memory-Mountain" class="headerlink" title="The Memory Mountain"></a>The Memory Mountain</h3><ul>
+<li>由时间局部性引起Size维度的下跌，明显发现L1、L2、L3、Mem四层  </li>
+<li>由空间局部性引起Strike维度的下跌</li>
+<li>注意在Strike比较小的时候，Size维度的下降在L2和L3层之间区别不明显，是因为二者之间存在预取机制</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/07/ICS_10/" rel="next" title="Memory Hierarchy">
+                <i class="fa fa-chevron-left"></i> Memory Hierarchy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/13/DM&S/" rel="prev" title="Lecture 1 infinity">
+                Lecture 1 infinity <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif"
+                alt="Ruan Liangwang" />
+            
+              <p class="site-author-name" itemprop="name">Ruan Liangwang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cache-Memories"><span class="nav-number">1.</span> <span class="nav-text">Cache Memories</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-memory-organization-and-operation"><span class="nav-number">1.1.</span> <span class="nav-text">Cache memory organization and operation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-Mapped-Cache-E-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">Direct Mapped Cache(E=1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#E-way-Set-Associative-Cache"><span class="nav-number">1.1.2.</span> <span class="nav-text">E-way Set Associative Cache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General-Cache-Organization-S-E-B"><span class="nav-number">1.2.</span> <span class="nav-text">General Cache Organization(S,E,B)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Writes"><span class="nav-number">1.2.1.</span> <span class="nav-text">Writes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-impact-of-caches"><span class="nav-number">1.3.</span> <span class="nav-text">Performance impact of caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Memory-Mountain"><span class="nav-number">1.3.1.</span> <span class="nav-text">The Memory Mountain</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ruan Liangwang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

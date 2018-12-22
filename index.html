@@ -229,6 +229,1123 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/code_review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/22/code_review/" itemprop="url">编程回顾</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-22T23:04:11+08:00">
+                2018-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基本模板"><a href="#基本模板" class="headerlink" title="基本模板"></a>基本模板</h1><h2 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">findNext</span><span class="params">(<span class="keyword">char</span>* S, <span class="keyword">int</span>* Next, <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Next[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,k=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(k&gt;=<span class="number">0</span>&amp;&amp;S[k]!=S[i])</span><br><span class="line">        &#123;</span><br><span class="line">            k=Next[k];</span><br><span class="line">        &#125;</span><br><span class="line">        ++i,++k;</span><br><span class="line">        <span class="keyword">if</span>(S[i]==S[k])</span><br><span class="line">            Next[i] = Next[k];</span><br><span class="line">        <span class="keyword">else</span> Next[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">match</span><span class="params">(<span class="keyword">char</span>* T, <span class="keyword">char</span>* P, <span class="keyword">int</span>* Next)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> plen = <span class="built_in">strlen</span>(P);</span><br><span class="line">    <span class="keyword">int</span> tlen = <span class="built_in">strlen</span>(T);</span><br><span class="line">    <span class="keyword">if</span>(plen &gt; tlen)<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> i =<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(j&lt;plen || i&lt;tlen)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j==<span class="number">-1</span>||T[i]==P[i])</span><br><span class="line">            ++i,++j;</span><br><span class="line">        <span class="keyword">else</span> j = Next[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(j&gt;=plen)</span><br><span class="line">        <span class="keyword">return</span> i - plen;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lower-bound"><a href="#lower-bound" class="headerlink" title="lower_bound"></a>lower_bound</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binsear</span><span class="params">(<span class="keyword">int</span>* a, <span class="keyword">int</span> N, <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>,r = N<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid,pos=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r)</span><br><span class="line">    &#123;</span><br><span class="line">        mid = l + (r-l)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid]&lt;t)</span><br><span class="line">        &#123;</span><br><span class="line">            l = mid + <span class="number">1</span>;</span><br><span class="line">            pos = l;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            r = mid;</span><br><span class="line">            pos =r;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">dist[start]=<span class="number">0</span>;</span><br><span class="line">    que.push(qnode(start,<span class="number">0</span>));</span><br><span class="line">    qnode tmp;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        tmp=que.top();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="keyword">int</span> u=tmp.v;</span><br><span class="line">        <span class="keyword">if</span>(vis[u])<span class="keyword">continue</span>;</span><br><span class="line">        vis[u]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;E[u].size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=E[tmp.v][i].v;</span><br><span class="line">            <span class="keyword">int</span> cost=E[u][i].cost;</span><br><span class="line">            <span class="keyword">if</span>(!vis[v]&amp;&amp;dist[v]&gt;dist[u]+cost)</span><br><span class="line">            &#123;</span><br><span class="line">                dist[v]=dist[u]+cost;</span><br><span class="line">                que.push(qnode(v,dist[v]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Prim-amp-Kruskal"><a href="#Prim-amp-Kruskal" class="headerlink" title="Prim &amp; Kruskal"></a>Prim &amp; Kruskal</h2><h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n&amp;(-n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Change</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> add = P[n] ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">    P[n] ^= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = S[n];</span><br><span class="line">    <span class="keyword">int</span> len = N * <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span> (k &lt;= len)</span><br><span class="line">    &#123;</span><br><span class="line">        C[k] += add;</span><br><span class="line">        k = k + lowbit(k);</span><br><span class="line">    &#125;</span><br><span class="line">    k = E[n];</span><br><span class="line">    <span class="keyword">while</span> (k &lt;= len)</span><br><span class="line">    &#123;</span><br><span class="line">        C[k] += add;</span><br><span class="line">        k = k + lowbit(k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">sum_low</span><span class="params">(<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += C[j];</span><br><span class="line">        j = j - lowbit(j);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并查集</p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>没啥好说的，关键找递推函数和边界情况</p>
+<h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><p>这个在检索里很有用，也可二分枚举解空间，并可结合bst balabala</p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>KMP KMP KMP<br>碰到trie图什么的最后再考虑，碰到后缀数组什么的直接放弃，一般应该KMP就够了</p>
+<h1 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h1><p>魔法方法</p>
+<h1 id="图上算法"><a href="#图上算法" class="headerlink" title="图上算法"></a>图上算法</h1><p>Dijstra，Foryd，Bellman-Ford，</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/PDS&A_8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/PDS&A_8/" itemprop="url">计算几何</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-26T10:04:57+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="基础-点、线、面"><a href="#基础-点、线、面" class="headerlink" title="基础-点、线、面"></a>基础-点、线、面</h1><h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CVector</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">double</span> x,y;</span><br><span class="line">    <span class="comment">//init</span></span><br><span class="line">    CVector();</span><br><span class="line">    CVector(<span class="keyword">int</span> _x, <span class="keyword">int</span> _y);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//operation</span></span><br><span class="line">    CVector <span class="keyword">operator</span> + (CVector&amp; b);</span><br><span class="line">    CVector <span class="keyword">operator</span> - (CVector&amp; b);</span><br><span class="line">    <span class="keyword">double</span> <span class="keyword">operator</span> *(CVector q);</span><br><span class="line">    <span class="keyword">double</span> <span class="keyword">operator</span> ^(CVector q);<span class="comment">//two dimension</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Scrambled-Polygon-POJ-2007"><a href="#Scrambled-Polygon-POJ-2007" class="headerlink" title="Scrambled Polygon POJ 2007"></a>Scrambled Polygon POJ 2007</h2><p>利用叉积排序，如果节点y在节点x之后，则一定有x^y&gt;0</p>
+<h2 id="求面积"><a href="#求面积" class="headerlink" title="求面积"></a>求面积</h2><p>分割成三角形，使用叉积(有向面积)。</p>
+<ul>
+<li>按逆时针方向为边指定方向</li>
+<li>对每条边$\Overrightarrow{AB}$，累加$\frac {\vec A \times \vec B}{2}$的值</li>
+<li>最后结果即是多边形面积</li>
+</ul>
+<h2 id="点和线"><a href="#点和线" class="headerlink" title="点和线"></a>点和线</h2><p>用线的端点表示线，常用常数与函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">double</span> INF = <span class="number">1e20</span>;</span><br><span class="line"><span class="keyword">double</span> EPS = <span class="number">1e-6</span>;</span><br></pre></td></tr></table></figure>
+<p>点线距离用叉积来算</p>
+<h2 id="两条直线的交点"><a href="#两条直线的交点" class="headerlink" title="两条直线的交点"></a>两条直线的交点</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CPoint <span class="title">intersect</span><span class="params">(CLine l, CLine m,<span class="built_in">string</span>&amp; msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> x = area(m.a-l.a,l.b-l.a);</span><br><span class="line">    <span class="keyword">double</span> y = area(l.b-l.a,m.b-l.a);</span><br><span class="line">    <span class="keyword">if</span>(isZero(x+y))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(isZero(dist(l,m))) msg = <span class="string">"cover"</span>;</span><br><span class="line">        <span class="keyword">else</span> msg = <span class="string">"paralle"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m.a + x/(x+y)*(m.b-m.a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/21/ICS_12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/21/ICS_12/" itemprop="url">Linking</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T15:16:34+08:00">
+                2018-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Linking"><a href="#Linking" class="headerlink" title="Linking"></a>Linking</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/PDS&A_7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/19/PDS&A_7/" itemprop="url">网络流</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-19T10:28:00+08:00">
+                2018-11-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="网络流问题"><a href="#网络流问题" class="headerlink" title="网络流问题"></a>网络流问题</h1><h2 id="最大流"><a href="#最大流" class="headerlink" title="最大流"></a>最大流</h2><p>带权有向图$G=(V,E)$，有唯一的源和汇，并且对于任意其他 节点流入的流量等于流出的流量</p>
+<p>一种思路：</p>
+<ul>
+<li>每次dfs寻找从源点到汇点有流量的路径，找到路径上容量最小的管道，再将路径上的管道容量减去此容量</li>
+<li>重复上一步，直到源到汇没有路径</li>
+</ul>
+<p>但是这是<strong>有问题</strong>的，最终的最大流方法可以按上方法理解，但是不能用这种方法寻找，反例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">a[a]--100--&gt;b[b]</span><br><span class="line">b--100--&gt;d[d]</span><br><span class="line">a--100--&gt;c[c]</span><br><span class="line">c--100--&gt;d</span><br><span class="line">b--100--&gt;c</span><br></pre></td></tr></table></figure>
+<p>改进：在每次dfs之后，在路径上增加反向边，容量设为搜索出的最小容量</p>
+<ul>
+<li>第一次</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">a[a]==100==&gt;b[b]</span><br><span class="line">b--100--&gt;d[d]</span><br><span class="line">a--100--&gt;c[c]</span><br><span class="line">c==100==&gt;d</span><br><span class="line">b==100==&gt;c</span><br></pre></td></tr></table></figure>
+<p>找到路径为a-&gt;b-&gt;c-&gt;d，容量为100<br>增加反向边</p>
+<ul>
+<li>增加反向边</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//graph LR</span><br><span class="line">a--0--&gt;b</span><br><span class="line">b--100--&gt;a</span><br><span class="line">b--100--&gt;d</span><br><span class="line">a--100--&gt;c[c]</span><br><span class="line">c--0--&gt;d</span><br><span class="line">d--100--&gt;c</span><br><span class="line">b--0--&gt;c</span><br><span class="line">c--100--&gt;b</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这nm。。服气</p>
+</blockquote>
+<p>总之就是叠加原理，用反向边标记当前管道可以减小的流量大小(叠加的流量不能与管道方向相反)。<br>每次增加的过程称为“增广”。</p>
+<h2 id="Dinic-快速网络流算法"><a href="#Dinic-快速网络流算法" class="headerlink" title="Dinic 快速网络流算法"></a>Dinic 快速网络流算法</h2><p>使用BFS分层，在一次增广中找到多条路径。</p>
+<ul>
+<li>先使用BFS对残余网络进行分层，节点层数为从源点出发到节点所能走的最少边数</li>
+<li>分完层后，用DFS寻找增广路，要求DFS的每一步都必须走到下一层节点，搜索到与汇点同层的节点即结束搜索，若搜到的是汇点，则找到一条增广路径。</li>
+<li>DFS找到一条增广路径之后，并不立即结束，而是回溯到某个节点继续寻找增广路径，回溯的节点u满足<ul>
+<li>DFS搜索树的树边(u,v)上的容量已经变为0，即刚刚找到的增广路径上增加的流量等于(u,v)增广前的容量</li>
+<li>u是满足上条件的最上层节点</li>
+</ul>
+</li>
+<li>如果回溯到源点而无法继续往下走，本次DFS结束</li>
+<li>DFS结束后，再对残余网络再次进行分层，继续DFS</li>
+<li>当BFS无法到达汇点算法结束</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/DM&S/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/13/DM&S/" itemprop="url">Lecture 1 infinity</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-13T13:03:29+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Discrete-Math-and-Structures/" itemprop="url" rel="index">
+                    <span itemprop="name">Discrete Math and Structures</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Set-Relation-Function-Cardinality-and-Well-Ordering"><a href="#Set-Relation-Function-Cardinality-and-Well-Ordering" class="headerlink" title="Set, Relation,Function, Cardinality and Well Ordering"></a>Set, Relation,Function, Cardinality and Well Ordering</h1><h2 id="Set-Subset-and-Power-Set"><a href="#Set-Subset-and-Power-Set" class="headerlink" title="Set, Subset and Power Set"></a>Set, Subset and Power Set</h2><p>Power set $2^S$: $T \in 2^S$ iff $T \subset S$<br>Cartesian Product Set $S \times T$</p>
+<h2 id="Inductive-Set"><a href="#Inductive-Set" class="headerlink" title="Inductive Set"></a>Inductive Set</h2><p>$0=\emptyset$<br>$1=\{0\}$<br>$n=\{0,1,…,n-1\}$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/ICS_11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/12/ICS_11/" itemprop="url">Cache Memories</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T15:11:37+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Cache-Memories"><a href="#Cache-Memories" class="headerlink" title="Cache Memories"></a>Cache Memories</h1><h2 id="Cache-memory-organization-and-operation"><a href="#Cache-memory-organization-and-operation" class="headerlink" title="Cache memory organization and operation"></a>Cache memory organization and operation</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A[Regs]--&gt;B[L1 cache SRAM]</span><br><span class="line">B--&gt; C[L2 cache SRAM]</span><br><span class="line">C--&gt; D[L3 cache SRAM]</span><br><span class="line">D--&gt; E[Main memory DRAM]</span><br><span class="line">E--&gt; F[Local secondary storage local disks]</span><br><span class="line">F--&gt; G[Remote secondary storage e.g. Web servers]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>垃圾mermaid，[()]都不能识别。。。</p>
+</blockquote>
+<h3 id="Direct-Mapped-Cache-E-1"><a href="#Direct-Mapped-Cache-E-1" class="headerlink" title="Direct Mapped Cache(E=1)"></a>Direct Mapped Cache(E=1)</h3><ul>
+<li>Cache<ul>
+<li>v(1 bit)+tag(t bits)+data block(2^b bytes)</li>
+</ul>
+</li>
+<li>Address<ul>
+<li>tag(t bits)+arr number(s bits)+b bits</li>
+</ul>
+</li>
+</ul>
+<p>每个数据块$2^b$bits，需要b个二进制位索引，实际内存有$2^{t+s}$个块，在cache中保留$2^s$个块，也即内存中$2^t$个块对应cache中的E个块<br>只有tag相同并且v=1时才命中<br>E=1时容易发生数据抖动</p>
+<h3 id="E-way-Set-Associative-Cache"><a href="#E-way-Set-Associative-Cache" class="headerlink" title="E-way Set Associative Cache"></a>E-way Set Associative Cache</h3><p>E路组相联Cache<br>当发生不命中时，将从内存中取出的block放在E个cache block中空的block内；当全满时，则根据不同的替换规则覆盖cache中的block。</p>
+<h2 id="General-Cache-Organization-S-E-B"><a href="#General-Cache-Organization-S-E-B" class="headerlink" title="General Cache Organization(S,E,B)"></a>General Cache Organization(S,E,B)</h2><p>cache容量为$S\times E \times B$ bytes，$S=2^s$，$B=2^b$。</p>
+<h3 id="Writes"><a href="#Writes" class="headerlink" title="Writes"></a>Writes</h3><ul>
+<li>Write-through<br>直接写进内存</li>
+<li>Write-back<br>写进cache，当被替换时写入内存，需要新增一位标记有没有被改过</li>
+</ul>
+<p>What if Write-miss?</p>
+<ul>
+<li>Write-allocate<br>在cache中更新，被替换时写入内存</li>
+<li>No-write-allocate<br>直接写入内存</li>
+</ul>
+<p>Typical</p>
+<ul>
+<li>Write-through + No-write-allocate</li>
+<li><strong>Write-back + Write-allocate</strong></li>
+</ul>
+<h2 id="Performance-impact-of-caches"><a href="#Performance-impact-of-caches" class="headerlink" title="Performance impact of caches"></a>Performance impact of caches</h2><h3 id="The-Memory-Mountain"><a href="#The-Memory-Mountain" class="headerlink" title="The Memory Mountain"></a>The Memory Mountain</h3><ul>
+<li>由时间局部性引起Size维度的下跌，明显发现L1、L2、L3、Mem四层  </li>
+<li>由空间局部性引起Strike维度的下跌</li>
+<li>注意在Strike比较小的时候，Size维度的下降在L2和L3层之间区别不明显，是因为二者之间存在预取机制</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/ICS_10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/07/ICS_10/" itemprop="url">Memory Hierarchy</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-07T15:11:27+08:00">
+                2018-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Memory-Hierarchy"><a href="#Memory-Hierarchy" class="headerlink" title="Memory Hierarchy"></a>Memory Hierarchy</h1><h2 id="Radom-Access-Memory-RAM"><a href="#Radom-Access-Memory-RAM" class="headerlink" title="Radom-Access Memory(RAM)"></a>Radom-Access Memory(RAM)</h2><p>磁带不是RAM<br>断电信息丢失</p>
+<ul>
+<li>SRAM (Static RAM)<blockquote>
+<p>用于Cache</p>
+</blockquote>
+</li>
+<li>DRAM (Dynamic RAM)<blockquote>
+<p>信息以电容？方式储存，通电时也需要刷新，储存密度更高，成本更低，用于主内存</p>
+<ul>
+<li>SDRAM (Synchronous DRAM)</li>
+<li>DDR SDRAM (Double data-rate synchronous DRAM)</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="Nonvolatile-Memories"><a href="#Nonvolatile-Memories" class="headerlink" title="Nonvolatile Memories"></a>Nonvolatile Memories</h2><p>断电也不会消失</p>
+<ul>
+<li>ROM (Read-only memory)<ul>
+<li>programmed during production</li>
+<li><blockquote>
+<p>Firmware programs: BIOS, controller for disks, network cards, graphics accelerators, security subsystems…</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>Solid state disks</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>Disk caches</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>PROM (Programmable ROM)<ul>
+<li>can be programmed once</li>
+</ul>
+</li>
+<li>EPROM (Eraseable PROM)<ul>
+<li>can be bulk erased (UV, X-Ray)</li>
+</ul>
+</li>
+<li>EEPROM (Electrically eraseable PROM)</li>
+<li>EEPROMs (Flash memory)<blockquote>
+<p>可在线修改，不用拆下来修改</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Traditional-Bus-Structure-Connecting-CPU-and-Memory"><a href="#Traditional-Bus-Structure-Connecting-CPU-and-Memory" class="headerlink" title="Traditional Bus Structure Connecting CPU and Memory"></a>Traditional Bus Structure Connecting CPU and Memory</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[Register file]--&gt;B(Bus interface)</span><br><span class="line">B--&gt;A</span><br><span class="line">B--&gt; C[I/O bridge]</span><br><span class="line">C--&gt;B</span><br><span class="line">C--&gt; D[Mainmemory]</span><br><span class="line">D--&gt; C</span><br></pre></td></tr></table></figure>
+<h2 id="Disk-Drive"><a href="#Disk-Drive" class="headerlink" title="Disk Drive"></a>Disk Drive</h2><p>platters with two surfaces</p>
+<ul>
+<li>Record density</li>
+<li>Track density<blockquote>
+<p>磁道径向密度</p>
+</blockquote>
+</li>
+<li>Earal density</li>
+</ul>
+<p>CPU把需要硬盘需要执行的指令、block编号、目标内存地址传给disk controller，然后硬盘执行操作把需要的数据传给内存，CPU干别的事去了，直到数据被写进内存，发送中断指令到CPU。</p>
+<h2 id="Principle-of-Locality"><a href="#Principle-of-Locality" class="headerlink" title="Principle of Locality"></a>Principle of Locality</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/ICS_9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -565,179 +1682,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/29/PDS&A_5/" itemprop="url">图的联通性相关问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
-                2018-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="图的联通性相关问题"><a href="#图的联通性相关问题" class="headerlink" title="图的联通性相关问题"></a>图的联通性相关问题</h1><h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><p>对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前</p>
-<p>.L1<br>找出入度为0的点，将其从图中删去并加入队列<br>当图非空时，goto .L1</p>
-<h2 id="有向图的强连通分支"><a href="#有向图的强连通分支" class="headerlink" title="有向图的强连通分支"></a>有向图的强连通分支</h2><p>任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支</p>
-<h3 id="Tarjan算法-有向图"><a href="#Tarjan算法-有向图" class="headerlink" title="Tarjan算法(有向图)"></a>Tarjan算法(有向图)</h3><p>任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间，$dfs[i]$越小表示节点越早。用$low[i]$表示从i出发DFS过程中能访问到最早的节点。初始时$low[i]=i$，但是如果在i出发的DFS中能够到达更早的节点j，则这个更早的节点j与i强连通，更新</p>
-<script type="math/tex; mode=display">low[i]=min\{low[i],j\}</script><p>维护DFS过程中的栈，当发现当前节点的子节点在栈中，则表明可以从该点出发走到更早的节点，更新$low[i]$。在遍历完所有子节点之后，用子节点的最小的$low[j]$更新父节点，即</p>
-<script type="math/tex; mode=display">low[i]=min\{low[i],low[son(i)]\}</script><p>当发现更新之后节点的$dfs[i]==low[i]$，则说明这个节点是当前强连通子图中最小的节点，于是<strong>将栈中所有i和i以上的节点出栈，构成一个强连通分量</strong>。</p>
-<blockquote>
-<p>复杂度与深搜相同，为O(V)<br>算法正确性的证明需要把图中的节点按与u在栈中的关系分类，分别讨论与u在图中的关系。<br>感觉这个算法的关键是找到了栈与节点单调性之间的关系</p>
-</blockquote>
-<h2 id="例题1-Popular-Cows-POJ2186"><a href="#例题1-Popular-Cows-POJ2186" class="headerlink" title="例题1 Popular Cows POJ2186"></a>例题1 Popular Cows POJ2186</h2><p>将强连通分量合并，得到的有向图无环<br>有向无环图唯一一个出度为0的点，一定可以由任意点出发到达<br>用Tarjan算法给原图染色，扫一遍老图所有的边，跨两种颜色的边加到新图。</p>
-<h2 id="Network-of-schools-POJ1236"><a href="#Network-of-schools-POJ1236" class="headerlink" title="Network of schools POJ1236"></a>Network of schools POJ1236</h2><p>问题1) 给入度为0的强连通分量发软件<br>问题2) 为入度为0的点加边，给每个出度为0的点加出边，如果分别有m、n个，则$max(m,n)$为答案</p>
-<h2 id="无向连通图求割点和桥"><a href="#无向连通图求割点和桥" class="headerlink" title="无向连通图求割点和桥"></a>无向连通图求割点和桥</h2><p>删去割点后图不连通，去掉桥边后不连通</p>
-<p>基本与<strong>Tarjan算法</strong>类似，注意在考虑节点i的子节点j是否在栈中时，$(i,j)$不能是之前深搜走过的边，也即<strong>j不能是i在深搜时的父节点</strong></p>
-<p>一个点$u$是割点，当且仅当满足下面两条</p>
-<ul>
-<li>$u$是树根，$u$有多于一个子树</li>
-<li>$u$不是树根，且存在$(u,v)$为树枝边(出现在DFS中的边,u为v的父节点)，且$dfs[u] \leqslant low[v]$<blockquote>
-<p>因为此时v必须通过u与上面的节点连通，故去掉u图不连通</p>
-</blockquote>
-</li>
-</ul>
-<p>一条边$(u,v)$是桥，当且仅当</p>
-<ul>
-<li>$(u,v)$为树枝边，且$dfs[u] &lt; low[v]$<blockquote>
-<p>注意这里是小于</p>
-</blockquote>
-</li>
-<li>注意不能有重边</li>
-</ul>
-<blockquote>
-<p>实际操作时，可以先做一遍DFS，再判断有无割点和桥</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -898,1113 +1842,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/27/POJ2104/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/27/POJ2104/" itemprop="url">K-th Number POJ2104</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-27T11:14:18+08:00">
-                2018-10-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithms/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithms</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="K-th-Number"><a href="#K-th-Number" class="headerlink" title="K-th Number"></a><a href="http://poj.org/problem?id=2104" target="_blank" rel="noopener">K-th Number</a></h1><blockquote>
-<p>You are working for Macrohard company in data structures department. After failing your previous task about key insertion you were asked to write a new data structure that would be able to return quickly k-th order statistics in the array segment.<br>That is, given an array a[1…n] of different integer numbers, your program must answer a series of questions Q(i, j, k) in the form: “What would be the k-th number in a[i…j] segment, if this segment was sorted?”<br>For example, consider the array a = (1, 5, 2, 6, 3, 7, 4). Let the question be Q(2, 5, 3). The segment a[2…5] is (5, 2, 6, 3). If we sort this segment, we get (2, 3, 5, 6), the third number is 5, and therefore the answer to the question is 5.</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/24/ICS_7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/24/ICS_7/" itemprop="url">计算机系统导论_7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-24T15:16:18+08:00">
-                2018-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Processor-Architecture-I-ISA-amp-Logic-Design"><a href="#Processor-Architecture-I-ISA-amp-Logic-Design" class="headerlink" title="Processor Architecture I: ISA &amp; Logic Design"></a>Processor Architecture I: ISA &amp; Logic Design</h1><h2 id="Instruction-Set-Architecture"><a href="#Instruction-Set-Architecture" class="headerlink" title="Instruction Set Architecture"></a>Instruction Set Architecture</h2><p>Compiler OS<br><strong>ISA</strong><br>CPU Design</p>
-<h2 id="Y86-Processor-State"><a href="#Y86-Processor-State" class="headerlink" title="Y86 Processor State"></a>Y86 Processor State</h2><blockquote>
-<p>教学所用x86的子集</p>
-</blockquote>
-<ul>
-<li>Program Registers<ul>
-<li>same 8 as with IA32</li>
-</ul>
-</li>
-<li>Condition Codes<ul>
-<li>ZF, SF, OF</li>
-</ul>
-</li>
-<li>Program Counter</li>
-<li>Program Status<blockquote>
-<p>标记有没有死机</p>
-</blockquote>
-</li>
-<li>Memory<ul>
-<li><strong>little endian</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="Y86-Instruction-Set"><a href="#Y86-Instruction-Set" class="headerlink" title="Y86 Instruction Set"></a>Y86 Instruction Set</h3><blockquote>
-<p>与汇编器配套，可有多个版本</p>
-<ul>
-<li>halt <strong>00</strong><br>1 byte</li>
-<li>nop <strong>10</strong></li>
-<li>cmvXX rA, rB <strong>2 fn rA rB</strong><br><strong>fn</strong> 进一步确定XX的种类<ul>
-<li>rrmovl <strong>20</strong></li>
-<li>cmvle <strong>21</strong></li>
-<li>…</li>
-</ul>
-</li>
-<li>irmovl V, rB <strong>3 0 F rB V</strong></li>
-<li>…</li>
-</ul>
-</blockquote>
-<h3 id="Encoding-Registers"><a href="#Encoding-Registers" class="headerlink" title="Encoding Registers"></a>Encoding Registers</h3><ul>
-<li>%eax 0</li>
-<li>%ecx 1</li>
-<li>%edx 2</li>
-<li>…</li>
-<li>no register <strong>0xF</strong></li>
-</ul>
-<h3 id="Instruction-Example"><a href="#Instruction-Example" class="headerlink" title="Instruction Example"></a>Instruction Example</h3><p>addl rA, rB</p>
-<ul>
-<li>Add value in register rA to that in register rB</li>
-<li>Set condition codes</li>
-<li>…</li>
-</ul>
-<h3 id="Program-Stack"><a href="#Program-Stack" class="headerlink" title="Program Stack"></a>Program Stack</h3><ul>
-<li>indicated by %esp</li>
-<li>grows toward lower addresss</li>
-<li>…</li>
-</ul>
-<h3 id="Miscellaneous-Instructions"><a href="#Miscellaneous-Instructions" class="headerlink" title="Miscellaneous Instructions"></a>Miscellaneous Instructions</h3><ul>
-<li>nop</li>
-<li>halt<ul>
-<li>stop the simulator</li>
-<li>initialize memory to zero</li>
-</ul>
-</li>
-</ul>
-<h3 id="Status-Conditions"><a href="#Status-Conditions" class="headerlink" title="Status Conditions"></a>Status Conditions</h3><ul>
-<li>AOK 1 Normal operation</li>
-<li>HLT 2 Halt instruction encountered</li>
-<li>ADR 3 Bad address</li>
-<li>INS 4 Invalid instruction encountered</li>
-</ul>
-<h3 id="Writing-Y86-Code"><a href="#Writing-Y86-Code" class="headerlink" title="Writing Y86 Code"></a>Writing Y86 Code</h3><blockquote>
-<p>初始先init %esp, %ebp，然后<code>call main</code></p>
-</blockquote>
-<h2 id="Logic-Design"><a href="#Logic-Design" class="headerlink" title="Logic Design"></a>Logic Design</h2><p>Communication&amp;Computation&amp;Storage</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/22/ICS_6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/22/ICS_6/" itemprop="url">计算机系统导论_6</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-22T15:13:11+08:00">
-                2018-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Advanced-Topics"><a href="#Advanced-Topics" class="headerlink" title="Advanced Topics"></a>Advanced Topics</h1><h2 id="Unions"><a href="#Unions" class="headerlink" title="Unions"></a>Unions</h2><h3 id="Byte-Ordering-Revisited"><a href="#Byte-Ordering-Revisited" class="headerlink" title="Byte Ordering Revisited"></a>Byte Ordering Revisited</h3><ul>
-<li>Big Endian<ul>
-<li>Most significant byte has lowest address</li>
-<li>Sparc</li>
-</ul>
-</li>
-<li>Little Endian<ul>
-<li>Least signficant byte has lowest address</li>
-<li>Intel x86, ARM Android and IOS</li>
-</ul>
-</li>
-<li>Bi Endian<ul>
-<li>Can be configured either way</li>
-<li>ARM</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意以不同的类型输出<code>Union</code>内的数据时要考虑大端小端</p>
-</blockquote>
-<h2 id="Memory-Layout"><a href="#Memory-Layout" class="headerlink" title="Memory Layout"></a>Memory Layout</h2><ul>
-<li>Stack<ul>
-<li>8MB limit</li>
-</ul>
-</li>
-<li>Heap<ul>
-<li>malloc()<blockquote>
-<p>堆在管理动态内存时会倾向于将大数据和小数据分开，当然这与编译器有关，总的来说堆向上增长。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>Data<ul>
-<li>Statically alloated as needed</li>
-</ul>
-</li>
-<li>Text/Shared Libraries<ul>
-<li>Read-only<blockquote>
-<p>公用库的位置可变</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Buffer-Overflow"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</h2><h3 id="Avoid-Overflow"><a href="#Avoid-Overflow" class="headerlink" title="Avoid Overflow"></a>Avoid Overflow</h3><ul>
-<li>avoid overflow vulnerabilities in Code<ul>
-<li>fgets instead of gets</li>
-<li>strncpy instead of strpy</li>
-<li>use %ns(like %4s)instead of integer</li>
-</ul>
-</li>
-<li>System-Level Protections<ul>
-<li>Randomized stack offsets<ul>
-<li>allocate random amount of space on stack</li>
-<li>Shifts stack addresses for entire program</li>
-<li>…</li>
-</ul>
-</li>
-<li>Nonexecutable code segments<ul>
-<li>add “executable” premission besides “read-only” and “writeable”</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Stack Canaries can help<ul>
-<li>Check for corruption before exiting function<ul>
-<li><code>mov %fs:28, %rax</code><blockquote>
-<p><code>%fs</code>是段寄存器，后面的数字每次编译不同，放在缓冲区后面，用作哨兵，输入后检查哨兵是否被更改</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/19/Config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/19/Config/" itemprop="url">公式渲染的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-19T09:40:33+08:00">
-                2018-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="公式渲染问题"><a href="#公式渲染问题" class="headerlink" title="公式渲染问题"></a>公式渲染问题</h1><p>hexo默认是不支持$LaTeX$的公式编辑的，可以使用<code>mathjax</code>引擎解决。<br><code>mathjax</code>的文档提供了3种解决方案，参考博客<a href="https://blog.csdn.net/u014630987/article/details/78670258" target="_blank" rel="noopener">如何在 hexo 中支持 Mathjax？</a>，使用最简单的<code>CDN</code>网络方法实现。<br><a href="http://www.mohu.org/info/symbols/symbols.htm" target="_blank" rel="noopener">Latex符号表</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/17/ICS_5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/17/ICS_5/" itemprop="url">计算机系统导论_5</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T15:13:35+08:00">
-                2018-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h1><h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><h3 id="One-dimensional"><a href="#One-dimensional" class="headerlink" title="One-dimensional"></a>One-dimensional</h3><p>int val[5];</p>
-<ul>
-<li>val <code>x</code></li>
-<li>val+1 <code>x+4</code></li>
-<li>&amp;val[2] <code>x+8</code></li>
-</ul>
-<h3 id="Multi-dimensional-nested"><a href="#Multi-dimensional-nested" class="headerlink" title="Multi-dimensional(nested)"></a>Multi-dimensional(nested)</h3><ul>
-<li>Declaration<br><code>T A[R][C]</code></li>
-</ul>
-<h3 id="Multi-level"><a href="#Multi-level" class="headerlink" title="Multi-level"></a>Multi-level</h3><blockquote>
-<p>先初始化一维数组，再把头指针存在一个数组，此时二维数组在不连续的空间里。</p>
-</blockquote>
-<h2 id="Structures"><a href="#Structures" class="headerlink" title="Structures"></a>Structures</h2><h3 id="Allocation"><a href="#Allocation" class="headerlink" title="Allocation"></a>Allocation</h3><h3 id="Access"><a href="#Access" class="headerlink" title="Access"></a>Access</h3><h3 id="Alignment"><a href="#Alignment" class="headerlink" title="Alignment"></a>Alignment</h3><h2 id="Floating-Point"><a href="#Floating-Point" class="headerlink" title="Floating Point"></a>Floating Point</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/ICS_4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/15/ICS_4/" itemprop="url">计算机系统导论_4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T15:21:17+08:00">
-                2018-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h1><h2 id="Mechanisms-in-Procedures"><a href="#Mechanisms-in-Procedures" class="headerlink" title="Mechanisms in Procedures"></a>Mechanisms in Procedures</h2><ul>
-<li>Passing control</li>
-<li>Passing data</li>
-<li>Memory management<ul>
-<li>Allocate during procedure excution</li>
-<li>Deallocate upon return</li>
-</ul>
-</li>
-</ul>
-<h2 id="x86-64-Stack"><a href="#x86-64-Stack" class="headerlink" title="x86-64 Stack"></a>x86-64 Stack</h2><p>%rsp contains lowest element (top) of the stack</p>
-<ul>
-<li><strong><code>pushq Src</code></strong><ul>
-<li>Fecth oprand at Src</li>
-<li>Decrement %rsp by 8</li>
-<li>Write operand ar address given by <strong>%rsp</strong></li>
-</ul>
-</li>
-<li><strong><code>popq Dest</code></strong><ul>
-<li>Read value at address given by <strong>%rsp</strong></li>
-<li>Increment <strong>%rsp</strong> by 8</li>
-<li>Store value at Dest</li>
-<li>the memory doesn’t change</li>
-</ul>
-</li>
-</ul>
-<h2 id="Passing-Control"><a href="#Passing-Control" class="headerlink" title="Passing Control"></a>Passing Control</h2><ul>
-<li><strong><code>call label</code></strong><ul>
-<li>Push return address on stack</li>
-<li>Jump to label</li>
-</ul>
-</li>
-<li><strong><code>ret</code></strong><ul>
-<li>Pop address from stack</li>
-<li>Jump to address</li>
-</ul>
-</li>
-</ul>
-<h2 id="Passing-data"><a href="#Passing-data" class="headerlink" title="Passing data"></a>Passing data</h2><ul>
-<li>First 6 arguments<blockquote>
-<p><strong>%rdi</strong> <strong>%rsi</strong> <strong>%rdx</strong> <strong>%rcx</strong> <strong>%r8</strong> <strong>%r9</strong>  </p>
-</blockquote>
-</li>
-<li>Return value<br><strong>%rax</strong></li>
-</ul>
-<h2 id="Managing-local-data"><a href="#Managing-local-data" class="headerlink" title="Managing local data"></a>Managing local data</h2><ul>
-<li>Languages that support recursion<ul>
-<li>Code must be Reentrant</li>
-<li>Need some place to store state of each instantiation<ul>
-<li>Arguments</li>
-<li>Local variables</li>
-<li>Return pointer</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Stack allocated in <strong>Frames</strong></li>
-</ul>
-<h3 id="Stack-Frames"><a href="#Stack-Frames" class="headerlink" title="Stack Frames"></a>Stack Frames</h3><ul>
-<li>Contents<ul>
-<li>Return information</li>
-<li>Local storage</li>
-<li>Temporary space</li>
-</ul>
-</li>
-<li>Pointers<ul>
-<li><strong>%rsp</strong> Stack Pointer</li>
-<li><strong>%rbp</strong> Frame Pointer(Optional, from IA32)</li>
-</ul>
-</li>
-</ul>
-<h4 id="x86-64-Linux-Stack-Frame"><a href="#x86-64-Linux-Stack-Frame" class="headerlink" title="x86-64/Linux Stack Frame"></a>x86-64/Linux Stack Frame</h4><ul>
-<li>Caller Stack Frame<ul>
-<li>Return address(push by <code>call</code>)</li>
-<li>Arguments for this call</li>
-</ul>
-</li>
-<li>Current Stack Frame<ul>
-<li>“Argument build”(Parameters for function about to call)</li>
-<li>Local variables(if can’t keep in registers)</li>
-<li>Saved register context</li>
-<li>Old frame pointer(optional)<ul>
-<li><blockquote>
-<p>方便返回时找到<code>caller</code>的栈帧</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><code>callee</code>可以访问并修改<code>caller</code>栈帧里的内容，比如<code>caller</code>向<code>callee</code>传递的参数大于6个时，就存在<code>callee</code>的栈帧里</p>
-</blockquote>
-<h4 id="Register-Saving-Conventions"><a href="#Register-Saving-Conventions" class="headerlink" title="Register Saving Conventions"></a>Register Saving Conventions</h4><ul>
-<li>Caller Saved<ul>
-<li>caller saves temporary values in its frame before the call</li>
-</ul>
-</li>
-<li><p>Callee Saved</p>
-<ul>
-<li>Callee saves temporary values in its frame before using</li>
-<li>Callee restores them before returning to caller</li>
-</ul>
-</li>
-<li><p>Caller Save</p>
-<ul>
-<li>%rax</li>
-<li>%rdi,…,%r9</li>
-<li>%r10,%r11</li>
-</ul>
-</li>
-<li>Callee Save<ul>
-<li>%rbx, %r12, %13, %r14</li>
-<li>%rbp</li>
-<li>%rsp</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2059,7 +1896,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2070,7 +1907,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

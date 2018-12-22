@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Rlion&#39;s Blog">
 <meta property="og:description" content="图的联通性相关问题拓扑排序对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前 .L1找出入度为0的点，将其从图中删去并加入队列当图非空时，goto .L1 有向图的强连通分支任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支 Tarjan算法(有向图)任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-05T03:56:39.275Z">
+<meta property="og:updated_time" content="2018-11-12T02:44:25.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图的联通性相关问题">
 <meta name="twitter:description" content="图的联通性相关问题拓扑排序对一个有向无环图(DAG)G进行拓扑排序，若$(u,v)\in E(G)$，则$u$在$v$之前 .L1找出入度为0的点，将其从图中删去并加入队列当图非空时，goto .L1 有向图的强连通分支任意节点之间相互可达，则称图是强连通的。图G的最大强连通子图称为G的强连通分支 Tarjan算法(有向图)任取一点，用DFS的方法遍历整个图。用$dfs[i]$标记i节点的开始时间">
@@ -353,6 +353,10 @@
 <blockquote>
 <p>实际操作时，可以先做一遍DFS，再判断有无割点和桥</p>
 </blockquote>
+<h2 id="无向连通图点双联通分支"><a href="#无向连通图点双联通分支" class="headerlink" title="无向连通图点双联通分支"></a>无向连通图点双联通分支</h2><p>定义：不包含割点的极大连通子图<br>在求割点的同时可以顺便把每个点的双连通分支求出。在搜索时将边入栈，$(u,v)$满足$dfn(u)&lt;=low(v)$或者u是树根时，u是双联通分支的根，将栈中$(u,v)$以上的边弹出组成一个双联通分支。<br>注意不要将反向边入栈两次，判断条件是</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v!=father)</span><br><span class="line">&#123;</span><br><span class="line">    low[u]=min(low[u],dfn[v]);</span><br><span class="line">    <span class="keyword">if</span>(dfn[u]&gt;dfn[v])</span><br><span class="line">        Edges.push_back(Edge(u,v));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="无向连通图边双连通分支"><a href="#无向连通图边双连通分支" class="headerlink" title="无向连通图边双连通分支"></a>无向连通图边双连通分支</h2><p>定义：不包含桥的极大连通子图<br>把桥边删除，原图就被分成了多个边双连通块，将双连通分支缩点，得到的图没有环，为一棵树。</p>
+<h2 id="Road-Construction-POJ-3352"><a href="#Road-Construction-POJ-3352" class="headerlink" title="Road Construction POJ 3352"></a>Road Construction POJ 3352</h2><p>加入最少的边使得最后的图为一个边双连通分支，只需要在缩点后的树的叶子节点之间加边即可。对于一个有n个叶节点的树，最少需要在叶子上添加$\lceil n/2 \rceil$条边，使用归纳法证明。</p>
 
       
     </div>
@@ -377,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/29/PDS&A_4/" rel="next" title="数据结构与算法实习_4">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法实习_4
+              <a href="/2018/10/27/POJ2104/" rel="next" title="K-th Number POJ2104">
+                <i class="fa fa-chevron-left"></i> K-th Number POJ2104
               </a>
             
           </div>
@@ -387,8 +391,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/29/ICS_8/" rel="prev" title="计算机系统导论_8">
-                计算机系统导论_8 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/29/PDS&A_6/" rel="prev" title="最短路径">
+                最短路径 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -470,7 +474,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -481,7 +485,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -516,7 +520,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图的联通性相关问题"><span class="nav-number">1.</span> <span class="nav-text">图的联通性相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有向图的强连通分支"><span class="nav-number">1.2.</span> <span class="nav-text">有向图的强连通分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tarjan算法-有向图"><span class="nav-number">1.2.1.</span> <span class="nav-text">Tarjan算法(有向图)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-Popular-Cows-POJ2186"><span class="nav-number">1.3.</span> <span class="nav-text">例题1 Popular Cows POJ2186</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-of-schools-POJ1236"><span class="nav-number">1.4.</span> <span class="nav-text">Network of schools POJ1236</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向连通图求割点和桥"><span class="nav-number">1.5.</span> <span class="nav-text">无向连通图求割点和桥</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图的联通性相关问题"><span class="nav-number">1.</span> <span class="nav-text">图的联通性相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有向图的强连通分支"><span class="nav-number">1.2.</span> <span class="nav-text">有向图的强连通分支</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tarjan算法-有向图"><span class="nav-number">1.2.1.</span> <span class="nav-text">Tarjan算法(有向图)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题1-Popular-Cows-POJ2186"><span class="nav-number">1.3.</span> <span class="nav-text">例题1 Popular Cows POJ2186</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-of-schools-POJ1236"><span class="nav-number">1.4.</span> <span class="nav-text">Network of schools POJ1236</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向连通图求割点和桥"><span class="nav-number">1.5.</span> <span class="nav-text">无向连通图求割点和桥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向连通图点双联通分支"><span class="nav-number">1.6.</span> <span class="nav-text">无向连通图点双联通分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无向连通图边双连通分支"><span class="nav-number">1.7.</span> <span class="nav-text">无向连通图边双连通分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Road-Construction-POJ-3352"><span class="nav-number">1.8.</span> <span class="nav-text">Road Construction POJ 3352</span></a></li></ol></li></ol></div>
             
 
           </div>
