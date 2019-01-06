@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/ICS_9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/29/PDS&A_6/" itemprop="url">最短路径</a></h1>
+                <a class="post-title-link" href="/2018/10/31/ICS_9/" itemprop="url">Processor Architecture III</a></h1>
         
 
         <div class="post-meta">
@@ -260,8 +260,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
-                2018-10-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-31T15:13:59+08:00">
+                2018-10-31
               </time>
             
 
@@ -283,8 +283,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
                   </a>
                 </span>
 
@@ -322,20 +322,201 @@
       
         
           
-            <h1 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h1><h2 id="Dijkstra-算法"><a href="#Dijkstra-算法" class="headerlink" title="Dijkstra 算法"></a>Dijkstra 算法</h2><p>维护一个最短路径表，标记当前搜索阶段从0号节点到i节点的最短路径$dist[i]$，初始时其他节点设为$+\infty$，0号节点设为0。每次取表中还未求出最短路径的dist最小元素i，则$dist[i]$就是0到i的最短路径，并用这个值更新与i相连的未求出最短路径的节点j：</p>
-<script type="math/tex; mode=display">dist[j]=min(dist[j],Edge(i,j))</script><p><code>Dijkstra</code>算法可以用于无向图，但是<strong>不能</strong>用于存在负权边的图。</p>
-<h2 id="Bellman-Ford-算法"><a href="#Bellman-Ford-算法" class="headerlink" title="Bellman-Ford 算法"></a>Bellman-Ford 算法</h2><p>解决含负权边的带权有向图的单源最短路径问题，注意图中<strong>不能</strong>包含从源点可达的<strong>权值总和未负的回路</strong>(否则可以在回路上不断走使路径值减到$-\infty$)。</p>
-<p>构造数组序列</p>
-<script type="math/tex; mode=display">dist^1[u],dist^2[u],...,dist^{n-1}[u]</script><p>n为图中的点数<br>$dist^k[u]$表示从源点v出发最多经过不构成负权回路的k条边到达u的最短路径</p>
-<blockquote>
-<p>经过n条边时一定产生回路，因为不存在负权回路，因此有回路的路径一定更长</p>
-</blockquote>
-<p>假设已经求出了$dist^{k-1}[u]$，有递推公式</p>
-<script type="math/tex; mode=display">dist^1[u]=Edge(v,u)</script><script type="math/tex; mode=display">dist^k[u]=min(dist^{k-1}[u],dist^{k-1}[j]+Edge(j,u))\ j \in vertices\ j != u</script><p>判断负权值回路：<br>在求出$dist^{n-1}[\ ]$之后，如果出现</p>
-<script type="math/tex; mode=display">dist[u]+Edge(u,k)<dist[k]</script><p>则表明出现了源点可达的负权值回路。</p>
-<p>在实际储存时，不需要开二维数组，直接遍历所有边更新$dist[\ ]$，此时在第k步求出的$dist[\ ]$中储存的值对应走法可能超过k条边(因为我们可能用更新过的u节点去更新v节点)。此时如果存在负权回路，用这种方法上面给的判断条件依然成立，依然可以判断出负权环；如果不存在负权环，那多走出环的路径一定更长，不影响最短路径的最终答案。</p>
-<p>当某一步循环时所有节点的最短路径的长度没有再发生改变时，可直接跳出循环。</p>
-<h2 id="SPFA-算法"><a href="#SPFA-算法" class="headerlink" title="SPFA 算法"></a>SPFA 算法</h2><p>每次迭代，取出队头的点V，依次枚举从V能到达的U，用V更新U，如果U被更新，则将U的前驱记为V，如果U不在队列中，则将U入队，直到队列为空。<strong>如果一个点最短路被改进的次数达到n，则有负权环</strong>。</p>
+            <h1 id="PIPE-Pipelined-Implementation"><a href="#PIPE-Pipelined-Implementation" class="headerlink" title="PIPE: Pipelined Implementation"></a>PIPE: Pipelined Implementation</h1><p>Throughput 吞吐率 单位时间执行指令数量</p>
+<p>一条指令的结果是另一条指令的输入<br>Read-after-write(RAW) dependency(写后读。。。)</p>
+<p>改造SEQ！！！</p>
+<p>换一个大一点的寄存器，把改变PC的条件储存起来，而不是在流程的末尾储存新的PC<br>新增5个流水线寄存器</p>
+<ul>
+<li>Fetch<ul>
+<li>用于计算新PC</li>
+</ul>
+</li>
+<li>Decode<ul>
+<li>储存解码之后的指令</li>
+</ul>
+</li>
+<li>Execute</li>
+<li>Memory</li>
+<li>Write Back</li>
+</ul>
+<p>S_Field 从流水线寄存器读出的值<br>s_Field 在这一级运算之后的值</p>
+<p>很明显，PC的值属于RAW dependency<br>怎么预测PC?</p>
+<ul>
+<li>如果指令不涉及转移，直接计算PC</li>
+<li>如果是Call或直接Jump，PC更新为valC</li>
+<li>条件转移<ul>
+<li>预测新的PC为valC，大概60%正确率</li>
+</ul>
+</li>
+<li>Return<ul>
+<li>不预测。。。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Bubble"><a href="#Bubble" class="headerlink" title="Bubble"></a>Bubble</h2><p>对于addl(RAW dependency)指令，Fetch过程实际上不受影响，只在Decode阶段需要读寄存器的值，可以在上一条指令Write back之后立即Decode，中间用nop填充。</p>
+<p>如果发现要用的寄存器需要上面指令更新，硬件插入空指令Bubble。</p>
+<p>加入<strong>Pipe control logic</strong>！参与维护中间流水线寄存器，当流水线寄存器的bubble输入为1时，到时钟上升沿时储存值清空为nop。</p>
+<p>这种方法牺牲了效率！</p>
+<h2 id="Data-Forwarding"><a href="#Data-Forwarding" class="headerlink" title="Data Forwarding"></a>Data Forwarding</h2><p>Data Forwarding 数据前递<br>在处理器中加入Bypass Paths，用以向前传递数据<br>在寄存器与执行阶段寄存器之间加入Forward选择器，用以挑选前递的数据</p>
+<p>当前面有多条指令涉及当前指令需要读的寄存器，选择最晚执行的</p>
+<p>注意<strong>Load-use dependency</strong>，必须读取内存之后才能确定前递的数据，这时必须在中间插bubble，M阶段之后再执行下个指令的E阶段。</p>
+<h2 id="Brach-Misprediction"><a href="#Brach-Misprediction" class="headerlink" title="Brach Misprediction"></a>Brach Misprediction</h2><p>回到之前的问题，跳转猜错了怎么办？<br>猜错不可怕，只要不改变机器状态就可以。从条件转移猜的F阶段到真正计算跳转目的E阶段，接下来的指令绝对没有运行到写寄存器的步骤。</p>
+<p>对于ret指令，插bubble，读内存读完之后再将读到的值送到F阶段(之前数据前递都是送到D阶段)</p>
+<h2 id="组合情况"><a href="#组合情况" class="headerlink" title="组合情况"></a>组合情况</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/ICS_8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/29/ICS_8/" itemprop="url">计算机系统导论_8</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T15:07:19+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ICS/" itemprop="url" rel="index">
+                    <span itemprop="name">ICS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Processor-Architecture-II-SEQ"><a href="#Processor-Architecture-II-SEQ" class="headerlink" title="Processor Architecture II: SEQ"></a>Processor Architecture II: SEQ</h1><h2 id="SEQ-Hardware-Structure"><a href="#SEQ-Hardware-Structure" class="headerlink" title="SEQ Hardware Structure"></a>SEQ Hardware Structure</h2><ul>
+<li>Fetch<ul>
+<li>从%rip读指令地址，获得指令</li>
+</ul>
+</li>
+<li>Decode<ul>
+<li>译码(实际贯穿整个过程)</li>
+</ul>
+</li>
+<li>Execute</li>
+<li>Memory</li>
+<li>Write Back</li>
+<li>PC</li>
+</ul>
 
           
         
@@ -513,6 +694,334 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(v!=father)</span><br><span class="line">&#123;</span><br><span class="line">    low[u]=min(low[u],dfn[v]);</span><br><span class="line">    <span class="keyword">if</span>(dfn[u]&gt;dfn[v])</span><br><span class="line">        Edges.push_back(Edge(u,v));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="无向连通图边双连通分支"><a href="#无向连通图边双连通分支" class="headerlink" title="无向连通图边双连通分支"></a>无向连通图边双连通分支</h2><p>定义：不包含桥的极大连通子图<br>把桥边删除，原图就被分成了多个边双连通块，将双连通分支缩点，得到的图没有环，为一棵树。</p>
 <h2 id="Road-Construction-POJ-3352"><a href="#Road-Construction-POJ-3352" class="headerlink" title="Road Construction POJ 3352"></a>Road Construction POJ 3352</h2><p>加入最少的边使得最后的图为一个边双连通分支，只需要在缩点后的树的叶子节点之间加边即可。对于一个有n个叶节点的树，最少需要在叶子上添加$\lceil n/2 \rceil$条边，使用归纳法证明。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/29/PDS&A_6/" itemprop="url">最短路径</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h1><h2 id="Dijkstra-算法"><a href="#Dijkstra-算法" class="headerlink" title="Dijkstra 算法"></a>Dijkstra 算法</h2><p>维护一个最短路径表，标记当前搜索阶段从0号节点到i节点的最短路径$dist[i]$，初始时其他节点设为$+\infty$，0号节点设为0。每次取表中还未求出最短路径的dist最小元素i，则$dist[i]$就是0到i的最短路径，并用这个值更新与i相连的未求出最短路径的节点j：</p>
+<script type="math/tex; mode=display">dist[j]=min(dist[j],Edge(i,j))</script><p><code>Dijkstra</code>算法可以用于无向图，但是<strong>不能</strong>用于存在负权边的图。</p>
+<h2 id="Bellman-Ford-算法"><a href="#Bellman-Ford-算法" class="headerlink" title="Bellman-Ford 算法"></a>Bellman-Ford 算法</h2><p>解决含负权边的带权有向图的单源最短路径问题，注意图中<strong>不能</strong>包含从源点可达的<strong>权值总和未负的回路</strong>(否则可以在回路上不断走使路径值减到$-\infty$)。</p>
+<p>构造数组序列</p>
+<script type="math/tex; mode=display">dist^1[u],dist^2[u],...,dist^{n-1}[u]</script><p>n为图中的点数<br>$dist^k[u]$表示从源点v出发最多经过不构成负权回路的k条边到达u的最短路径</p>
+<blockquote>
+<p>经过n条边时一定产生回路，因为不存在负权回路，因此有回路的路径一定更长</p>
+</blockquote>
+<p>假设已经求出了$dist^{k-1}[u]$，有递推公式</p>
+<script type="math/tex; mode=display">dist^1[u]=Edge(v,u)</script><script type="math/tex; mode=display">dist^k[u]=min(dist^{k-1}[u],dist^{k-1}[j]+Edge(j,u))\ j \in vertices\ j != u</script><p>判断负权值回路：<br>在求出$dist^{n-1}[\ ]$之后，如果出现</p>
+<script type="math/tex; mode=display">dist[u]+Edge(u,k)<dist[k]</script><p>则表明出现了源点可达的负权值回路。</p>
+<p>在实际储存时，不需要开二维数组，直接遍历所有边更新$dist[\ ]$，此时在第k步求出的$dist[\ ]$中储存的值对应走法可能超过k条边(因为我们可能用更新过的u节点去更新v节点)。此时如果存在负权回路，用这种方法上面给的判断条件依然成立，依然可以判断出负权环；如果不存在负权环，那多走出环的路径一定更长，不影响最短路径的最终答案。</p>
+<p>当某一步循环时所有节点的最短路径的长度没有再发生改变时，可直接跳出循环。</p>
+<h2 id="SPFA-算法"><a href="#SPFA-算法" class="headerlink" title="SPFA 算法"></a>SPFA 算法</h2><p>每次迭代，取出队头的点V，依次枚举从V能到达的U，用V更新U，如果U被更新，则将U的前驱记为V，如果U不在队列中，则将U入队，直到队列为空。<strong>如果一个点最短路被改进的次数达到n，则有负权环</strong>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/29/PDS&A_4/" itemprop="url">数据结构与算法实习_4</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
+                2018-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Trie图"><a href="#Trie图" class="headerlink" title="Trie图"></a>Trie图</h1><p>多模式串的字符串匹配问题</p>
+<ul>
+<li>母串的当前字符，同时匹配多个模式串的当前字符</li>
+<li>失配时，母串指针不回溯，调整若干个模式串的指针到合适位置</li>
+</ul>
+<h2 id="Trie树-字典树，单词前缀树"><a href="#Trie树-字典树，单词前缀树" class="headerlink" title="Trie树(字典树，单词前缀树)"></a>Trie树(字典树，单词前缀树)</h2><p>树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">trienode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    trienode* child[<span class="number">26</span>];</span><br><span class="line">    <span class="comment">//字符串由a~z组成</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Trie图-AC自动机，DFA"><a href="#Trie图-AC自动机，DFA" class="headerlink" title="Trie图(AC自动机，DFA)"></a>Trie图(AC自动机，DFA)</h2><ul>
+<li>对于插入的每个字符串，插入过程中使用的最后一个节点标记为<code>终止节点</code></li>
+<li>如果只使用Trie树，在失配时只能回溯到根节点，并且母串指针回溯</li>
+<li>解决方法与KMP类似，对于每个节点，当在该节点失配时，应访问与其之前路径(已经与母串匹配)的后缀相同的最大前缀对应的节点，与母串当前字符比较。也就是树上的<code>next[i]</code>数组</li>
+<li>当按照上面描述的路径走到头时，应返回<code>root</code>，表明该次匹配不能匹配到任意模式串</li>
+<li>使用<code>BFS</code>构建前缀指针<ul>
+<li>添加0号节点，所有子节点指向root</li>
+<li>访问到一个节点，其父节点与其连边对应字符<code>ch</code>，顺着其父节点的前缀指针一直往上走，直到访问到一个节点有对应<code>ch</code>的边，对应的子节点即为所求的前缀指针。</li>
+</ul>
+</li>
+</ul>
+<h3 id="危险节点"><a href="#危险节点" class="headerlink" title="危险节点"></a>危险节点</h3><ul>
+<li>终止节点是危险节点</li>
+<li>如果一个节点的前缀指针指向危险节点，那么它也是危险节点。(对应一个模式串是一个另一个模式串的子串)</li>
+<li>在匹配过程中经过了危险节点，就表明匹配到一个模式串</li>
+</ul>
+<h2 id="多模式串匹配模板题"><a href="#多模式串匹配模板题" class="headerlink" title="多模式串匹配模板题"></a>多模式串匹配模板题</h2><h2 id="躲不开的病毒"><a href="#躲不开的病毒" class="headerlink" title="躲不开的病毒"></a>躲不开的病毒</h2><ul>
+<li>有环</li>
+<li>当存在所有ch指针时，不走前缀指针</li>
+<li>不能经过危险节点</li>
+<li>使用dfs能访问到栈中节点时，有环</li>
+</ul>
+<h2 id="DNA-repair-POJ-3691"><a href="#DNA-repair-POJ-3691" class="headerlink" title="DNA repair POJ 3691"></a>DNA repair POJ 3691</h2><p>$dp[i][j]$表示用长度为i的母串前缀遍历Trie图，使之到达节点j，至少需要修改多少字符，j是安全节点。</p>
+<script type="math/tex; mode=display">dp[i+1][son(j)]=min\{dp[i+1][son(j)],dp[i][j]+(Char(j,son(j))!=str[i])\}</script><p>$Char(j,son(j))$表示从j到son(j)经过的字母，son(j)也包括通过前缀指针走到的节点。结果为</p>
+<script type="math/tex; mode=display">min\{dp[len][j]|j\in \{safe\ node\}\}</script><h2 id="Censored-POJ-1625"><a href="#Censored-POJ-1625" class="headerlink" title="Censored POJ 1625"></a>Censored POJ 1625</h2><p>动归+Trie图+高精度</p>
 
           
         
@@ -1396,624 +1905,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/ICS_4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/15/ICS_4/" itemprop="url">计算机系统导论_4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T15:21:17+08:00">
-                2018-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Procedures"><a href="#Procedures" class="headerlink" title="Procedures"></a>Procedures</h1><h2 id="Mechanisms-in-Procedures"><a href="#Mechanisms-in-Procedures" class="headerlink" title="Mechanisms in Procedures"></a>Mechanisms in Procedures</h2><ul>
-<li>Passing control</li>
-<li>Passing data</li>
-<li>Memory management<ul>
-<li>Allocate during procedure excution</li>
-<li>Deallocate upon return</li>
-</ul>
-</li>
-</ul>
-<h2 id="x86-64-Stack"><a href="#x86-64-Stack" class="headerlink" title="x86-64 Stack"></a>x86-64 Stack</h2><p>%rsp contains lowest element (top) of the stack</p>
-<ul>
-<li><strong><code>pushq Src</code></strong><ul>
-<li>Fecth oprand at Src</li>
-<li>Decrement %rsp by 8</li>
-<li>Write operand ar address given by <strong>%rsp</strong></li>
-</ul>
-</li>
-<li><strong><code>popq Dest</code></strong><ul>
-<li>Read value at address given by <strong>%rsp</strong></li>
-<li>Increment <strong>%rsp</strong> by 8</li>
-<li>Store value at Dest</li>
-<li>the memory doesn’t change</li>
-</ul>
-</li>
-</ul>
-<h2 id="Passing-Control"><a href="#Passing-Control" class="headerlink" title="Passing Control"></a>Passing Control</h2><ul>
-<li><strong><code>call label</code></strong><ul>
-<li>Push return address on stack</li>
-<li>Jump to label</li>
-</ul>
-</li>
-<li><strong><code>ret</code></strong><ul>
-<li>Pop address from stack</li>
-<li>Jump to address</li>
-</ul>
-</li>
-</ul>
-<h2 id="Passing-data"><a href="#Passing-data" class="headerlink" title="Passing data"></a>Passing data</h2><ul>
-<li>First 6 arguments<blockquote>
-<p><strong>%rdi</strong> <strong>%rsi</strong> <strong>%rdx</strong> <strong>%rcx</strong> <strong>%r8</strong> <strong>%r9</strong>  </p>
-</blockquote>
-</li>
-<li>Return value<br><strong>%rax</strong></li>
-</ul>
-<h2 id="Managing-local-data"><a href="#Managing-local-data" class="headerlink" title="Managing local data"></a>Managing local data</h2><ul>
-<li>Languages that support recursion<ul>
-<li>Code must be Reentrant</li>
-<li>Need some place to store state of each instantiation<ul>
-<li>Arguments</li>
-<li>Local variables</li>
-<li>Return pointer</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Stack allocated in <strong>Frames</strong></li>
-</ul>
-<h3 id="Stack-Frames"><a href="#Stack-Frames" class="headerlink" title="Stack Frames"></a>Stack Frames</h3><ul>
-<li>Contents<ul>
-<li>Return information</li>
-<li>Local storage</li>
-<li>Temporary space</li>
-</ul>
-</li>
-<li>Pointers<ul>
-<li><strong>%rsp</strong> Stack Pointer</li>
-<li><strong>%rbp</strong> Frame Pointer(Optional, from IA32)</li>
-</ul>
-</li>
-</ul>
-<h4 id="x86-64-Linux-Stack-Frame"><a href="#x86-64-Linux-Stack-Frame" class="headerlink" title="x86-64/Linux Stack Frame"></a>x86-64/Linux Stack Frame</h4><ul>
-<li>Caller Stack Frame<ul>
-<li>Return address(push by <code>call</code>)</li>
-<li>Arguments for this call</li>
-</ul>
-</li>
-<li>Current Stack Frame<ul>
-<li>“Argument build”(Parameters for function about to call)</li>
-<li>Local variables(if can’t keep in registers)</li>
-<li>Saved register context</li>
-<li>Old frame pointer(optional)<ul>
-<li><blockquote>
-<p>方便返回时找到<code>caller</code>的栈帧</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p><code>callee</code>可以访问并修改<code>caller</code>栈帧里的内容，比如<code>caller</code>向<code>callee</code>传递的参数大于6个时，就存在<code>callee</code>的栈帧里</p>
-</blockquote>
-<h4 id="Register-Saving-Conventions"><a href="#Register-Saving-Conventions" class="headerlink" title="Register Saving Conventions"></a>Register Saving Conventions</h4><ul>
-<li>Caller Saved<ul>
-<li>caller saves temporary values in its frame before the call</li>
-</ul>
-</li>
-<li><p>Callee Saved</p>
-<ul>
-<li>Callee saves temporary values in its frame before using</li>
-<li>Callee restores them before returning to caller</li>
-</ul>
-</li>
-<li><p>Caller Save</p>
-<ul>
-<li>%rax</li>
-<li>%rdi,…,%r9</li>
-<li>%r10,%r11</li>
-</ul>
-</li>
-<li>Callee Save<ul>
-<li>%rbx, %r12, %13, %r14</li>
-<li>%rbp</li>
-<li>%rsp</li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/15/PDS&A_3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/15/PDS&A_3/" itemprop="url">数据结构与算法实习_3</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T09:57:00+08:00">
-                2018-10-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="线段树-Interval-Tree"><a href="#线段树-Interval-Tree" class="headerlink" title="线段树 Interval Tree"></a>线段树 Interval Tree</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ul>
-<li>树上的每个节点对应一个区间$[a,b]$</li>
-<li>每个非叶子节点的左子节点为$[a,(a+b)/2]$，右子节点为$[(a+b)/2+1,b]$</li>
-<li>同层节点对应区间不相交，并起来为总区间</li>
-</ul>
-<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><ul>
-<li>使用二分的方法构造，最多二分$\lceil{log(b-a+1)\rceil}$次</li>
-<li>叶子节点数目为$N$，总结点个数$2N-1$</li>
-</ul>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="核心操作：区间分解"><a href="#核心操作：区间分解" class="headerlink" title="核心操作：区间分解"></a>核心操作：区间分解</h3><p>给定区间$[c,d]$，寻找其对应的线段树中的节点集合</p>
-<ul>
-<li>从节点开始</li>
-<li>走到$[L,R]$，如果要分解的区间就是$[L,R]$，找到一个终止节点</li>
-<li>考虑节点的两个子节点，若子节点与$[L,R]$有交集，就进入子节点递归分解</li>
-</ul>
-<p>每层最多<strong>2</strong>个终止节点，总的终止节点数是$log(N)$量级，总复杂度也是$O(logN)$</p>
-<blockquote>
-<p>两者在复杂度上同级, 但是<strong>树状数组的常数</strong>明显<strong>优于</strong>线段树, 其编程复杂度也远小于线段树.<br>树状数组的作用被线段树完全涵盖, 凡是可以使用树状数组解决的问题, <strong>使用线段树一定可以解决</strong>, 但是线段树能够解决的问题<strong>树状数组未必能够解决</strong>.<br><strong>树状数组</strong>的突出特点是其编程的极端<strong>简洁性</strong>, 使用lowbit技术可以在很短的几步操作中完成树状数组的核心操作，与之相关的便是其代码效率远高于线段树。<br>另外，当问题推广到<strong>高维情形</strong>时高维<strong>树状数组</strong>有高维线段树所无法企及的<strong>常数优势</strong>。</p>
-</blockquote>
-<p>对于两个子节点都与目标区间相交的情况，访问到<code>v-&gt;_L-&gt;_R</code>一定是终止节点，<code>v-&gt;_R-&gt;_L</code>也一定是终止节点，因此实际有效的“两个子区间都参与分解”的情况只会出现一次。因此总复杂度仍为$O(logN)$</p>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><p>从根节点开始，递归构建<br>复杂度为$O(N)$</p>
-<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><ul>
-<li>确认根节点对应区间，建树</li>
-<li>插入数据</li>
-<li>更新计算</li>
-</ul>
-<h2 id="储存"><a href="#储存" class="headerlink" title="储存"></a>储存</h2><ul>
-<li>动态储存</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> L,R;</span><br><span class="line">    <span class="comment">//与区间[L,R]有关的数据</span></span><br><span class="line">    node* pLeft,pRight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>静态储存</li>
-</ul>
-<p>不要左右节点指针，使用完全二叉树的数组储存，最后一层的未满叶子占数组空间。数组开到$4N$可保证不越界</p>
-<h2 id="例题1-单点更新，区间求和"><a href="#例题1-单点更新，区间求和" class="headerlink" title="例题1 单点更新，区间求和"></a>例题1 单点更新，区间求和</h2><p>自顶向下递归查询和更新</p>
-<h2 id="例题2-Balanced-Lineup-POJ3264"><a href="#例题2-Balanced-Lineup-POJ3264" class="headerlink" title="例题2 Balanced Lineup POJ3264"></a>例题2 Balanced Lineup POJ3264</h2><p>多次求任一区间$[A_i,A_j]$中最大数与最小数的差</p>
-<h2 id="例题3-A-Simple-Problem-with-Integers"><a href="#例题3-A-Simple-Problem-with-Integers" class="headerlink" title="例题3 A Simple Problem with Integers"></a>例题3 A Simple Problem with Integers</h2><p>区间更新，区间求和</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">CNOde</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> L,R;</span><br><span class="line">    CNode *pLeft,*pRight;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> sum;<span class="comment">//原来的和</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> inc;<span class="comment">//本区间里的所有数都加上inc，其子节点**不更新**</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在更新时，如果当前节点是修改区间的子集，就更新inc，不继续往下。如果不是，则更新当前节点的<code>sum</code>，inc带到下一层，inc=0;</p>
-<blockquote>
-<p>inc在查询或修改节点不是目标区间的子集时，都必须更新本层的inc并将inc带到下一层。因为虽然父节点记录了子节点每个数要增加的值，但是在自顶向下递归时并不知道子节点的元素个数。</p>
-</blockquote>
-<h2 id="例题4-Mayor’s-Poster"><a href="#例题4-Mayor’s-Poster" class="headerlink" title="例题4 Mayor’s Poster"></a>例题4 Mayor’s Poster</h2><p>离散化，树中元素记录对应区间是否被覆盖</p>
-<blockquote>
-<p>在更新时(初始为<code>false</code>，完全覆盖时更新)，更新到终止节点就返回。这样虽然终止节点的子节点没有更新，但是每次访问子节点都需要经过父节点，而父节点已经被标记为<code>true</code>，此时访问到父节点直接返回不会导致错误。同时还需要注意当父节点为<code>false</code>时，此时贴上海报可能导致父节点表示区间被覆盖，因此递归返回时，要用子节点的返回值更新父节点的值。</p>
-</blockquote>
-<h2 id="例题5-Atlantis"><a href="#例题5-Atlantis" class="headerlink" title="例题5 Atlantis"></a>例题5 <a href="http://poj.org/problem?id=1151" target="_blank" rel="noopener">Atlantis</a></h2><p>先进行横坐标的离散化，在求面积时，使用一条纵向扫描线从左扫到右，构建纵向区间的线段树，记录对应区间的<strong>被矩形覆盖的长度</strong><code>len</code>，以及<strong>覆盖当前区间的矩形的个数</strong><code>cover</code>。<br>在扫到矩形边时，计算扫面线走过的长度乘上整个纵向区间被矩形覆盖的长度，得到扫过的面积，再更新线段树，分两种情况：</p>
-<ul>
-<li>扫到矩形左边时，递归向下到终止节点增加<code>cover</code>值和<code>len</code>值，回调时更新父节点的<code>len</code>值，如果父节点的<code>cover</code>不为0则不更改</li>
-<li>扫到矩形右边时，递归向下到终止节点更新<code>cover</code>和<code>len</code>，注意到删除的矩形一定是之前存在的，因此即使父节点的<code>cover</code>值与子节点的<code>cover</code>没有同步更新，也不会出现删除出错的情况。同样，回调时更新父节点的<code>len</code>，同样注意<code>cover</code>不为0时不更改</li>
-</ul>
-<h2 id="例题6-K-th-Number"><a href="#例题6-K-th-Number" class="headerlink" title="例题6 K-th Number"></a>例题6 <a href="http://poj.org/problem?id=2104" target="_blank" rel="noopener">K-th Number</a></h2><p>问题数据空间过大，但是解空间不大！</p>
-<ul>
-<li>枚举第K小的数X，枚举范围是$a_i$的取值范围，对假定的X，用线段树查询$a[L…R]$中小于等于X的数的个数num，看是否是K</li>
-<li>用二分加快枚举，若$num \geqslant k$，则减小X，否则加大X，最小的使得$num \geqslant k$的X，就是问题答案</li>
-<li>树状数组里储存区间内排序后的数组，空间复杂度$O(NlogN)$，访问到终止节点使用<code>upper_bound</code>，回调时将子节点的<code>num</code>值加起来即可。单次访问的时间复杂度为$O(logN)$<blockquote>
-<p>这里时间复杂度需要argue一下</p>
-</blockquote>
-</li>
-<li>总结一下，先将<code>a[1...n]</code>使用归并排序同时构建线段树，对于每次查询，在排序过的<code>a[1..n]</code>中使用二分查找，判断条件为$num \geqslant k$</li>
-</ul>
-<h2 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h2><p>采用树套树的方法，相当于二维数组的每一行都是行的线段树，每一列都是列的线段树。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/09/IFCS_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/09/IFCS_2/" itemprop="url">前沿计算导论_2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-09T10:15:12+08:00">
-                2018-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IFCS/" itemprop="url" rel="index">
-                    <span itemprop="name">IFCS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Neuroscience"><a href="#Neuroscience" class="headerlink" title="Neuroscience"></a>Neuroscience</h1><ul>
-<li>光遗传学</li>
-<li>全脑光成像  </li>
-</ul>
-<h2 id="membrane-potential-and-ion-channels"><a href="#membrane-potential-and-ion-channels" class="headerlink" title="membrane potential and ion channels"></a>membrane potential and ion channels</h2><p>$[K^+],[Na^+],[Cl^-]$<br><strong>Nernst Equation</strong><br><strong>Goldman-Hodgkin-Katz(GHK) Equation</strong>  </p>
-<h3 id="Summmary"><a href="#Summmary" class="headerlink" title="Summmary"></a>Summmary</h3><ul>
-<li>most neurons rest at -65mv</li>
-<li>ion channel</li>
-<li>driven by voltage</li>
-</ul>
-<h2 id="Hodgkin-Huxley-model"><a href="#Hodgkin-Huxley-model" class="headerlink" title="Hodgkin-Huxley model"></a>Hodgkin-Huxley model</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2063,7 +1959,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2113,7 +2009,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

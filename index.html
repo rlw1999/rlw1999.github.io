@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/code_review/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/04/review_graph/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ruan Liangwang">
@@ -248,7 +248,480 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/22/code_review/" itemprop="url">编程回顾</a></h1>
+                <a class="post-title-link" href="/2019/01/04/review_graph/" itemprop="url">图上算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-04T15:22:47+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="图的存储结构"><a href="#图的存储结构" class="headerlink" title="图的存储结构"></a>图的存储结构</h1><h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>1000左右的数据量可考虑使用</p>
+<h2 id="边链表"><a href="#边链表" class="headerlink" title="边链表"></a>边链表</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, pre;</span><br><span class="line">&#125;</span><br><span class="line">Edge edges[maxe];</span><br><span class="line"><span class="keyword">int</span> edgelink[maxn], edgecnt=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加有向边</span></span><br><span class="line">edge[edgecnt].to = to;</span><br><span class="line">edge[edgecnt].pre = edgelink[from];</span><br><span class="line">edgelink[from] = edgecnt++;</span><br><span class="line"></span><br><span class="line"><span class="comment">//无向边可由两条有向边组成，同时成对出现，因此一条边为edgecnt, 另一条一定为edgecnt^1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//有重边时如果想去重边，在添加的时候遍历检查一下</span></span><br></pre></td></tr></table></figure>
+<h1 id="Tarjan"><a href="#Tarjan" class="headerlink" title="Tarjan"></a>Tarjan</h1><h2 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//有向图</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfn[u] = low[u] = T++;</span><br><span class="line">    instack[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">stack</span>[top++] = u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = edgelink[u]; i != <span class="number">-1</span>; i = edge[i].pre)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].to;</span><br><span class="line">        <span class="keyword">if</span> (!dfn[v])</span><br><span class="line">        &#123;</span><br><span class="line">            Tarjan(v);</span><br><span class="line">            low[u] = min(low[v], low[u]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (instack[v])</span><br><span class="line">            low[u] = min(low[v], low[u]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[u] == dfn[u])</span><br><span class="line">    &#123;</span><br><span class="line">        cnt++;</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = <span class="built_in">stack</span>[--top];</span><br><span class="line">            instack[v] = <span class="number">0</span>;</span><br><span class="line">            id[v] = cnt; <span class="comment">//分类</span></span><br><span class="line">            <span class="keyword">if</span> (v == u)<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果原图连通性不能保证，要多次Tarjan</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在DAG上加上几条边可以使得DAG变为强连通？<br>有m个入度为0的点，n个出度为0的点，答案为max(m,n)</p>
+</blockquote>
+<h2 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h2><ul>
+<li>反向边不能是父子边</li>
+<li>不需要栈保存节点</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Tarjan</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> father)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    dfi[u] = low[u] = T++;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">int</span> i = edgelink[u]; i!=<span class="number">-1</span>;i = edge[i].pre)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].to;</span><br><span class="line">        <span class="keyword">if</span>(!dfi[v])</span><br><span class="line">        &#123;</span><br><span class="line">            Tarjan(v, u);</span><br><span class="line">            low[u] = min(low[v], low[u]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(v!=father)</span><br><span class="line">        &#123;</span><br><span class="line">            low[u] = min(low[v], low[u]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//分类可以最后再做</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="割点和桥"><a href="#割点和桥" class="headerlink" title="割点和桥"></a>割点和桥</h2><p>割点：</p>
+<ul>
+<li>u为树根，且有多于一个子树</li>
+<li>u不为树根，存在(u,v)为父子边(树枝边)，使得dfn(u) &lt;= low(v)</li>
+</ul>
+<p>桥：(u,v)为父子边，dfn(u) &lt; low(v)</p>
+<blockquote>
+<p>可引入parent[]数组判断父子边</p>
+</blockquote>
+<h2 id="无向图的点双连通分支"><a href="#无向图的点双连通分支" class="headerlink" title="无向图的点双连通分支"></a>无向图的点双连通分支</h2><blockquote>
+<p>不含割点的连通分支</p>
+</blockquote>
+<p>建立一个栈，存储当前双连通分支，在搜索图时，每找到一条树枝边或反向边(连到树中祖先的边），就把这条<strong>边</strong>加入栈中。如果遇到某<strong>树枝边（u,v) 满足dfn(u)&lt;=low(v)</strong>，说明u是一个点双连通分量的根，此时把边从栈顶一个个取出，直到遇到了边(u,v)。割点可属于多个点双连通分支。</p>
+<h2 id="无向图的边双连通分支"><a href="#无向图的边双连通分支" class="headerlink" title="无向图的边双连通分支"></a>无向图的边双连通分支</h2><p>把桥边删除即可</p>
+<blockquote>
+<p>一个树只需要添加 <strong>(叶子节点个数+1)/2</strong> 条边可变为双连通图</p>
+</blockquote>
+<h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><p>优先队列</p>
+<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">int</span> G[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> dist[maxn], inq[maxn], cnt[maxn];</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x7f7f7f7f</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">getdist</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dist, <span class="number">0x7f</span>, <span class="keyword">sizeof</span>(dist));</span><br><span class="line">    dist[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    q.push(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    inq[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        cur = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        inq[cur] = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (G[cur][i] &lt; INF &amp;&amp; dist[i] &lt; dist[cur] + G[cur][i])</span><br><span class="line">            &#123;</span><br><span class="line">            dist[i] = dist[cur] + G[cur][i];</span><br><span class="line">				<span class="keyword">if</span> (!inq[i])</span><br><span class="line">				&#123;</span><br><span class="line">					q.push(i);</span><br><span class="line">					inq[i] = <span class="number">1</span>;</span><br><span class="line">					++cnt[i];</span><br><span class="line">					<span class="keyword">if</span> (cnt[i] &gt; N)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/04/review_trie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/04/review_trie/" itemprop="url">trie图</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-04T15:16:20+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="trie图"><a href="#trie图" class="headerlink" title="trie图"></a>trie图</h1><ul>
+<li>根节点为1号节点，0号节点为根节点的prev</li>
+<li>节点个数不超过总字符个数</li>
+<li>先insert各节点，然后用BFS实现build()</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\\关键循环：</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (p-&gt;pchild[s[i] - <span class="string">'a'</span>]==<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p-&gt;prev;</span><br><span class="line">        &#125;</span><br><span class="line">        p = p-&gt;pchild[s[i] - <span class="string">'a'</span>];</span><br><span class="line">        <span class="keyword">if</span> (p-&gt;isbad)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/02/review_interval/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/02/review_interval/" itemprop="url">树状数组&线段树</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-02T18:52:04+08:00">
+                2019-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
+                    <span itemprop="name">PDS&A</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h1><p>注意点：</p>
+<ul>
+<li>数组元素从1开始</li>
+<li>lowbit(i) = i&amp;(-x);</li>
+<li>单点更新，区间求值</li>
+<li>任意区间求和复杂度$O(logN)$, 任意区间求最大值复杂度$O(log^2N)$</li>
+<li>初始化和$O(N)$，一般初始化$O(NlogN)$</li>
+<li>某些情况下原始数组可省略</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> add)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(k&lt;=N)</span><br><span class="line">    &#123;</span><br><span class="line">        C[k] += add;<span class="comment">//modify the interval value</span></span><br><span class="line">        k = k + lowbit(k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum_low</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(k&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += C[k];</span><br><span class="line">        j = j - lowbit[j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getmax</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == b)<span class="keyword">return</span> A[a];</span><br><span class="line">    <span class="keyword">if</span> (b - lowbit(b) &gt;= a)</span><br><span class="line">        <span class="keyword">return</span> min(getmin(a, b - lowbit(b)), Min[b]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> min(A[b], getmin(a, b - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h1><p>注意点：</p>
+<ul>
+<li>当使用完全二叉树数组储存时，数组大小开到4*maxn不会越界</li>
+<li>更新到终止节点时不继续更新，递归返回时要根据子节点更新父节点</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/review_DSA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ruan Liangwang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rlion's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/22/review_DSA/" itemprop="url">编程回顾</a></h1>
         
 
         <div class="post-meta">
@@ -1333,520 +1806,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/ICS_9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/ICS_9/" itemprop="url">Processor Architecture III</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-31T15:13:59+08:00">
-                2018-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="PIPE-Pipelined-Implementation"><a href="#PIPE-Pipelined-Implementation" class="headerlink" title="PIPE: Pipelined Implementation"></a>PIPE: Pipelined Implementation</h1><p>Throughput 吞吐率 单位时间执行指令数量</p>
-<p>一条指令的结果是另一条指令的输入<br>Read-after-write(RAW) dependency(写后读。。。)</p>
-<p>改造SEQ！！！</p>
-<p>换一个大一点的寄存器，把改变PC的条件储存起来，而不是在流程的末尾储存新的PC<br>新增5个流水线寄存器</p>
-<ul>
-<li>Fetch<ul>
-<li>用于计算新PC</li>
-</ul>
-</li>
-<li>Decode<ul>
-<li>储存解码之后的指令</li>
-</ul>
-</li>
-<li>Execute</li>
-<li>Memory</li>
-<li>Write Back</li>
-</ul>
-<p>S_Field 从流水线寄存器读出的值<br>s_Field 在这一级运算之后的值</p>
-<p>很明显，PC的值属于RAW dependency<br>怎么预测PC?</p>
-<ul>
-<li>如果指令不涉及转移，直接计算PC</li>
-<li>如果是Call或直接Jump，PC更新为valC</li>
-<li>条件转移<ul>
-<li>预测新的PC为valC，大概60%正确率</li>
-</ul>
-</li>
-<li>Return<ul>
-<li>不预测。。。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Bubble"><a href="#Bubble" class="headerlink" title="Bubble"></a>Bubble</h2><p>对于addl(RAW dependency)指令，Fetch过程实际上不受影响，只在Decode阶段需要读寄存器的值，可以在上一条指令Write back之后立即Decode，中间用nop填充。</p>
-<p>如果发现要用的寄存器需要上面指令更新，硬件插入空指令Bubble。</p>
-<p>加入<strong>Pipe control logic</strong>！参与维护中间流水线寄存器，当流水线寄存器的bubble输入为1时，到时钟上升沿时储存值清空为nop。</p>
-<p>这种方法牺牲了效率！</p>
-<h2 id="Data-Forwarding"><a href="#Data-Forwarding" class="headerlink" title="Data Forwarding"></a>Data Forwarding</h2><p>Data Forwarding 数据前递<br>在处理器中加入Bypass Paths，用以向前传递数据<br>在寄存器与执行阶段寄存器之间加入Forward选择器，用以挑选前递的数据</p>
-<p>当前面有多条指令涉及当前指令需要读的寄存器，选择最晚执行的</p>
-<p>注意<strong>Load-use dependency</strong>，必须读取内存之后才能确定前递的数据，这时必须在中间插bubble，M阶段之后再执行下个指令的E阶段。</p>
-<h2 id="Brach-Misprediction"><a href="#Brach-Misprediction" class="headerlink" title="Brach Misprediction"></a>Brach Misprediction</h2><p>回到之前的问题，跳转猜错了怎么办？<br>猜错不可怕，只要不改变机器状态就可以。从条件转移猜的F阶段到真正计算跳转目的E阶段，接下来的指令绝对没有运行到写寄存器的步骤。</p>
-<p>对于ret指令，插bubble，读内存读完之后再将读到的值送到F阶段(之前数据前递都是送到D阶段)</p>
-<h2 id="组合情况"><a href="#组合情况" class="headerlink" title="组合情况"></a>组合情况</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/ICS_8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/29/ICS_8/" itemprop="url">计算机系统导论_8</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T15:07:19+08:00">
-                2018-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ICS/" itemprop="url" rel="index">
-                    <span itemprop="name">ICS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Processor-Architecture-II-SEQ"><a href="#Processor-Architecture-II-SEQ" class="headerlink" title="Processor Architecture II: SEQ"></a>Processor Architecture II: SEQ</h1><h2 id="SEQ-Hardware-Structure"><a href="#SEQ-Hardware-Structure" class="headerlink" title="SEQ Hardware Structure"></a>SEQ Hardware Structure</h2><ul>
-<li>Fetch<ul>
-<li>从%rip读指令地址，获得指令</li>
-</ul>
-</li>
-<li>Decode<ul>
-<li>译码(实际贯穿整个过程)</li>
-</ul>
-</li>
-<li>Execute</li>
-<li>Memory</li>
-<li>Write Back</li>
-<li>PC</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/PDS&A_4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ruan Liangwang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://gss0.baidu.com/70cFfyinKgQFm2e88IuM_a/forum/w%3D580/sign=96608d4786d6277fe912323018391f63/fbdee051f3deb48f9d35b822f11f3a292cf57895.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rlion's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/29/PDS&A_4/" itemprop="url">数据结构与算法实习_4</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-29T09:57:00+08:00">
-                2018-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PDS-A/" itemprop="url" rel="index">
-                    <span itemprop="name">PDS&A</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Trie图"><a href="#Trie图" class="headerlink" title="Trie图"></a>Trie图</h1><p>多模式串的字符串匹配问题</p>
-<ul>
-<li>母串的当前字符，同时匹配多个模式串的当前字符</li>
-<li>失配时，母串指针不回溯，调整若干个模式串的指针到合适位置</li>
-</ul>
-<h2 id="Trie树-字典树，单词前缀树"><a href="#Trie树-字典树，单词前缀树" class="headerlink" title="Trie树(字典树，单词前缀树)"></a>Trie树(字典树，单词前缀树)</h2><p>树中的每一个节点，都对应一个字符串，为从树根走到该节点的路径，根节点为空。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">trienode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    trienode* child[<span class="number">26</span>];</span><br><span class="line">    <span class="comment">//字符串由a~z组成</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="Trie图-AC自动机，DFA"><a href="#Trie图-AC自动机，DFA" class="headerlink" title="Trie图(AC自动机，DFA)"></a>Trie图(AC自动机，DFA)</h2><ul>
-<li>对于插入的每个字符串，插入过程中使用的最后一个节点标记为<code>终止节点</code></li>
-<li>如果只使用Trie树，在失配时只能回溯到根节点，并且母串指针回溯</li>
-<li>解决方法与KMP类似，对于每个节点，当在该节点失配时，应访问与其之前路径(已经与母串匹配)的后缀相同的最大前缀对应的节点，与母串当前字符比较。也就是树上的<code>next[i]</code>数组</li>
-<li>当按照上面描述的路径走到头时，应返回<code>root</code>，表明该次匹配不能匹配到任意模式串</li>
-<li>使用<code>BFS</code>构建前缀指针<ul>
-<li>添加0号节点，所有子节点指向root</li>
-<li>访问到一个节点，其父节点与其连边对应字符<code>ch</code>，顺着其父节点的前缀指针一直往上走，直到访问到一个节点有对应<code>ch</code>的边，对应的子节点即为所求的前缀指针。</li>
-</ul>
-</li>
-</ul>
-<h3 id="危险节点"><a href="#危险节点" class="headerlink" title="危险节点"></a>危险节点</h3><ul>
-<li>终止节点是危险节点</li>
-<li>如果一个节点的前缀指针指向危险节点，那么它也是危险节点。(对应一个模式串是一个另一个模式串的子串)</li>
-<li>在匹配过程中经过了危险节点，就表明匹配到一个模式串</li>
-</ul>
-<h2 id="多模式串匹配模板题"><a href="#多模式串匹配模板题" class="headerlink" title="多模式串匹配模板题"></a>多模式串匹配模板题</h2><h2 id="躲不开的病毒"><a href="#躲不开的病毒" class="headerlink" title="躲不开的病毒"></a>躲不开的病毒</h2><ul>
-<li>有环</li>
-<li>当存在所有ch指针时，不走前缀指针</li>
-<li>不能经过危险节点</li>
-<li>使用dfs能访问到栈中节点时，有环</li>
-</ul>
-<h2 id="DNA-repair-POJ-3691"><a href="#DNA-repair-POJ-3691" class="headerlink" title="DNA repair POJ 3691"></a>DNA repair POJ 3691</h2><p>$dp[i][j]$表示用长度为i的母串前缀遍历Trie图，使之到达节点j，至少需要修改多少字符，j是安全节点。</p>
-<script type="math/tex; mode=display">dp[i+1][son(j)]=min\{dp[i+1][son(j)],dp[i][j]+(Char(j,son(j))!=str[i])\}</script><p>$Char(j,son(j))$表示从j到son(j)经过的字母，son(j)也包括通过前缀指针走到的节点。结果为</p>
-<script type="math/tex; mode=display">min\{dp[len][j]|j\in \{safe\ node\}\}</script><h2 id="Censored-POJ-1625"><a href="#Censored-POJ-1625" class="headerlink" title="Censored POJ 1625"></a>Censored POJ 1625</h2><p>动归+Trie图+高精度</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1896,7 +1860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1946,7 +1910,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
