@@ -1,0 +1,71 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Liangwang's Blog
+theme: ["PaperMod"]
+enableEmoji: true
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+languages:
+  en:
+    disabled: false
+    languageCode: en-US
+    languageDirection: ltr
+    languageName: English
+    weight: 2
+  zh:
+    disabled: false
+    languageCode: zh-CN
+    languageDirection: ltr
+    languageName: Chinese
+    title: Liangwang's Blog
+    params:
+      homeInfoParams:
+        Title: "欢迎！" 
+        Content: 刚刚重新开始
+    menu:
+      main:
+        - identifier: archives
+          name: 归档
+          url: /archives/
+          weight: 20
+        - identifier: search
+          name: 搜索
+          url: /search/
+          weight: 10
+    weight: 1
+params:
+  homeInfoParams:
+    Title: "Welcome!" 
+    Content: just restarted
+  env: production
+  author: Liangwang Ruan
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowCodeCopyButtons: true
+  showtoc: true
+  toopen: false
+  ShowPostNavLinks: true
+  ShareButtons: ["x", "reddit"]
+  ShowWordCount: true
+  socialIcons: # optional
+    - name: "github"
+      url: "https://github.com/LwRuan"
+    - name: "cv"
+      url: "https://www.lwruan.com"
+    - name: "zhihu"
+      url: "https://www.zhihu.com/people/lwruan"
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+menu:
+  main:
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 20
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 10
