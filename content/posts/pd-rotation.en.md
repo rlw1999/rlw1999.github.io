@@ -23,13 +23,13 @@ Vanilla Newton's method requires around 10 iterations to converge, while PD requ
 
 From [[Liu et al. 2017]](https://tiantianliu.cn/papers/liu17quasi/liu17quasi.html), PD can be seen as a quasi-Newton method, meaning in each iteration, PD constructs an accurate right-hand-side vector (i.e. the accurate gradient of total energy), but constructs an approximate left-hand-side Hessian. The accurate Hessian of each spring is:
 
-$$ \mathbf{H}_{\text{N} } = k (1 - \frac{l_s}{l_d}) (\mathbf{I}-\bm{n}\bm{n}^T) + k \bm{n}\bm{n}^T, $$
+$$ \mathbf{H}_{\text{N} } = k (1 - \frac{l_s}{l_d}) (\mathbf{I}-\mathbf{n}\mathbf{n}^T) + k \mathbf{n}\mathbf{n}^T, $$
 
-where $k$ is the stiffness, $l_s$ is the static length of the spring, $l_d$ is the deformed length, $\bm{n}$ is the deformed direction of the spring. PD simplifies the accurate Hessian to a constant matrix:
+where $k$ is the stiffness, $l_s$ is the static length of the spring, $l_d$ is the deformed length, $\mathbf{n}$ is the deformed direction of the spring. PD simplifies the accurate Hessian to a constant matrix:
 
-$$ \mathbf{H}_{\text{P} } = k \mathbf{I} = k (\mathbf{I}-\bm{n}\bm{n}^T) + k \bm{n}\bm{n}^T. $$
+$$ \mathbf{H}_{\text{P} } = k \mathbf{I} = k (\mathbf{I}-\mathbf{n}\mathbf{n}^T) + k \mathbf{n}\mathbf{n}^T. $$
 
-After we expand the expression of $\mathbf{H}_{\text{P} }$, both Hessians look very similar. The only difference is the coefficient before $\mathbf{I}-\bm{n}\bm{n}^T$. The coefficient $k (1 - \frac{l_s}{l_d})$ in Newton's Hessian is expected to be near zero if $l_s \approx l_d$, while $k$ in PD's Hessian is constantly large. This means for a deformation direction $\bm{d}$ othogonal to $\bm{n}$ (i.e. spinning of the spring), Newton's Hessian has a near zero penalty, while PD's Hessian has a large penalty. In the example we show, the main deformation is global rotation of springs, thus the unwanted large penalty introduced by PD causes slow convergence.
+After we expand the expression of $\mathbf{H}_{\text{P} }$, both Hessians look very similar. The only difference is the coefficient before $\mathbf{I}-\mathbf{n}\mathbf{n}^T$. The coefficient $k (1 - \frac{l_s}{l_d})$ in Newton's Hessian is expected to be near zero if $l_s \approx l_d$, while $k$ in PD's Hessian is constantly large. This means for a deformation direction $\mathbf{d}$ othogonal to $\mathbf{n}$ (i.e. spinning of the spring), Newton's Hessian has a near zero penalty, while PD's Hessian has a large penalty. In the example we show, the main deformation is global rotation of springs, thus the unwanted large penalty introduced by PD causes slow convergence.
 
 This observation can be generalized to FEM. We do not show the full derivation here, but only the key idea. For each element, the energy is a function of its deformation gradient $\mathbf{F}$, but only the symmetric part $\mathbf{S}$ in the polar decomposition $\mathbf{F}=\mathbf{RS}$ takes a real effect for isotropic energies. Pure rotation deformation should not be penalized, just like the othogonal deformation for springs. PD uses a diagonal Hessian for each element, penalizes all deformations including rotations, thus converges slowly for quasi-static cases.
 

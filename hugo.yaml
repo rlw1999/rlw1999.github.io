@@ -1,9 +1,8 @@
 baseURL: https://rlw1999.github.io
-languageCode: en-us
 title: Liangwang's Blog
 theme: ["PaperMod"]
 enableEmoji: true
-defaultContentLanguage: en
+defaultContentLanguage: zh
 defaultContentLanguageInSubdir: false
 languages:
   en:
@@ -11,7 +10,7 @@ languages:
     languageCode: en-US
     languageDirection: ltr
     languageName: English
-    weight: 2
+    weight: 1
   zh:
     disabled: false
     languageCode: zh-CN
@@ -34,7 +33,7 @@ languages:
           name: 搜索
           url: /search/
           weight: 10
-    weight: 1
+    weight: 2
 params:
   homeInfoParams:
     Title: "Welcome!" 
