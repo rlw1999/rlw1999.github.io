@@ -22,6 +22,8 @@ languages:
       homeInfoParams:
         Title: "欢迎！" 
         Content: 刚刚重新开始
+      assets:
+        disableHLJS: true
     menu:
       main:
         - identifier: archives
@@ -54,6 +56,8 @@ params:
       url: "https://www.lwruan.com"
     - name: "zhihu"
       url: "https://www.zhihu.com/people/lwruan"
+  assets:
+    disableHLJS: true
 outputs:
   home:
     - HTML
@@ -69,3 +73,7 @@ menu:
       name: Search
       url: /search/
       weight: 10
+markup:
+  highlight:
+    noClasses: false
+    

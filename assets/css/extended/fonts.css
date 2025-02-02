@@ -1,0 +1,10 @@
+/* 使用霞鹜文楷字体 */
+body {  
+  font-family: "LXGW WenKai";  
+}
+
+code {
+  font-family:
+    "Consolas",
+    "LXGW WenKai";
+}
