@@ -10,10 +10,10 @@ math: true
 
 ## Projective Dynamics
 
-[Projective dynamics](https://www.projectivedynamics.org/Projective_Dynamics/index.html) (PD) is often considered easy to implement and fast to converge:smiley:. This statement is true for real-time simulations, but in the quasi-static setting where the initial position and the converged position are very different, PD can be very slow:worried:. We can show this with a simple mass-spring example ([taichi code](code/pd-rotation/ms-2d.py)).
+[Projective dynamics](https://www.projectivedynamics.org/Projective_Dynamics/index.html) (PD) is often considered easy to implement and fast to converge:smiley:. This statement is true for real-time simulations, but in the quasi-static setting where the initial position and the converged position are very different, PD can be very slow:worried:. We can show this with a simple mass-spring example ([taichi code](ms-2d.py)).
 
 {{< figure
-  src="/image/pd-rotation/ms-1.png"
+  src="ms-1.png"
   width="50%"
   align="center"
   caption="Mass-spring quasi-static example: the bar is bended from the horizontal rest position due to gravity with one end fixed."

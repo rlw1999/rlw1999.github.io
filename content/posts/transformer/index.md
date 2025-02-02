@@ -35,9 +35,9 @@ $$ \alpha(\mathbf{q}, \mathbf{k}_i) = \mathbf{q}^\top \mathbf{k}_i/\sqrt{d} $$
 有了对注意力机制的基本了解之后，我们就可以深入了解 Transformer 的细节。原始的 Transformer 不是现在的通用的大模型，而是专门解决序列到序列的问题，比如翻译任务：给定完整的一个句子，网络输出翻译的结果。这里就引出了 Transformer 网络最关键的框架图：
 
 {{< figure
-  src="/image/transformer/transformer.png"
-  width="60%"
-  align="center"
+  src="transformer.png"
+  width=60%
+  align=center
   caption="Transformer 的框架图，来自[原论文](https://arxiv.org/pdf/1706.03762)"
 >}}
 
@@ -84,9 +84,9 @@ def generate(input_sequence, max_length):
 ## 多头注意力模块 Multi-Head Attention
 
 {{< figure
-  src="/image/transformer/attention.png"
-  width="70%"
-  align="center"
+  src="attention.png"
+  width=70%
+  align=center
   caption="Attention 框架图，来自[原论文](https://arxiv.org/pdf/1706.03762)"
 >}}
 
