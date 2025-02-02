@@ -3,16 +3,18 @@ title: Liangwang's Blog
 theme: ["PaperMod"]
 enableEmoji: true
 defaultContentLanguage: zh
-defaultContentLanguageInSubdir: false
+defaultContentLanguageInSubdir: true
 languages:
   en:
     disabled: false
     languageCode: en-US
     languageDirection: ltr
     languageName: English
+    contentDir: content/en
     weight: 1
   zh:
     disabled: false
+    contentDir: content/zh
     languageCode: zh-CN
     languageDirection: ltr
     languageName: Chinese
