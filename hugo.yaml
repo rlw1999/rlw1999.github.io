@@ -11,6 +11,7 @@ languages:
     languageDirection: ltr
     languageName: English
     contentDir: content/en
+    author: Liangwang Ruan
     weight: 1
   zh:
     disabled: false
@@ -25,6 +26,7 @@ languages:
         Content: 刚刚重新开始
       assets:
         disableHLJS: true
+      author: 阮良旺
     menu:
       main:
         - identifier: archives
@@ -41,7 +43,6 @@ params:
     Title: "Welcome!" 
     Content: just restarted
   env: production
-  author: Liangwang Ruan
   ShowReadingTime: true
   ShowShareButtons: false
   ShowCodeCopyButtons: true
