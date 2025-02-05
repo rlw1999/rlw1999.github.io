@@ -243,7 +243,7 @@ $$f(x)=\frac{1}{2^{\frac{d}{2}}\Gamma(\frac{d}{2})} x^{\frac{d}{2}-1}e^{-\frac{x
 在 Attention 层中，当前 Token 不能受到后面 Token 的影响对应着当前 Token 的 Query 不能匹配上后面 Token 的 Key，因此我们可以将 Attention 层里的掩码设计成上三角矩阵：
 
 ```python
-mask = torch.triu(torch.ones(len_seq, len_seq), diagonal=1)
+mask = torch.triu(torch.ones(len_seq, len_seq, dtype=torch.bool), diagonal=1)
 """
 [[1, 1, 1],
  [0, 1, 1],
@@ -255,7 +255,7 @@ Mask 的对角线应该是 $1$，因为当前 Token 的输出是下个 Token 的
 
 ## 交叉注意力 Cross Attention
 
-解码器在进行和编码器一样的自注意力（Self Attention）层之后，还会额外经过一个交叉注意力（Cross Attention）层，表示解码器从源序列中获取信息。交叉注意力层的结构其实与自注意力层完全一样，只是 $K$ 和 $V$ 是从解码器得到。解码器输出的 `(n_batch, len_seq, d_model)` 维的特征张量，经过解码器内部的两个线性层 $\mathbf{W}_K$ 和 $\mathbf{W}_V$ 转化为 $K$ 和 $V$，而 $Q$ 依然从解码器上个自注意力模块得到。
+解码器在进行和编码器一样的自注意力（Self Attention）层之后，还会额外经过一个交叉注意力（Cross Attention）层，表示解码器从源序列中获取信息。交叉注意力层的结构其实与自注意力层完全一样，只是 $K$ 和 $V$ 是从编码器得到。编码器输出的 `(n_batch, len_seq, d_model)` 维的特征张量，经过解码器内部的两个线性层 $\mathbf{W}_K$ 和 $\mathbf{W}_V$ 转化为 $K$ 和 $V$，而 $Q$ 依然从解码器上个自注意力模块得到。
 
 ## 为什么选择注意力？ Why Attention？
 
