@@ -1,7 +1,7 @@
 ---
 date: '2025-02-17T13:43:41+08:00'
 draft: false
-title: 'Physics in Large Video Model'
+title: 'Physics for Large Video Model'
 math: true
 ShowReadingTime: false
 ShowWordCount: false
