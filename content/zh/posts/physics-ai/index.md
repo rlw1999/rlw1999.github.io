@@ -35,6 +35,8 @@ ShowWordCount: false
 
 可以发现成绩最好的是开源模型 [CogVideoX-5B](https://github.com/THUDM/CogVideo)，但是也只是勉强及格的水平。这方向类似的工作还有 [VideoScore](https://tiger-ai-lab.github.io/VideoScore/)，[PhyGenBench](https://phygenbench2024.github.io)。理论上有了打分模型之后我们就可以对视频模型进行强化学习对齐了，[OnlineVPO](https://onlinevpo.github.io) 就使用了 VideoScore 作为反馈模型微调了 [OpenSora](https://github.com/hpcaitech/Open-Sora) 模型，使其在 VideoScore 得分上超越了其他模型。
 
+最近这个方向又有两篇新文章：[Physics IQ Benchmark](https://physics-iq.github.io/) 和 [WorldModelBench](https://arxiv.org/abs/2502.20694)。Physics-IQ 根据几个生活中的物理场景：固体、流体、光学、热物理、磁现象，测试大模型预测物理过程的能力，最后得到一个 0-100 的 Physics-IQ。结论上来说，所有大模型得分都不高，最高是 [VideoPoet](https://sites.research.google/videopoet/) （和 Physics-IQ 都是 Google 的） 的 29.5 分。并且作者观察到生成真实的视频 （更高的 MLLM 分数）和物理正确（更高的 Physics-IQ）并没有什么关系。相比之下 WorldModelBench 做了更多的工作。WorldModelBench 首先提了几个指标，包括是否遵从指令，是否符合物理等，然后众包人类标准了一个数据集，然后训练了一个判别器，然后用判别器微调了 OpenSora-v1.2 模型。从论文展示的结果来看，微调的提升效果有限。
+
 整体上来说，物理对齐比较依赖预训练大模型的能力。对于语言模型来说，对齐往往会降低模型在基准测试上的分数，称为支付对齐税（Alignment Tax）。对于视频模型情况应该是类似的，增强其在物理动态方面的能力可能导致其他能力的削弱。因此，一个更本质的问题是，通过预训练的方式大模型是否能够足够泛化地学到物理规律？字节的工作 [How Far is Video Generation from World Model? A Physical Law Perspective](https://phyworld.github.io) 是这个方向的一个初步探索。
 
 ## 屏幕空间物理 Screen-space Physics
@@ -73,6 +75,10 @@ Ok，如果视频模型短期内无法达到我们对于物理规律的需求，
 
 我们可以发现，如果只是用大模型去增强现有的图形管线，那么不可避免的需要很长的管线，并且没有充分利用大模型的能力。最理想的情况是，我们用最少的规则限制和控制信号，提供最基础的三维物理和几何的保证，其他的交给预训练模型补充细节。在这个方向上，[CineMaster](https://cinemaster-dev.github.io) 是一个很有意思的尝试，只通过最简单的包围盒作为条件，就能实现很好的视频控制生成效果。
 
+## 光流 Optical Flow
+
+光流（Optical Flow）可以理解为屏幕空间像素的速度场，因此是一个和物理非常相关的概念。假设我们有了光流场，通过移动像素加上大模型修正，就能生成动态可控的真实视频。[Go-with-the-Flow](https://eyeline-research.github.io/Go-with-the-Flow/) 就使用了这样的想法，使用光流场变换扩散模型的噪声，就能可控生成高质量的视频，效果非常好。那问题来了，光流场要如何得到？一个非常初步的尝试是 [MotionCraft](https://mezzelfo.github.io/MotionCraft/)，直接从传统模拟器中得到光流场，再拿去变换扩散模型的噪声。
+
 ## References
 
 - [PhysGen: Rigid-Body Physics-Grounded Image-to-Video Generation](https://stevenlsw.github.io/physgen/)
@@ -87,3 +93,7 @@ Ok，如果视频模型短期内无法达到我们对于物理规律的需求，
 - [PhysAnimator: Physics-Guided Generative Cartoon Animation](https://xpandora.github.io/PhysAnimator/)
 - [GPT4Motion: Scripting Physical Motions in Text-to-Video Generation via Blender-Oriented GPT Planning](https://gpt4motion.github.io)
 - [CineMaster: A 3D-Aware and Controllable Framework for Cinematic Text-to-Video Generation](https://cinemaster-dev.github.io)
+- [MotionCraft: Physics-Based Zero-Shot Video Generation](https://mezzelfo.github.io/MotionCraft/)
+- [Go-with-the-Flow: Motion-Controllable Video Diffusion Models Using Real-Time Warped Noise](https://eyeline-research.github.io/Go-with-the-Flow/)
+- [WorldModelBench: Judging Video Generation Models As World Models](https://arxiv.org/abs/2502.20694)
+- [Physics IQ Benchmark: Do generative video models understand physical principles?](https://physics-iq.github.io/)
