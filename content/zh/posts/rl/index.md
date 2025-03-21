@@ -112,5 +112,108 @@ $$`
 `$$
 \delta_t = r_t + \gamma v_\phi(s_{t+1}) - v_\phi(s_t).
 $$`
+于是自然我们可以使用 $\delta_t$ 来定义损失函数：
+$$L = \frac{1}{2} \delta_t^2 = \frac{1}{2} [r_t + \gamma v_\phi(s_{t+1}) - v_\phi(s_t)]^2.$$
+当损失函数完全降到 $0$ 时，值网络收敛到真值。这里注意一个细节，尽管这个损失函数的定义需要网络 forward 两次，但是在梯度反传的时候我们往往会固定 $v_\phi(s_{t+1})$ 不反传梯度，只反传 $v_\phi(s_t)$。这样不仅能简化实现，还能稳定训练。我们这里其实使用的是一个自回归的思想，或者说是机器学习领域的 bootstrapping 思想。每次我们让网络值更接近真值一些，但是不直接用真值作为监督，以减小方差。这种利用贝尔曼方程回归值函数的方法称为时序差分（time difference，TD）。我们还可以多展开（rollout）几步，计算贝尔曼方程左右估计的差别，得到：
+$$L = \frac{1}{2}\left[G^n(s_t) - v_\phi(s_t) \right]^2, \ G^{(n)}(s_t) = \sum_{i=0}^{n-1} \gamma^i r_{t+i} + \gamma^n v_\phi(s_{t+n}).$$
+这样的算法称为 n-step TD。可以发现，当 $n$ 趋向正无穷时，n-step TD 其实就是蒙特卡洛估计。因此 $n$ 不宜过大，也不宜过小。进一步，我们可以发现上面我们虽然展开了多步，但是值网络只固定 forward 了两次，并没有用到中间状态 $v_\phi(s_{t+i})$ 的估计值。我们可以考虑计算每一步的 $G^{(n)}$，然后引入一个新的衰减因子 $\lambda$，定义总回报的估计为：
+$$G^\lambda(s_t) = (1-\lambda) \sum_{i=1}^{\infty} \lambda^{i-1} G^{(i)}(s_t).$$
+可以发现我们就是对 $G^{i}$ 进行了加权平均，展开越长权重越小。这样的做法称为 TD($\lambda$)。当 $\lambda=0$ 时，$G^0(s_t)$ 回退为单步展开，因此单步 TD 也称为 TD($0$)。
 
-TBD
+在实际应用时，我们可以一直展开到结束再回头更新值网络，这样的视角称为前向视角。反过来，每当我们展开一步，这对应前一状态的 $G^{(1)}$，前两步状态的 $G^{(2)}$，前三步状态的 $G^{(3)}$……因此我们可以用一步展开去更新之前所有状态的值，这样的视角称为后向视角。我们这里不进一步展开细节了，因为下面我们将了解 $TD(\lambda)$ 的思想在策略梯度中更常用的形式：广义优势估计（general advantage estimation，GAE）。
+
+## 广义优势估计 GAE
+
+在策略梯度中，我们最后使用优势函数定义带基线的损失函数，然后在贝尔曼方程部分我们了解了可以使用 TD($\lambda$) 估计基线，那自然想到可不可以直接用 TD($\lambda$) 的思想估计优势函数 $A$。我们可以根据定义直接推导：
+`$$
+\begin{aligned}
+  A(s_t, a_t) =& q(s_t, a_t) - v(s_t) \\
+  \approx & G^\lambda(s_t, a_t) - v_\phi(s_t) \\
+  =& - v_\phi(s_t) + (1-\lambda)[\textcolor{blue}{r_t} + \gamma v_\phi(s_{t+1})] + \\
+  &(1-\lambda)\lambda[\textcolor{blue}{r_t} + \gamma \textcolor{red}{r_{t+1}} + \gamma^2 v_\phi(s_{t+2})] + \\
+  &(1-\lambda)\lambda^2[\textcolor{blue}{r_t} + \gamma \textcolor{red}{r_{t+1}} + \gamma^2 r_{t+2} + \gamma^3 v_\phi(s_{t+3})] + \cdots \\
+  =& - v_\phi(s_t) + \textcolor{blue}{r_t} + \lambda\gamma \textcolor{red}{r_{t+1}} + (\lambda\gamma)^2 r_{t+2} + \cdots + \\
+  & (1-\lambda)\gamma v_\phi(s_{t+1}) + (1-\lambda)\lambda\gamma^2 v_\phi(s_{t+2}) + \cdots \\
+  =& [r_t + \gamma v_\phi(s_{t+1}) - v_\phi(s_t)] + \\
+  &(\lambda\gamma)[r_{t+1} + \gamma v_\phi(s_{t+2}) - v_\phi(s_{t+1})] + \\
+  &(\lambda\gamma)^2[r_{t+2} + \gamma v_\phi(s_{t+3}) - v_\phi(s_{t+2})] + \cdots \\
+  =& \delta_t + (\lambda\gamma)\delta_{t+1} + (\lambda\gamma)^2 \delta_{t+2} + \cdots 
+\end{aligned}
+$$`
+这个推导的过程比较复杂，但结果是清晰的：每一步更新我们都可以计算一个 $\delta_t$（称为 TD error），累计起来就可以得到优势函数的估计，记为 $A^{GAE}_t$。并且在实现中，我们还可以将上面的公式写为递推形式。假设我们展开了一条轨迹，从后往前遍历，`$A^{GAE}_t$` 与 `$A^{GAE}_{t+1}$` 的关系为：
+`$$A^{GAE}_t = \delta_t + (\lambda \gamma) A^{GAE}_{t+1}.$$`
+所以我们只需要从后往前遍历一次轨迹就可以得到优势函数的估计，用于训练策略网络。对于值网络而言，我们可以用 `$A^{GAE}_t + v_\phi(s_t)$` 作为监督，定义损失函数：
+`$$
+L = \frac{1}{2} [v^{tar} - v_\phi(s_t)]^2, \ \ v^{tar} = A^{GAE}_t + v_\phi(s_t).
+$$`
+
+我们可以从两个角度理解这个公式。第一个角度是我们其实在最小化 $A^{GAE}$，也就是最小化 TD error $\delta$，这跟我们之前理解训练值网络的方向相同。第二个角度是 $A^{GAE} + v$ 其实是对动作值 $q$ 的估计，由于我们的所有轨迹都是从策略 $\pi$ 中采的，因此采样的动作值应该和值网络的输出是一样的。
+
+到这里我们就得到了一个带基线的策略梯度算法，使用了两个网络：$\pi_\theta$ 用于生成策略分布，$v_\phi$ 用于估计状态值。这样的算法称为演员-裁判（actor-critic，A2C）算法，每步训练的伪代码如下：
+```python
+# 伪代码由 deepseek-R1 生成
+# 1. 收集轨迹数据
+states, actions, rewards, dones, next_states = [], [], [], [], []
+for _ in range(num_steps):
+    # 并行执行多个环境（若num_envs > 1）
+    for env in 0, 1, ..., num_envs-1:
+        s = current_state[env]
+        a ~ PolicyNN(s)                 # 采样动作
+        s1, r, done = env.step(a)  # 与环境交互
+        # 存储数据
+        states.append(s)
+        actions.append(a)
+        rewards.append(r)
+        dones.append(done)
+        next_states.append(s1)
+        # 重置环境（如果终止）
+        if done:
+            current_state[env] = env.reset()
+
+# 2. 计算GAE和值目标
+values = ValueNN(states)                # 当前状态值V(s_t)
+next_values = ValueNN(next_states)      # 下一状态值V(s_{t+1})
+
+# 初始化GAE和回报计算
+advantages = []
+returns = []
+A_next = 0
+V_target_next = 0
+
+# 反向遍历时间步
+for t in reversed(range(num_steps * num_envs)):
+    # 计算 TD error
+    delta = rewards[t] + gamma * (1 - dones[t]) * next_values[t] - values[t]
+    # 计算 GAE 优势 A_t
+    A_t = delta + gamma * lambda_ * (1 - dones[t]) * A_next
+    advantages.append(A_t)
+    # 计算值目标 V_target
+    V_target = values[t] + A_t
+    returns.append(V_target)
+    # 更新下一时间步的A_next和V_target_next
+    A_next = A_t
+    V_target_next = V_target if not dones[t] else 0
+# 反转列表以对齐时间顺序
+advantages = advantages[::-1]
+returns = returns[::-1]
+
+# 3. 归一化优势（可选）
+advantages = (advantages - mean(advantages)) / (std(advantages) + 1e-8)
+
+# 4. 更新Actor网络（策略梯度）
+log_probs = PolicyNN(states).log_prob(actions)   # 计算动作对数概率
+actor_loss = - (log_probs * advantages).mean() - entropy_coef * PolicyNN.entropy().mean()
+optimizer_actor.zero_grad()
+actor_loss.backward()
+optimizer_actor.step()
+
+# 5. 更新Critic网络（值函数回归）
+critic_loss = (ValueNN(states) - returns).pow(2).mean()
+optimizer_critic.zero_grad()
+critic_loss.backward()
+optimizer_critic.step()
+```
+
+## 近似梯度优化 PPO
+
+TODO
