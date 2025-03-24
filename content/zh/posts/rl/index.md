@@ -149,7 +149,7 @@ $$`
 
 我们可以从两个角度理解这个公式。第一个角度是我们其实在最小化 $A^{GAE}$，也就是最小化 TD error $\delta$，这跟我们之前理解训练值网络的方向相同。第二个角度是 $A^{GAE} + v$ 其实是对动作值 $q$ 的估计，由于我们的所有轨迹都是从策略 $\pi$ 中采的，因此采样的动作值应该和值网络的输出是一样的。
 
-到这里我们就得到了一个带基线的策略梯度算法，使用了两个网络：$\pi_\theta$ 用于生成策略分布，$v_\phi$ 用于估计状态值。这样的算法称为演员-裁判（actor-critic，A2C）算法，每步训练的伪代码如下：
+到这里我们就得到了一个带基线的策略梯度算法，使用了两个网络：$\pi_\theta$ 用于生成策略分布，$v_\phi$ 用于估计状态值。这样的算法称为演员-裁判（actor-critic，AC）算法，更具体的是使用优势函数的演员-裁判（advantage actor-critic, A2C）算法，每步训练的伪代码如下：
 ```python
 # 伪代码由 deepseek-R1 生成
 # 1. 收集轨迹数据
@@ -214,6 +214,79 @@ critic_loss.backward()
 optimizer_critic.step()
 ```
 
-## 近似梯度优化 PPO
+## 近端策略优化 PPO
 
-TODO
+强化学习问题与监督学习问题不同，监督学习的梯度方向是显式定义且无偏的，但强化学习的梯度方向必须通过采样得到，从而引入大的方差。一个例子是，一个高手下出的一步棋可能是非常好的，但是让新手来判断，来采样这步棋之后怎么走，可能根本不能明白这步棋妙在哪里。因此，我们历史的策略同时影响着我们对于每个动作的判断，演员和裁判是在共同进步。这反映了强化学习的两个问题：
+
+1. 策略更新的非平稳性：策略更新会导致采样的偏移，从而导致策略评价的改变。
+2. 探索-利用困境：探索（随机采样）可以获得更多无偏大信息，但增大方差；利用（已有的策略）可以减小方差，但带来偏差。
+
+近端策略优化（proximal policy optimization，PPO）算法相比于 A2C 算法可以缓解这些问题，实现更稳定的收敛。近端（proximal）这个词来源于优化算法中的近端算子（proximal operator）。在凸优化中，近端算子用于解决含非光滑项的优化问题，其形式为：
+$$
+\text{prox}_{\lambda f}(v) = \arg\min_x \left( f(x) + \frac{1}{2\lambda} \|x - v\|^2 \right)
+$$
+近端算子的核心思想是：在每一步迭代中，既优化目标函数 $f(x)$，又保证解 $x$ 不会偏离当前点 $v$ 太远（通过二次项约束）。在 PPO 中我们借用这个思想，保证策略每步更新时不要离上一步太远，避免策略过早放弃探索，陷入局部困境。在具体实现中，有两种 PPO 算法：
+1. PPO-penalty：类似于近端算子的做法，在损失函数上加上原策略 $\pi_\theta$ 和新策略 $\pi_{\theta + \Delta \theta}$ 的 KL 散度，保证策略更新步长不要太大。
+2. PPO-clip：直接对梯度进行裁剪，避免更新步长超过某个阈值。
+
+实际中 PPO-clip 实现更简单，效果也更稳定，因此下面只介绍 PPO-clip 算法。
+
+假设我们基于 $\pi_{\theta_k}$ 采样了一堆轨迹，我们希望使用这些轨迹更新策略 $\pi_\theta$，并且不要离开 $\pi_{\theta_k}$ 太远。由于我们要限制策略更新的步长，所以希望能尽可能重复使用基于 $\pi_{\theta_k}$ 采样的轨迹，避免重复采样相似的策略带来的计算开销。这个过程类似于 off-policy 的思想，即采样数据的策略不同于当前策略，但是区别在于这二者非常接近。对于 A2C 算法而言，单步策略的梯度可以写为：
+`$$g = \mathbb{E}_{(s_t, a_t) \sim \pi_\theta} A_{\pi_\theta} (s_t, a_t) \nabla_\theta \log \pi_\theta (a_t | s_t). $$`
+
+对于 PPO，我们数据分布不再是 $\pi_\theta$ 采样得到的，而是 $\pi_{\theta_k}$ 采样的结果。因此，我们可以使用重要性采样，将其转化为对 $\pi_{\theta_k}$ 的期望，得到：
+`$$
+\begin{aligned}
+  g &= \mathbb{E}_{(s_t, a_t) \sim \pi_\theta} A_{\pi_\theta} (s_t, a_t) \nabla_\theta \log \pi_\theta (a_t | s_t) \\
+  &= \mathbb{E}_{(s_t, a_t) \sim \textcolor{blue}{\pi_{\theta_k}}} \frac{P_\theta(a_t, s_t)}{\textcolor{blue}{P_{\theta_k}(a_t, s_t)}} A_{\pi_\theta} (s_t, a_t) \nabla_\theta \log \pi_\theta (a_t | s_t) \\
+  &= \mathbb{E}_{(s_t, a_t) \sim \pi_{\theta_k}} \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_k}(a_t|s_t)} \frac{P_\theta(s_t)}{P_{\theta_k}(s_t)} A_{\pi_\theta} (s_t, a_t) \nabla_\theta \log \pi_\theta (a_t | s_t) \\
+  &\approx \mathbb{E}_{(s_t, a_t) \sim \pi_{\theta_k}} \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_k}(a_t|s_t)} A_{\pi_{\theta_k}} (s_t, a_t) \nabla_\theta \log \pi_\theta (a_t | s_t) \\
+  &= \mathbb{E}_{(s_t, a_t) \sim \pi_{\theta_k}} \frac{\nabla_\theta \pi_\theta(a_t|s_t)}{\pi_{\theta_k}(a_t|s_t)} A_{\pi_{\theta_k}} (s_t, a_t).
+\end{aligned} 
+$$`
+这一步近似中，我们利用了 $\theta$ 与 $\theta_k$ 接近的假设，认为 $P_\theta(s_t) \approx P_{\theta_k}(s_t)$ 以及 $A_{\pi_{\theta}} \approx A_{\pi_{\theta_k}}$。因此我们可以定义在做梯度裁减之前的目标函数为：
+`$$L = - \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_k}(a_t|s_t)} A_{\pi_{\theta_k}} (s_t, a_t).$$`
+在这个形式之上我们可以定义带裁减的 PPO 的损失函数形式：
+`$$
+L = - \min \left[\frac{\pi_\theta}{\pi_{\theta_k}} A_{\pi_{\theta_k}}, \text{clip}\left(\frac{\pi_\theta}{\pi_{\theta_k}}, 1 - \varepsilon, 1 + \varepsilon\right)A_{\pi_{\theta_k}} \right].
+$$`
+这个形式写得很复杂，我们可以分成两种情况来理解。如果 $A_{\pi_{\theta_k}} > 0$，表示这个行动应该是好的，此时损失函数为：
+`$$
+L = - \min \left(\frac{\pi_\theta}{\pi_{\theta_k}}, 1 + \varepsilon \right)A_{\pi_{\theta_k}}.
+$$`
+涵义是假设新策略已经好到超过旧策略的 $1+\varepsilon$ 倍时，梯度为 $0$，别再进一步鼓励这个行动了。与之相对的，如果 $A_{\pi_{\theta_k}} < 0$，表示这个行动不行，此时损失函数为：
+`$$
+L = - \max \left(\frac{\pi_\theta}{\pi_{\theta_k}}, 1 - \varepsilon \right)A_{\pi_{\theta_k}}.
+$$`
+涵义是假设新策略已经减小这个坏行动的概率到旧策略的 $1-\varepsilon$ 倍时，梯度为 $0$，不再进一步惩罚这个行动了。
+
+在实现中，PPO 算法会在采样得到轨迹之后，少量多次地更新策略，与 A2C 算法核心的差别由下面的伪代码给出：
+```python
+# 代码由 deepseek-R1 生成
+# === PPO 独有部分 ===
+
+# 1. 记录旧策略的动作概率（重要性采样基础）
+old_probs = actor(states).detach()  # 旧策略概率（固定梯度）
+
+# 2. 多次小批量更新（数据重用）
+for _ in range(K_EPOCHS):  # 通常 K_EPOCHS=3~10
+    
+    # 3. 计算新策略比率（核心机制）
+    new_probs = actor(states)
+    ratios = new_probs[actions] / old_probs[actions]  # 策略比率 r(θ)
+    
+    # 4. 剪切目标函数（信赖域约束）
+    clipped_ratios = torch.clamp(ratios, 1 - CLIP_EPS, 1 + CLIP_EPS)
+    surr1 = ratios * advantages
+    surr2 = clipped_ratios * advantages
+    actor_loss = -torch.min(surr1, surr2).mean()  # 剪切后的损失
+    
+    # 5. 熵正则化（鼓励探索）
+    entropy = -torch.sum(new_probs * torch.log(new_probs), dim=1).mean()
+    actor_loss += ENTROPY_COEF * entropy  # 通常 ENTROPY_COEF=0.01
+    
+    # 6. 仅更新 Actor（Critic 更新与A2C相同）
+    optimizer_actor.zero_grad()
+    actor_loss.backward()
+    optimizer_actor.step()
+```
